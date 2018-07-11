@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Holepei</title>
+	<style>
+	#meucanvas{
+	background-color:black;
+	margin-top: -300px;
+	margin-left: -300px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	}
+	</style>
+</head>
+<body>
+<canvas id="meucanvas" height="600" width="600" >O seu Browser nao suporta este elemento</canvas>
+<script>
+		//alert("Use as setas do teclado");
+		var canvas = document.getElementById("meucanvas");
+		var ctx = canvas.getContext("2d");
+
+		var vc = {
+			x:0,
+			y:0,
+			largura:0,
+			altura:0,
+			speed:2
+		};
+
+///////////////////////////////////////////////////////////////
+
+		var linhasHorizontala = {
+			x:0,
+			y:0,
+			largura:canvas.width,
+			altura:5,
+		};
+		
+		var linhasHorizontalb = {
+			x:0,
+			y:0,
+			largura:canvas.width,
+			altura:5,
+		};
+
+		var linhasHorizontalc = {
+			x:0,
+			y:0,
+			largura:canvas.width,
+			altura:5,
+		};
+
+		var linhasHorizontald = {
+			x:0,
+			y:0,
+			largura:canvas.width,
+			altura:5,
+		};
+
+		var linhasHorizontale = {
+			x:0,
+			y:0,
+			largura:canvas.width,
+			altura:5,
+		};
+		
+		var linhasHorizontalf = {
+			x:0,
+			y:0,
+			largura:canvas.width,
+			altura:5,
+		};
+
+		var linhasHorizontalg = {
+			x:0,
+			y:0,
+			largura:canvas.width,
+			altura:5,
+		};
+
+		var linhasHorizontalh = {
+			x:0,
+			y:0,
+			largura:canvas.width,
+			altura:5,
+		};
+
+		var linhasHorizontali = {
+			x:0,
+			y:0,
+			largura:canvas.width,
+			altura:5,
+		};
+
+		var linhasHorizontalj = {
+			x:0,
+			y:0,
+			largura:canvas.width,
+			altura:5,
+		};
+
+		var linhasHorizontalk = {
+			x:0,
+			y:0,
+			largura:canvas.width,
+			altura:5,
+		};
+
+		var linhasHorizontall = {
+			x:0,
+			y:0,
+			largura:canvas.width,
+			altura:5,
+		};
+
+		var linhasHorizontalm = {
+			x:0,
+			y:0,
+			largura:canvas.width,
+			altura:5,
+		};
+//////////////////////////////////////////////////////
+
+		var linhasVerticala = {
+			x:0,
+			y:0,
+			largura:5,
+			altura:canvas.height,
+		};
+		var linhasVerticalb = {
+			x:0,
+			y:0,
+			largura:5,
+			altura:canvas.height,
+		};
+		var linhasVerticalc = {
+			x:0,
+			y:0,
+			largura:5,
+			altura:canvas.height,
+		};
+		var linhasVerticald = {
+			x:0,
+			y:0,
+			largura:5,
+			altura:canvas.height,
+		};
+		var linhasVerticale = {
+			x:0,
+			y:0,
+			largura:5,
+			altura:canvas.height,
+		};
+		var linhasVerticalf = {
+			x:0,
+			y:0,
+			largura:5,
+			altura:canvas.height,
+		};
+		var linhasVerticalg = {
+			x:0,
+			y:0,
+			largura:5,
+			altura:canvas.height,
+		};
+		var linhasVerticalh = {
+			x:0,
+			y:0,
+			largura:5,
+			altura:canvas.height,
+		};
+		var linhasVerticali = {
+			x:0,
+			y:0,
+			largura:5,
+			altura:canvas.height,
+		};
+		var linhasVerticalj = {
+			x:0,
+			y:0,
+			largura:5,
+			altura:canvas.height,
+		};
+		var linhasVerticalk = {
+			x:0,
+			y:0,
+			largura:5,
+			altura:canvas.height,
+		};
+		var linhasVerticall = {
+			x:0,
+			y:0,
+			largura:5,
+			altura:canvas.height,
+		};
+		var linhasVerticalm = {
+			x:0,
+			y:0,
+			largura:5,
+			altura:canvas.height,
+		};
+
+
+//////////////////////////////////////////////////////
+
+		var teclas = {};
+			document.addEventListener("keydown", function(e) {
+				teclas[e.keyCode] = true;
+				//alert(e.keyCode);
+			}, false);
+
+			document.addEventListener("keyup", function(e) {
+				delete teclas[e.keyCode];
+			}, false);
+
+			function move() {
+				if(38 in teclas)
+					vc.y += vc.speed;
+
+				if(39 in teclas)
+					vc.x -= vc.speed;
+
+				if(40 in teclas)
+					vc.y -= vc.speed;
+
+				if(37 in teclas)
+					vc.x += vc.speed;
+			};
+
+////////////////////////////////////////////////////////
+
+		function desenha(){
+
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+			ctx.fillStyle = "green";
+
+/////////////////////////////////////////////////////////////////////////////////////
+
+			ctx.fillRect(linhasHorizontala.x,linhasHorizontala.y,linhasHorizontala.largura,linhasHorizontala.altura);
+			ctx.fillRect(linhasHorizontalb.x,linhasHorizontalb.y,linhasHorizontalb.largura,linhasHorizontalb.altura);
+			ctx.fillRect(linhasHorizontalc.x,linhasHorizontalc.y,linhasHorizontalc.largura,linhasHorizontalc.altura);
+			ctx.fillRect(linhasHorizontald.x,linhasHorizontald.y,linhasHorizontald.largura,linhasHorizontald.altura);
+			ctx.fillRect(linhasHorizontale.x,linhasHorizontale.y,linhasHorizontale.largura,linhasHorizontale.altura);
+			ctx.fillRect(linhasHorizontalf.x,linhasHorizontalf.y,linhasHorizontalf.largura,linhasHorizontalf.altura);
+			ctx.fillRect(linhasHorizontalg.x,linhasHorizontalg.y,linhasHorizontalg.largura,linhasHorizontalg.altura);
+			ctx.fillRect(linhasHorizontalh.x,linhasHorizontalh.y,linhasHorizontalh.largura,linhasHorizontalh.altura);
+			ctx.fillRect(linhasHorizontali.x,linhasHorizontali.y,linhasHorizontali.largura,linhasHorizontali.altura);
+			ctx.fillRect(linhasHorizontalj.x,linhasHorizontalj.y,linhasHorizontalj.largura,linhasHorizontalj.altura);
+			ctx.fillRect(linhasHorizontalk.x,linhasHorizontalk.y,linhasHorizontalk.largura,linhasHorizontalk.altura);
+			ctx.fillRect(linhasHorizontall.x,linhasHorizontall.y,linhasHorizontall.largura,linhasHorizontall.altura);
+			ctx.fillRect(linhasHorizontalm.x,linhasHorizontalm.y,linhasHorizontalm.largura,linhasHorizontalm.altura);
+
+///////////////////////////////////////////////////////////////////////////////
+
+			ctx.fillRect(linhasVerticala.x,linhasVerticala.y,linhasVerticala.largura,linhasVerticala.altura);
+			ctx.fillRect(linhasVerticalb.x,linhasVerticalb.y,linhasVerticalb.largura,linhasVerticalb.altura);
+			ctx.fillRect(linhasVerticalc.x,linhasVerticalc.y,linhasVerticalc.largura,linhasVerticalc.altura);
+			ctx.fillRect(linhasVerticald.x,linhasVerticald.y,linhasVerticald.largura,linhasVerticald.altura);
+			ctx.fillRect(linhasVerticale.x,linhasVerticale.y,linhasVerticale.largura,linhasVerticale.altura);
+			ctx.fillRect(linhasVerticalf.x,linhasVerticalf.y,linhasVerticalf.largura,linhasVerticalf.altura);
+			ctx.fillRect(linhasVerticalg.x,linhasVerticalg.y,linhasVerticalg.largura,linhasVerticalg.altura);
+			ctx.fillRect(linhasVerticalh.x,linhasVerticalh.y,linhasVerticalh.largura,linhasVerticalh.altura);
+			ctx.fillRect(linhasVerticali.x,linhasVerticali.y,linhasVerticali.largura,linhasVerticali.altura);
+			ctx.fillRect(linhasVerticalj.x,linhasVerticalj.y,linhasVerticalj.largura,linhasVerticalj.altura);
+			ctx.fillRect(linhasVerticalk.x,linhasVerticalk.y,linhasVerticalk.largura,linhasVerticalk.altura);
+			ctx.fillRect(linhasVerticall.x,linhasVerticall.y,linhasVerticall.largura,linhasVerticall.altura);
+			ctx.fillRect(linhasVerticalm.x,linhasVerticalm.y,linhasVerticalm.largura,linhasVerticalm.altura);
+
+///////////////////////////////////////////////////////////////////////////////
+
+			linhasHorizontala.y = vc.y;
+			linhasHorizontalb.y = vc.y + 50;
+			linhasHorizontalc.y = vc.y + 100;
+			linhasHorizontald.y = vc.y + 150;
+			linhasHorizontale.y = vc.y + 200;
+			linhasHorizontalf.y = vc.y + 250;
+			linhasHorizontalg.y = vc.y + 300;
+			linhasHorizontalh.y = vc.y + 350;
+			linhasHorizontali.y = vc.y + 400;
+			linhasHorizontalj.y = vc.y + 450;
+			linhasHorizontalk.y = vc.y + 500;
+			linhasHorizontall.y = vc.y + 550;
+			linhasHorizontalm.y = vc.y + 600;
+
+//////////////////////////////////////////////////////////////////////
+
+			linhasVerticala.x = vc.x;
+			linhasVerticalb.x = vc.x + 50;
+			linhasVerticalc.x = vc.x + 100;
+			linhasVerticald.x = vc.x + 150;
+			linhasVerticale.x = vc.x + 200;
+			linhasVerticalf.x = vc.x + 250;
+			linhasVerticalg.x = vc.x + 300;
+			linhasVerticalh.x = vc.x + 350;
+			linhasVerticali.x = vc.x + 400;
+			linhasVerticalj.x = vc.x + 450;
+			linhasVerticalk.x = vc.x + 500;
+			linhasVerticall.x = vc.x + 550;
+			linhasVerticalm.x = vc.x + 600;
+
+//////////////////////////////////////////////////////////////////////
+
+			if (vc.y > canvas.width){
+			vc.y = 0;
+			};
+			
+			if(vc.y < canvas.width - 600){
+				vc.y = 600;
+			};
+
+//////////////
+
+			if (vc.x > canvas.height){
+			vc.x = 0;
+			};
+			
+			if(vc.x < canvas.height - 600){
+				vc.x = 600;
+			};
+
+///////////////////////////////////////////////////////////////////////
+
+			if(linhasHorizontalb.y > canvas.width){
+				linhasHorizontalb.y = vc.y - 600;
+			};
+			if(linhasHorizontalc.y > canvas.width){
+				linhasHorizontalc.y = vc.y - 550;
+			};
+			if(linhasHorizontald.y > canvas.width){
+				linhasHorizontald.y = vc.y - 500;
+			};
+			if(linhasHorizontale.y > canvas.width){
+				linhasHorizontale.y = vc.y - 450;
+			};
+			if(linhasHorizontalf.y > canvas.width){
+				linhasHorizontalf.y = vc.y - 400;
+			};
+			if(linhasHorizontalg.y > canvas.width){
+				linhasHorizontalg.y = vc.y - 350;
+			};
+			if(linhasHorizontalh.y > canvas.width){
+				linhasHorizontalh.y = vc.y - 300;
+			};
+			if(linhasHorizontali.y > canvas.width){
+				linhasHorizontali.y = vc.y - 250;
+			};
+			if(linhasHorizontalj.y > canvas.width){
+				linhasHorizontalj.y = vc.y - 200;
+			};
+			if(linhasHorizontalk.y > canvas.width){
+				linhasHorizontalk.y = vc.y - 150;
+			};
+			if(linhasHorizontall.y > canvas.width){
+				linhasHorizontall.y = vc.y - 100;
+			};
+			if(linhasHorizontalm.y > canvas.width){
+				linhasHorizontalm.y = vc.y - 50;
+			};
+
+//////////////////////////////////////////////////////////////////	
+	
+			if(linhasHorizontalb.y < canvas.width - 600){
+				linhasHorizontalb.y = vc.y + 600;
+			};
+			if(linhasHorizontalc.y < canvas.width - 600){
+				linhasHorizontalc.y = vc.y + 550;
+			};
+			if(linhasHorizontald.y < canvas.width - 600){
+				linhasHorizontald.y = vc.y + 500;
+			};
+			if(linhasHorizontale.y < canvas.width - 600){
+				linhasHorizontale.y = vc.y + 450;
+			};
+			if(linhasHorizontalf.y < canvas.width - 600){
+				linhasHorizontalf.y = vc.y + 400;
+			};
+			if(linhasHorizontalg.y < canvas.width - 600){
+				linhasHorizontalg.y = vc.y + 350;
+			};
+			if(linhasHorizontalh.y < canvas.width - 600){
+				linhasHorizontalh.y = vc.y + 300;
+			};
+			if(linhasHorizontali.y < canvas.width - 600){
+				linhasHorizontali.y = vc.y + 250;
+			};
+			if(linhasHorizontalj.y < canvas.width - 600){
+				linhasHorizontalj.y = vc.y + 200;
+			};
+			if(linhasHorizontalk.y < canvas.width - 600){
+				linhasHorizontalk.y = vc.y + 150;
+			};
+			if(linhasHorizontall.y < canvas.width - 600){
+				linhasHorizontall.y = vc.y + 100;
+			};
+			if(linhasHorizontalm.y < canvas.width - 600){
+				linhasHorizontalm.y = vc.y + 50;
+			};
+
+///////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////
+			if(linhasVerticalb.x > canvas.height){
+				linhasVerticalb.x = vc.x - 600;
+			};
+			if(linhasVerticalc.x > canvas.height){
+				linhasVerticalc.x = vc.x - 550;
+			};
+			if(linhasVerticald.x > canvas.height){
+				linhasVerticald.x = vc.x - 500;
+			};
+			if(linhasVerticale.x > canvas.height){
+				linhasVerticale.x = vc.x - 450;
+			};
+			if(linhasVerticalf.x > canvas.height){
+				linhasVerticalf.x = vc.x - 400;
+			};
+			if(linhasVerticalg.x > canvas.height){
+				linhasVerticalg.x = vc.x - 350;
+			};
+			if(linhasVerticalh.x > canvas.height){
+				linhasVerticalh.x = vc.x - 300;
+			};
+			if(linhasVerticali.x > canvas.height){
+				linhasVerticali.x = vc.x - 250;
+			};
+			if(linhasVerticalj.x > canvas.height){
+				linhasVerticalj.x = vc.x - 200;
+			};
+			if(linhasVerticalk.x > canvas.height){
+				linhasVerticalk.x = vc.x - 150;
+			};
+			if(linhasVerticall.x > canvas.height){
+				linhasVerticall.x = vc.x - 100;
+			};
+			if(linhasVerticalm.x > canvas.height){
+				linhasVerticalm.x = vc.x - 50;
+			};
+
+//////////////////////////////////////////////////////////////////	
+	
+			if(linhasVerticalb.x < canvas.height - 600){
+				linhasVerticalb.x = vc.x + 600;
+			};
+			if(linhasVerticalc.x < canvas.height - 600){
+				linhasVerticalc.x = vc.x + 550;
+			};
+			if(linhasVerticald.x < canvas.height - 600){
+				linhasVerticald.x = vc.x + 500;
+			};
+			if(linhasVerticale.x < canvas.height - 600){
+				linhasVerticale.x = vc.x + 450;
+			};
+			if(linhasVerticalf.x < canvas.height - 600){
+				linhasVerticalf.x = vc.x + 400;
+			};
+			if(linhasVerticalg.x < canvas.height - 600){
+				linhasVerticalg.x = vc.x + 350;
+			};
+			if(linhasVerticalh.x < canvas.height - 600){
+				linhasVerticalh.x = vc.x + 300;
+			};
+			if(linhasVerticali.x < canvas.height - 600){
+				linhasVerticali.x = vc.x + 250;
+			};
+			if(linhasVerticalj.x < canvas.height - 600){
+				linhasVerticalj.x = vc.x + 200;
+			};
+			if(linhasVerticalk.x < canvas.height - 600){
+				linhasVerticalk.x = vc.x + 150;
+			};
+			if(linhasVerticall.x < canvas.height - 600){
+				linhasVerticall.x = vc.x + 100;
+			};
+			if(linhasVerticalm.x < canvas.height - 600){
+				linhasVerticalm.x = vc.x + 50;
+			};
+
+///////////////////////////////////////////////////////////////
+
+			move();
+
+		};
+
+		setInterval(desenha,5);
+
+</script>
+</body>
+</html>

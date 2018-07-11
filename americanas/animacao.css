@@ -1,0 +1,17 @@
+*{ margin:0; padding:0; border:0; }
+body{background:#8B8B8B; }
+div#a{background:#FEFEFE; width:960px; height:1480px; margin:auto; }
+
+div#cima{background:#FEE501; width:940px; height:195px; margin:auto; }
+div#primeiro{background:#FF0101; width:460px; height:250px; margin-left:10px ; margin-top:10px ; float:left ; }
+div#segundo{background:#FF0101; width:460px; height:250px; margin-right:10px; margin-top:10px; float:right; }
+
+div#cima2{background:#FFFFFF ; width:940px; height:155px; margin:auto; margin-top:270px;  }
+div#primeiro2{background:#FF0101; width:460px; height:250px; margin-left:10px ; margin-top:10px ; float:left ; }
+div#segundo2{background:#FF0101; width:460px; height:250px; margin-right:10px; margin-top:10px; float:right; }
+
+div#cima3{background:#FFFFFF ; width:940px; height:155px; margin:auto; margin-top:270px; }
+div#primeiro3{background:#FF0101; width:460px; height:250px; margin-left:10px ; margin-top:10px ; float:left ; }
+div#segundo3{background:#FF0101; width:460px; height:250px; margin-right:10px; margin-top:10px; float:right; }
+
+div#cima4{background:#FEE501; width:940px; height:155px; margin:auto; margin-top:270px; }

@@ -1,0 +1,453 @@
+<html>
+<head>
+<title>Test2</title>
+		<style>
+			#mycanvas {
+				background-color: black;
+				margin-top: -300px;
+				margin-left: -500px;
+				position: absolute;
+				left: 50%;
+				top: 50%;
+			}
+		</style>
+</head>
+<body>
+		<canvas id="mycanvas" height="600" width="1000">O seu browser não suporta este elemento</canvas>
+<script>
+var canvas = document.getElementById("mycanvas")
+var ctx = canvas.getContext("2d");
+var teclas = {};
+	var divisaoVerticalUm = {
+		x:canvas.width - 200 - 5,
+		y:0,
+		largura:5,
+		altura:canvas.height
+	}; 
+	var divisaoVerticalDois = {
+		x:canvas.width - 5,
+		y:0,
+		largura:5,
+		altura:canvas.height
+	}; 
+	var divisaoVerticalTres = {
+		x:0,
+		y:0,
+		largura:5,
+		altura:canvas.height
+	}; 
+		var divisaoHorizontalUm = {
+		x:canvas.width - 200 - 5,
+		y:200,
+		largura:200,
+		altura:5
+	}; 
+		var divisaoHorizontalDois = {
+		x:0,
+		y:500,
+		largura:canvas.width,
+		altura:5
+	};
+		var divisaoHorizontalTres = {
+		x:0,
+		y:595,
+		largura:canvas.width,
+		altura:5
+	};
+
+///////////////////////////////////////////
+
+	var linhaUmHorizontal = {
+	x:canvas.width - 200 - 5,
+	y:40,
+	largura:200,
+	altura:5
+	};
+	var linhaDoisHorizontal = {
+	x:canvas.width - 200 - 5,
+	y:80,
+	largura:200,
+	altura:5
+	};
+	var linhaTresHorizontal = {
+	x:canvas.width - 200 - 5,
+	y:120,
+	largura:200,
+	altura:5
+	};
+	var linhaQuatroHorizontal = {
+	x:canvas.width - 200 - 5,
+	y:160,
+	largura:200,
+	altura:5
+	};
+	var linhaCincoHorizontal = {
+	x:0,
+	y:0,
+	largura:canvas.width,
+	altura:5
+	};
+
+//////////////////////////////
+	var linhaUmVertical = {
+	x:canvas.width - 160 - 5,
+	y:0,
+	largura:5,
+	altura:200
+	};
+	var linhaDoisVertical = {
+	x:canvas.width - 120 - 5,
+	y:0,
+	largura:5,
+	altura:200	
+	};
+	var linhaTresVertical = {
+	x:canvas.width - 80 - 5,
+	y:0,
+	largura:5,
+	altura:200
+	};
+	var linhaQuatroVertical = {
+	x:canvas.width - 40 - 5,
+	y:0,
+	largura:5,
+	altura:200
+	};
+	var linhaCincoVertical = {
+	x:canvas.width  - 5,
+	y:0,
+	largura:5,
+	altura:205
+	};
+
+////////////////////////////
+			document.addEventListener("keydown", function(e) {
+				teclas[e.keyCode] = true;
+				digitou();
+				//alert(e.keyCode);
+			}, false);
+
+			document.addEventListener("keyup", function(e) {
+				delete teclas[e.keyCode];
+			}, false);
+
+			function digitou(){
+	
+				if(quantidadeLetras < 39){
+				if(65 in teclas){
+					this.teclou.letraDigitada.push(a);
+					teclou.insere();
+					teclou.desenha();
+					this.teclou.tec.push(a);
+			};
+				if(66 in teclas){
+					this.teclou.letraDigitada.push(b);
+					teclou.insere();
+					teclou.desenha();
+					this.teclou.tec.push(b);
+			};
+				if(67 in teclas){
+					this.teclou.letraDigitada.push(c);
+					teclou.insere();
+					teclou.desenha();
+					this.teclou.tec.push(c);
+			};
+				if(68 in teclas){
+					this.teclou.letraDigitada.push(d);
+					teclou.insere();
+					teclou.desenha();
+					this.teclou.tec.push(d);
+			};
+				if(69 in teclas){
+					this.teclou.letraDigitada.push(e);
+					teclou.insere();
+					teclou.desenha();
+					this.teclou.tec.push(e);
+			};
+				if(70 in teclas){
+					this.teclou.letraDigitada.push(f);
+					teclou.insere();
+					teclou.desenha();
+					this.teclou.tec.push(f);
+			};
+				if(71 in teclas){
+					this.teclou.letraDigitada.push(g);
+					teclou.insere();
+					teclou.desenha();
+					this.teclou.tec.push(g);
+			};
+				if(72 in teclas){
+					this.teclou.letraDigitada.push(h);
+					teclou.insere();
+					teclou.desenha();
+					this.teclou.tec.push(h);
+			};
+				if(73 in teclas){
+					this.teclou.letraDigitada.push(i);
+					teclou.insere();
+					teclou.desenha();
+					this.teclou.tec.push(i);
+			};
+				if(74 in teclas){
+					this.teclou.letraDigitada.push(j);
+					teclou.insere();
+					teclou.desenha();
+					this.teclou.tec.push(j);
+			};
+				if(75 in teclas){
+					this.teclou.letraDigitada.push(k);
+					teclou.insere();
+					teclou.desenha();
+					this.teclou.tec.push(k);
+			};
+				if(76 in teclas){
+					this.teclou.letraDigitada.push(l);
+					teclou.insere();
+					teclou.desenha();
+					this.teclou.tec.push(l);
+			};
+				if(77 in teclas){
+					this.teclou.letraDigitada.push(m);
+					teclou.insere();
+					teclou.desenha();
+					this.teclou.tec.push(m);
+			};
+				if(78 in teclas){
+					this.teclou.letraDigitada.push(n);
+					teclou.insere();
+					teclou.desenha();
+					this.teclou.tec.push(n);
+			};
+				if(79 in teclas){
+					this.teclou.letraDigitada.push(o);
+					teclou.insere();
+					teclou.desenha();
+					this.teclou.tec.push(o);
+			};
+				if(80 in teclas){
+					this.teclou.letraDigitada.push(p);
+					teclou.insere();
+					teclou.desenha();
+					this.teclou.tec.push(p);
+			};
+				if(81 in teclas){
+					this.teclou.letraDigitada.push(q);
+					teclou.insere();
+					teclou.desenha();
+					this.teclou.tec.push(q);
+			};
+				if(82 in teclas){
+					this.teclou.letraDigitada.push(r);
+					teclou.insere();
+					teclou.desenha();
+					this.teclou.tec.push(r);
+			};
+				if(83 in teclas){
+					this.teclou.letraDigitada.push(s);
+					teclou.insere();
+					teclou.desenha();
+					this.teclou.tec.push(s);
+			};
+				if(84 in teclas){
+					this.teclou.letraDigitada.push(t);
+					teclou.insere();
+					teclou.desenha();
+					this.teclou.tec.push(t);
+			};
+				if(85 in teclas){
+					this.teclou.letraDigitada.push(u);
+					teclou.insere();
+					teclou.desenha();
+					this.teclou.tec.push(u);
+			};
+				if(86 in teclas){
+					this.teclou.letraDigitada.push(v);
+					teclou.insere();
+					teclou.desenha();
+					this.teclou.tec.push(v);
+			};
+				if(87 in teclas){
+					this.teclou.letraDigitada.push(w);
+					teclou.insere();
+					teclou.desenha();
+					this.teclou.tec.push(w);
+			};
+				if(88 in teclas){
+					this.teclou.letraDigitada.push(x);
+					teclou.insere();
+					teclou.desenha();
+					this.teclou.tec.push(x);
+			};
+				if(89 in teclas){
+					this.teclou.letraDigitada.push(y);
+					teclou.insere();
+					teclou.desenha();
+					this.teclou.tec.push(y);
+			};
+				if(90 in teclas){
+					this.teclou.letraDigitada.push(z);
+					teclou.insere();
+					teclou.desenha();
+					this.teclou.tec.push(z);
+			};
+				if(32 in teclas){
+					this.teclou.letraDigitada.push(espaco);
+					teclou.insere();
+					teclou.desenha();
+					this.teclou.tec.push(espaco);
+			};	
+				};
+					if(13 in teclas){
+					comecoTecla.ys = comecoTecla.ys - 27;
+					quantidadeFrases.push(" ");
+					frases.push(teclou/*.propriedades[quantidadeFrase - 1]*/.letraDigitada.toString());
+					desenha();
+					for (var ez = -1, tame = this.frases.length; ez < tame; ez++){
+					quantidadeFrase = tame;
+						ctx.fillText(frases[quantidadeFrase - 1],10,comecoTecla.ys);
+					};
+			}};
+var tame = 0;
+var quantidadeFrase = 0;
+var novaFrase/*teclou*/ = {
+	propriedades:[],
+	inseri:function(){
+		this.propriedades.push({
+			x:10,
+			y:521,
+			tec: [],
+		letras: [a = "a",b = "b",c = "c",d = "d",e = "e",f = "f",g = "g",h = "h",i = "i",j = "j",k = "k",l = "l",m = "m",n = "n",o = "o",p = "p",q = "q",r = "r",s = "s",t = "t",u = "u",v = "v",w = "w",x = "x",y = "y",z = "z",espaco = " "],
+		letraDigitada:[],
+		quantidade:[],		
+		insere:function(){				
+			this.quantidade.push({
+			y:comecoTecla.y,
+			})
+		},
+		desenha:function(){
+		for (var iz = -1, tam = this.tec.length; iz < tam; iz++){
+			quantidadeLetras = tam;
+			if(quantidadeLetras < 39){
+			ctx.fillText(teclou.letraDigitada.toString(),10,comecoTecla.y);
+			};
+////////////////////////////
+			ctx.fillStyle = "green";
+			ctx.font = "20px Arial";
+
+			ctx.fillRect(divisaoVerticalUm.x,divisaoVerticalUm.y,divisaoVerticalUm.largura,divisaoVerticalUm.altura);
+			ctx.fillRect(divisaoVerticalDois.x,divisaoVerticalDois.y,divisaoVerticalDois.largura,divisaoVerticalDois.altura);
+			ctx.fillRect(divisaoVerticalTres.x,divisaoVerticalTres.y,divisaoVerticalTres.largura,divisaoVerticalTres.altura);
+			ctx.fillRect(divisaoHorizontalUm.x,divisaoHorizontalUm.y,divisaoHorizontalUm.largura,divisaoHorizontalUm.altura);
+			ctx.fillRect(divisaoHorizontalDois.x,divisaoHorizontalDois.y,divisaoHorizontalDois.largura,divisaoHorizontalDois.altura);
+			ctx.fillRect(divisaoHorizontalTres.x,divisaoHorizontalTres.y,divisaoHorizontalTres.largura,divisaoHorizontalTres.altura);
+
+			ctx.fillRect(linhaUmHorizontal.x,linhaUmHorizontal.y,linhaUmHorizontal.largura,linhaUmHorizontal.altura);
+			ctx.fillRect(linhaDoisHorizontal.x,linhaDoisHorizontal.y,linhaDoisHorizontal.largura,linhaDoisHorizontal.altura);
+			ctx.fillRect(linhaTresHorizontal.x,linhaTresHorizontal.y,linhaTresHorizontal.largura,linhaTresHorizontal.altura);
+			ctx.fillRect(linhaQuatroHorizontal.x,linhaQuatroHorizontal.y,linhaQuatroHorizontal.largura,linhaQuatroHorizontal.altura);
+			ctx.fillRect(linhaCincoHorizontal.x,linhaCincoHorizontal.y,linhaCincoHorizontal.largura,linhaCincoHorizontal.altura);
+
+			ctx.fillRect(linhaUmVertical.x,linhaUmVertical.y,linhaUmVertical.largura,linhaUmVertical.altura);
+			ctx.fillRect(linhaDoisVertical.x,linhaDoisVertical.y,linhaDoisVertical.largura,linhaDoisVertical.altura);
+			ctx.fillRect(linhaTresVertical.x,linhaTresVertical.y,linhaTresVertical.largura,linhaTresVertical.altura);
+			ctx.fillRect(linhaQuatroVertical.x,linhaQuatroVertical.y,linhaQuatroVertical.largura,linhaQuatroVertical.altura);
+			ctx.fillRect(linhaCincoVertical.x,linhaCincoVertical.y,linhaCincoVertical.largura,linhaCincoVertical.altura);
+/////////////////////
+		};
+	},
+		})
+	},
+};
+///////////////////////////
+			ctx.fillStyle = "green";
+			ctx.font = "20px arial";
+///////////////////////////
+	//teclou.letraDigitada.join();   <-junta todos os elementos
+	//teclou.letraDigitada.toString();  <- mesma coisa, n sei a diferença
+	var comecoTecla = {
+		x:10,
+		y:521,
+		ys:521
+	};
+	var quantidadeLetras = 0;
+	var letrasExistentes = {px:14};
+	var teclou = {
+		tec: [],
+		letras: [a = "a",b = "b",c = "c",d = "d",e = "e",f = "f",g = "g",h = "h",i = "i",j = "j",k = "k",l = "l",m = "m",n = "n",o = "o",p = "p",q = "q",r = "r",s = "s",t = "t",u = "u",v = "v",w = "w",x = "x",y = "y",z = "z",espaco = " "],
+		letraDigitada:[],
+		quantidade:[],		
+		insere:function(){				
+			this.quantidade.push({
+			y:comecoTecla.y,
+			})
+		},
+		desenha:function(){
+		for (var iz = -1, tam = this.tec.length; iz < tam; iz++){
+			quantidadeLetras = tam;
+			if(quantidadeLetras < 39){
+			ctx.fillText(teclou/*.propriedades[quantidadeLetras - 1]*/.letraDigitada.toString(),10,comecoTecla.y);
+			};
+////////////////////////////
+			ctx.fillStyle = "green";
+			ctx.font = "20px Arial";
+
+			ctx.fillRect(divisaoVerticalUm.x,divisaoVerticalUm.y,divisaoVerticalUm.largura,divisaoVerticalUm.altura);
+			ctx.fillRect(divisaoVerticalDois.x,divisaoVerticalDois.y,divisaoVerticalDois.largura,divisaoVerticalDois.altura);
+			ctx.fillRect(divisaoVerticalTres.x,divisaoVerticalTres.y,divisaoVerticalTres.largura,divisaoVerticalTres.altura);
+			ctx.fillRect(divisaoHorizontalUm.x,divisaoHorizontalUm.y,divisaoHorizontalUm.largura,divisaoHorizontalUm.altura);
+			ctx.fillRect(divisaoHorizontalDois.x,divisaoHorizontalDois.y,divisaoHorizontalDois.largura,divisaoHorizontalDois.altura);
+			ctx.fillRect(divisaoHorizontalTres.x,divisaoHorizontalTres.y,divisaoHorizontalTres.largura,divisaoHorizontalTres.altura);
+
+			ctx.fillRect(linhaUmHorizontal.x,linhaUmHorizontal.y,linhaUmHorizontal.largura,linhaUmHorizontal.altura);
+			ctx.fillRect(linhaDoisHorizontal.x,linhaDoisHorizontal.y,linhaDoisHorizontal.largura,linhaDoisHorizontal.altura);
+			ctx.fillRect(linhaTresHorizontal.x,linhaTresHorizontal.y,linhaTresHorizontal.largura,linhaTresHorizontal.altura);
+			ctx.fillRect(linhaQuatroHorizontal.x,linhaQuatroHorizontal.y,linhaQuatroHorizontal.largura,linhaQuatroHorizontal.altura);
+			ctx.fillRect(linhaCincoHorizontal.x,linhaCincoHorizontal.y,linhaCincoHorizontal.largura,linhaCincoHorizontal.altura);
+
+			ctx.fillRect(linhaUmVertical.x,linhaUmVertical.y,linhaUmVertical.largura,linhaUmVertical.altura);
+			ctx.fillRect(linhaDoisVertical.x,linhaDoisVertical.y,linhaDoisVertical.largura,linhaDoisVertical.altura);
+			ctx.fillRect(linhaTresVertical.x,linhaTresVertical.y,linhaTresVertical.largura,linhaTresVertical.altura);
+			ctx.fillRect(linhaQuatroVertical.x,linhaQuatroVertical.y,linhaQuatroVertical.largura,linhaQuatroVertical.altura);
+			ctx.fillRect(linhaCincoVertical.x,linhaCincoVertical.y,linhaCincoVertical.largura,linhaCincoVertical.altura);
+/////////////////////
+		};
+	},
+	};
+	var	quantidadeFrases = [0,];
+	var	frases = [];
+/////////////////////////////////////////////////////////////////////////////////////
+
+	function desenha(){
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+			ctx.fillStyle = "green";
+			ctx.font = "20px Arial";
+
+			ctx.fillRect(divisaoVerticalUm.x,divisaoVerticalUm.y,divisaoVerticalUm.largura,divisaoVerticalUm.altura);
+			ctx.fillRect(divisaoVerticalDois.x,divisaoVerticalDois.y,divisaoVerticalDois.largura,divisaoVerticalDois.altura);
+			ctx.fillRect(divisaoVerticalTres.x,divisaoVerticalTres.y,divisaoVerticalTres.largura,divisaoVerticalTres.altura);
+			ctx.fillRect(divisaoHorizontalUm.x,divisaoHorizontalUm.y,divisaoHorizontalUm.largura,divisaoHorizontalUm.altura);
+			ctx.fillRect(divisaoHorizontalDois.x,divisaoHorizontalDois.y,divisaoHorizontalDois.largura,divisaoHorizontalDois.altura);
+			ctx.fillRect(divisaoHorizontalTres.x,divisaoHorizontalTres.y,divisaoHorizontalTres.largura,divisaoHorizontalTres.altura);
+
+			ctx.fillRect(linhaUmHorizontal.x,linhaUmHorizontal.y,linhaUmHorizontal.largura,linhaUmHorizontal.altura);
+			ctx.fillRect(linhaDoisHorizontal.x,linhaDoisHorizontal.y,linhaDoisHorizontal.largura,linhaDoisHorizontal.altura);
+			ctx.fillRect(linhaTresHorizontal.x,linhaTresHorizontal.y,linhaTresHorizontal.largura,linhaTresHorizontal.altura);
+			ctx.fillRect(linhaQuatroHorizontal.x,linhaQuatroHorizontal.y,linhaQuatroHorizontal.largura,linhaQuatroHorizontal.altura);
+			ctx.fillRect(linhaCincoHorizontal.x,linhaCincoHorizontal.y,linhaCincoHorizontal.largura,linhaCincoHorizontal.altura);
+
+			ctx.fillRect(linhaUmVertical.x,linhaUmVertical.y,linhaUmVertical.largura,linhaUmVertical.altura);
+			ctx.fillRect(linhaDoisVertical.x,linhaDoisVertical.y,linhaDoisVertical.largura,linhaDoisVertical.altura);
+			ctx.fillRect(linhaTresVertical.x,linhaTresVertical.y,linhaTresVertical.largura,linhaTresVertical.altura);
+			ctx.fillRect(linhaQuatroVertical.x,linhaQuatroVertical.y,linhaQuatroVertical.largura,linhaQuatroVertical.altura);
+			ctx.fillRect(linhaCincoVertical.x,linhaCincoVertical.y,linhaCincoVertical.largura,linhaCincoVertical.altura);
+			novaFrase.inseri();
+		};
+	
+setTimeout(desenha,1);
+//////////////////////////
+
+//Math.floor((Math.random() * 10) + 1
+</script>
+</body>
+</html>
+

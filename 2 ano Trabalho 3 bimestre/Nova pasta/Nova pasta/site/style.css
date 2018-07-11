@@ -1,0 +1,27 @@
+body  {
+	margin: 0;
+	padding: 0;
+	background: white;
+	}
+#container  {
+	margin: 1em auto;
+	width: 650px;
+	background: grey;
+	}
+#header {background: grey;}
+#mainnav {background: grey; }
+#menu  {
+	float: right;
+	width: 165px;
+	background: grey;
+	}
+#contents  {
+	float: left;
+	width: 440;  	
+	background: grey;
+	margin: 0 0 0 20px;
+	}
+#footer  {
+	clear: both;
+	background: brown;
+	}

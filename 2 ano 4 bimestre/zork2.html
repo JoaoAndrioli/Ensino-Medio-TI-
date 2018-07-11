@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>zork</title>
+	<style>
+	#meucanvas{
+	background-color:black;
+	margin-top: -300px;
+	margin-left: -450px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	}
+	</style>
+</head>
+<body>
+<canvas id="meucanvas" height="600" width="900" >O seu Browser nao suporta este elemento</canvas>
+<script>
+
+	var canvas = document.getElementById("meucanvas");
+	var ctx = canvas.getContext("2d");
+	var teclas = {};
+	var divisaoVerticalUm = {
+		x:canvas.width - 200 - 5,
+		y:0,
+		largura:5,
+		altura:canvas.height
+	}; 
+	var divisaoVerticalDois = {
+		x:canvas.width - 5,
+		y:0,
+		largura:5,
+		altura:canvas.height
+	}; 
+	var divisaoVerticalTres = {
+		x:0,
+		y:0,
+		largura:5,
+		altura:canvas.height
+	}; 
+		var divisaoHorizontalUm = {
+		x:canvas.width - 200 - 5,
+		y:200,
+		largura:200,
+		altura:5
+	}; 
+		var divisaoHorizontalDois = {
+		x:0,
+		y:500,
+		largura:canvas.width,
+		altura:5
+	};
+		var divisaoHorizontalTres = {
+		x:0,
+		y:595,
+		largura:canvas.width,
+		altura:5
+	};
+
+///////////////////////////////////////////
+
+	var linhaUmHorizontal = {
+	x:canvas.width - 200 - 5,
+	y:40,
+	largura:200,
+	altura:5
+	};
+	var linhaDoisHorizontal = {
+	x:canvas.width - 200 - 5,
+	y:80,
+	largura:200,
+	altura:5
+	};
+	var linhaTresHorizontal = {
+	x:canvas.width - 200 - 5,
+	y:120,
+	largura:200,
+	altura:5
+	};
+	var linhaQuatroHorizontal = {
+	x:canvas.width - 200 - 5,
+	y:160,
+	largura:200,
+	altura:5
+	};
+	var linhaCincoHorizontal = {
+	x:0,
+	y:0,
+	largura:canvas.width,
+	altura:5
+	};
+
+//////////////////////////////
+	var linhaUmVertical = {
+	x:canvas.width - 160 - 5,
+	y:0,
+	largura:5,
+	altura:200
+	};
+	var linhaDoisVertical = {
+	x:canvas.width - 120 - 5,
+	y:0,
+	largura:5,
+	altura:200	
+	};
+	var linhaTresVertical = {
+	x:canvas.width - 80 - 5,
+	y:0,
+	largura:5,
+	altura:200
+	};
+	var linhaQuatroVertical = {
+	x:canvas.width - 40 - 5,
+	y:0,
+	largura:5,
+	altura:200
+	};
+	var linhaCincoVertical = {
+	x:canvas.width  - 5,
+	y:0,
+	largura:5,
+	altura:205
+	};
+
+////////////////////////////////
+
+			document.addEventListener("keydown", function(e) {
+				teclas[e.keyCode];
+				//alert(e.keyCode);
+				digitou();
+			}, false);
+
+			document.addEventListener("keyup", function(e) {
+				delete teclas[e.keyCode];
+			}, false);
+			
+			function digitou(){
+				if(65 in teclas){
+					this.teclou.letraDigitada.push(a);
+					desenhaLetra();
+					this.teclou.tec.push(a);
+					
+			}};
+
+//////////////////////////////
+	var comecoTecla = {
+		x:10,
+		y:520
+	};
+	var letrasExistentes = {px:14};
+	var teclou = {
+		tec: [],
+		letras: [a = 1,b = 2,c = 3,d = 4,e = 5,f = 6,g = 7,h = 8,i = 9,j = 10,k = 11,l = 12,m = 13,n = 14,o = 15,p = 16,q = 17,r = 18,s = 19,t = 20,u = 21,v = 22,w = 23,x = 24,y = 25,z = 26],
+		letraDigitada:[],
+		quantity:[],
+	};
+	var quantidadeLetras;
+	function desenhaLetra(){
+		for (var i = -1, tam = this.teclou.tec.length; i < tam; i++){
+			quantidadeLetras = tam;
+			//if(this.teclou.letraDigitada[quantidadeLetras] == a){
+			//	ctx.fillText("a",canvas.width - 300,canvas.height - 300);
+			//};
+		};
+	};
+	var naosei = {nao:"a"};
+		function desenha(){
+			//desenhaLetra();
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+			ctx.fillStyle = "green";
+			ctx.font = "20px Arial";
+
+			ctx.fillRect(divisaoVerticalUm.x,divisaoVerticalUm.y,divisaoVerticalUm.largura,divisaoVerticalUm.altura);
+			ctx.fillRect(divisaoVerticalDois.x,divisaoVerticalDois.y,divisaoVerticalDois.largura,divisaoVerticalDois.altura);
+			ctx.fillRect(divisaoVerticalTres.x,divisaoVerticalTres.y,divisaoVerticalTres.largura,divisaoVerticalTres.altura);
+			ctx.fillRect(divisaoHorizontalUm.x,divisaoHorizontalUm.y,divisaoHorizontalUm.largura,divisaoHorizontalUm.altura);
+			ctx.fillRect(divisaoHorizontalDois.x,divisaoHorizontalDois.y,divisaoHorizontalDois.largura,divisaoHorizontalDois.altura);
+			ctx.fillRect(divisaoHorizontalTres.x,divisaoHorizontalTres.y,divisaoHorizontalTres.largura,divisaoHorizontalTres.altura);
+
+			ctx.fillRect(linhaUmHorizontal.x,linhaUmHorizontal.y,linhaUmHorizontal.largura,linhaUmHorizontal.altura);
+			ctx.fillRect(linhaDoisHorizontal.x,linhaDoisHorizontal.y,linhaDoisHorizontal.largura,linhaDoisHorizontal.altura);
+			ctx.fillRect(linhaTresHorizontal.x,linhaTresHorizontal.y,linhaTresHorizontal.largura,linhaTresHorizontal.altura);
+			ctx.fillRect(linhaQuatroHorizontal.x,linhaQuatroHorizontal.y,linhaQuatroHorizontal.largura,linhaQuatroHorizontal.altura);
+			ctx.fillRect(linhaCincoHorizontal.x,linhaCincoHorizontal.y,linhaCincoHorizontal.largura,linhaCincoHorizontal.altura);
+
+			ctx.fillRect(linhaUmVertical.x,linhaUmVertical.y,linhaUmVertical.largura,linhaUmVertical.altura);
+			ctx.fillRect(linhaDoisVertical.x,linhaDoisVertical.y,linhaDoisVertical.largura,linhaDoisVertical.altura);
+			ctx.fillRect(linhaTresVertical.x,linhaTresVertical.y,linhaTresVertical.largura,linhaTresVertical.altura);
+			ctx.fillRect(linhaQuatroVertical.x,linhaQuatroVertical.y,linhaQuatroVertical.largura,linhaQuatroVertical.altura);
+			ctx.fillRect(linhaCincoVertical.x,linhaCincoVertical.y,linhaCincoVertical.largura,linhaCincoVertical.altura);
+
+//////////////////////////////////////////////////////////////
+		for (var i = -1, tam = this.teclou.tec.length; i < tam; i++){
+			if(this.teclou.letraDigitada[quantidadeLetras] == 	a ){
+				ctx.fillText(naosei.nao,comecoTecla.x + quantidadeLetras * letrasExistentes.px,comecoTecla.y);
+				
+				this.teclou.quantity.push({
+					quantidade:(Math.floor(10 + Math.random())),
+					letra:this.teclou.letras.a,
+				});
+			};
+		};
+		};
+	
+	setInterval(desenha,20);
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
