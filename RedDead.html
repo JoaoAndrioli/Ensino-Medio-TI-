@@ -1,0 +1,1076 @@
+<html>
+<head>
+	<meta charset="utf-8" />
+<title>Redalive</title>
+	<style>
+	body {
+		background-color: black;
+	}
+		#mycanvas {
+			background-color: red;
+			margin-top: -345px;
+			margin-left: -575px;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="mycanvas" tabindex="1" height="690" width="1150">O seu browser não suporta este elemento</canvas>
+	
+<script>
+	var canvas = document.getElementById("mycanvas");
+	var ctx = canvas.getContext("2d");
+	
+	
+	const Base={
+		x:5,
+		y:5,
+		altura:680,
+		largura:1140,
+	};
+	
+	var vc = {
+		x:0,
+		y:0,
+		largura:0,
+		altura:0,
+		speed:2
+	};
+		
+		
+		
+	var linhasHorizontala = {
+		x:572.5,
+		y:342.5,
+		largura:5,
+		altura:5,
+	};
+		
+	var linhasHorizontalb = {
+		x:572.5,
+		y:342.5,
+		largura:5,
+		altura:5,
+	};
+	
+	
+	var linhasVerticala = {
+		x:572.5,
+		y:342.5,
+		largura:5,
+		altura:5,
+	};
+		
+	var linhasVerticalb = {
+		x:572.5,
+		y:342.5,
+		largura:5,
+		altura:5,
+	};
+	
+	
+		var linhasHorizontalaa = {
+		x:572.5,
+		y:342.5,
+		largura:5,
+		altura:5,
+	};
+		
+	var linhasHorizontalbb = {
+		x:572.5,
+		y:342.5,
+		largura:5,
+		altura:5,
+	};
+	
+	
+	var linhasVerticalaa = {
+		x:572.5,
+		y:342.5,
+		largura:5,
+		altura:5,
+	};
+		
+	var linhasVerticalbb = {
+		x:572.5,
+		y:342.5,
+		largura:5,
+		altura:5,
+	};
+	
+	
+	var linhasHorizontalaaa = {
+		x:572.5,
+		y:342.5,
+		largura:5,
+		altura:5,
+	};
+		
+	var linhasHorizontalbbb = {
+		x:572.5,
+		y:342.5,
+		largura:5,
+		altura:5,
+	};
+	
+	
+	var linhasVerticalaaa = {
+		x:572.5,
+		y:342.5,
+		largura:5,
+		altura:5,
+	};
+		
+	var linhasVerticalbbb = {
+		x:572.5,
+		y:342.5,
+		largura:5,
+		altura:5,
+	};	
+
+	
+	
+	var linhasHorizontalaaaa = {
+		x:572.5,
+		y:342.5,
+		largura:5,
+		altura:5,
+	};
+		
+	var linhasHorizontalbbbb = {
+		x:572.5,
+		y:342.5,
+		largura:5,
+		altura:5,
+	};
+	
+	
+	var linhasVerticalaaaa = {
+		x:572.5,
+		y:342.5,
+		largura:5,
+		altura:5,
+	};
+		
+	var linhasVerticalbbbb = {
+		x:572.5,
+		y:342.5,
+		largura:5,
+		altura:5,
+	};	
+
+	
+	
+	var linhasHorizontalaaaaa = {
+		x:572.5,
+		y:342.5,
+		largura:5,
+		altura:5,
+	};
+		
+	var linhasHorizontalbbbbb = {
+		x:572.5,
+		y:342.5,
+		largura:5,
+		altura:5,
+	};
+	
+	
+	var linhasVerticalaaaaa = {
+		x:572.5,
+		y:342.5,
+		largura:5,
+		altura:5,
+	};
+		
+	var linhasVerticalbbbbb = {
+		x:572.5,
+		y:342.5,
+		largura:5,
+		altura:5,
+	};		
+	
+	
+	var linhasHorizontalaaaaaa = {
+		x:572.5,
+		y:342.5,
+		largura:5,
+		altura:5,
+	};
+		
+	var linhasHorizontalbbbbbb = {
+		x:572.5,
+		y:342.5,
+		largura:5,
+		altura:5,
+	};
+	
+	
+	var linhasVerticalaaaaaa = {
+		x:572.5,
+		y:342.5,
+		largura:5,
+		altura:5,
+	};
+		
+	var linhasVerticalbbbbbb = {
+		x:572.5,
+		y:342.5,
+		largura:5,
+		altura:5,
+	};	
+	
+	
+	var linhasHorizontalaaaaaaa = {
+		x:572.5,
+		y:342.5,
+		largura:5,
+		altura:5,
+	};
+		
+	var linhasHorizontalbbbbbbb = {
+		x:572.5,
+		y:342.5,
+		largura:5,
+		altura:5,
+	};
+	
+	
+	var linhasVerticalaaaaaaa = {
+		x:572.5,
+		y:342.5,
+		largura:5,
+		altura:5,
+	};
+		
+	var linhasVerticalbbbbbbb = {
+		x:572.5,
+		y:342.5,
+		largura:5,
+		altura:5,
+	};	
+	
+	
+	var linhasHorizontalaaaaaaaa = {
+		x:572.5,
+		y:342.5,
+		largura:5,
+		altura:5,
+	};
+		
+	var linhasHorizontalbbbbbbbb = {
+		x:572.5,
+		y:342.5,
+		largura:5,
+		altura:5,
+	};
+	
+	
+	var linhasVerticalaaaaaaaa = {
+		x:572.5,
+		y:342.5,
+		largura:5,
+		altura:5,
+	};
+		
+	var linhasVerticalbbbbbbbb = {
+		x:572.5,
+		y:342.5,
+		largura:5,
+		altura:5,
+	};	
+	
+	
+	
+	var linhasHorizontalaaaaaaaaa = {
+		x:572.5,
+		y:342.5,
+		largura:5,
+		altura:5,
+	};
+		
+	var linhasHorizontalbbbbbbbbb = {
+		x:572.5,
+		y:342.5,
+		largura:5,
+		altura:5,
+	};
+	
+	
+	var linhasVerticalaaaaaaaaa = {
+		x:572.5,
+		y:342.5,
+		largura:5,
+		altura:5,
+	};
+		
+	var linhasVerticalbbbbbbbbb = {
+		x:572.5,
+		y:342.5,
+		largura:5,
+		altura:5,
+	};	
+				
+	var contadora = 0;
+	var contadorb = -0.2;
+	var contadorc = -0.4;
+	var contadord = -0.6;
+	var contadore = -0.8;
+	var contadorf = -1.0;
+	var contadorg = -1.2;
+	var contadorh = -1.4;
+	var contadori = -1.6;
+	
+	function desenha(){
+	
+	ctx.font = "20px Arial";
+	
+	ctx.fillStyle = "black";
+	ctx.fillRect(Base.x,Base.y,Base.largura,Base.altura);
+	ctx.fillStyle = "red";
+	
+	ctx.fillRect(linhasHorizontala.x,linhasHorizontala.y,linhasHorizontala.largura,linhasHorizontala.altura);
+	ctx.fillRect(linhasHorizontalb.x,linhasHorizontalb.y,linhasHorizontalb.largura,linhasHorizontalb.altura);
+	
+	ctx.fillRect(linhasVerticala.x,linhasVerticala.y,linhasVerticala.largura,linhasVerticala.altura);
+	ctx.fillRect(linhasVerticalb.x,linhasVerticalb.y,linhasVerticalb.largura,linhasVerticalb.altura);
+
+	
+		linhasHorizontala.y += contadora;
+		linhasHorizontala.x -= contadora / 0.580;
+		linhasHorizontala.largura += contadora * 3.45;
+		
+		linhasHorizontalb.y -= contadora;
+		linhasHorizontalb.x -= contadora / 0.580;
+		linhasHorizontalb.largura += contadora * 3.45;
+
+		linhasVerticala.x += contadora * 1.725;
+		linhasVerticala.y -= contadora;
+		linhasVerticala.altura += contadora * 2;
+		
+		linhasVerticalb.x -= contadora * 1.725;
+		linhasVerticalb.y -= contadora;
+		linhasVerticalb.altura += contadora * 2;
+		
+		if(linhasHorizontala.y > canvas.height){
+			linhasHorizontala.y = contadora + 342.5;
+			linhasHorizontala.x = 572.5;
+			linhasHorizontala.largura = 0;
+			
+			linhasHorizontalb.y = contadora + 342.5;
+			linhasHorizontalb.x = 572.5;
+			linhasHorizontalb.largura = 0;
+			
+			linhasVerticala.y = contadora + 342.5;
+			linhasVerticala.x = 572.5;
+			linhasVerticala.altura = 5;
+			
+			linhasVerticalb.y = contadora + 342.5;
+			linhasVerticalb.x = 572.5;
+			linhasVerticalb.altura = 5;
+						
+			contadora = 0;			
+		};
+		
+		
+		if(contadorb > 0){
+		
+	ctx.fillRect(linhasHorizontalaa.x,linhasHorizontalaa.y,linhasHorizontalaa.largura,linhasHorizontalaa.altura);
+	ctx.fillRect(linhasHorizontalbb.x,linhasHorizontalbb.y,linhasHorizontalbb.largura,linhasHorizontalbb.altura);
+	
+	ctx.fillRect(linhasVerticalaa.x,linhasVerticalaa.y,linhasVerticalaa.largura,linhasVerticalaa.altura);
+	ctx.fillRect(linhasVerticalbb.x,linhasVerticalbb.y,linhasVerticalbb.largura,linhasVerticalbb.altura);
+
+	
+		linhasHorizontalaa.y += contadorb;
+		linhasHorizontalaa.x -= contadorb / 0.580;
+		linhasHorizontalaa.largura += contadorb * 3.45;
+		
+		linhasHorizontalbb.y -= contadorb;
+		linhasHorizontalbb.x -= contadorb / 0.580;
+		linhasHorizontalbb.largura += contadorb * 3.45;
+
+		linhasVerticalaa.x += contadorb * 1.725;
+		linhasVerticalaa.y -= contadorb;
+		linhasVerticalaa.altura += contadorb * 2;
+		
+		linhasVerticalbb.x -= contadorb * 1.725;
+		linhasVerticalbb.y -= contadorb;
+		linhasVerticalbb.altura += contadorb * 2;
+		
+		if(linhasHorizontalaa.y > canvas.height){
+			linhasHorizontalaa.y = contadorb + 342.5;
+			linhasHorizontalaa.x = 572.5;
+			linhasHorizontalaa.largura = 0;
+			
+			linhasHorizontalbb.y = contadorb + 342.5;
+			linhasHorizontalbb.x = 572.5;
+			linhasHorizontalbb.largura = 0;
+			
+			linhasVerticalaa.y = contadorb + 342.5;
+			linhasVerticalaa.x = 572.5;
+			linhasVerticalaa.altura = 5;
+			
+			linhasVerticalbb.y = contadorb + 342.5;
+			linhasVerticalbb.x = 572.5;
+			linhasVerticalbb.altura = 5;
+						
+			contadorb = 0;			
+		};
+		};
+	
+		if(contadorc > 0){
+		
+	ctx.fillRect(linhasHorizontalaaa.x,linhasHorizontalaaa.y,linhasHorizontalaaa.largura,linhasHorizontalaaa.altura);
+	ctx.fillRect(linhasHorizontalbbb.x,linhasHorizontalbbb.y,linhasHorizontalbbb.largura,linhasHorizontalbbb.altura);
+	
+	ctx.fillRect(linhasVerticalaaa.x,linhasVerticalaaa.y,linhasVerticalaaa.largura,linhasVerticalaaa.altura);
+	ctx.fillRect(linhasVerticalbbb.x,linhasVerticalbbb.y,linhasVerticalbbb.largura,linhasVerticalbbb.altura);
+
+	
+		linhasHorizontalaaa.y += contadorc;
+		linhasHorizontalaaa.x -= contadorc / 0.580;
+		linhasHorizontalaaa.largura += contadorc * 3.45;
+		
+		linhasHorizontalbbb.y -= contadorc;
+		linhasHorizontalbbb.x -= contadorc / 0.580;
+		linhasHorizontalbbb.largura += contadorc * 3.45;
+
+		linhasVerticalaaa.x += contadorc * 1.725;
+		linhasVerticalaaa.y -= contadorc;
+		linhasVerticalaaa.altura += contadorc * 2;
+		
+		linhasVerticalbbb.x -= contadorc * 1.725;
+		linhasVerticalbbb.y -= contadorc;
+		linhasVerticalbbb.altura += contadorc * 2;
+		
+		if(linhasHorizontalaaa.y > canvas.height){
+			linhasHorizontalaaa.y = contadorc + 342.5;
+			linhasHorizontalaaa.x = 572.5;
+			linhasHorizontalaaa.largura = 0;
+			
+			linhasHorizontalbbb.y = contadorc + 342.5;
+			linhasHorizontalbbb.x = 572.5;
+			linhasHorizontalbbb.largura = 0;
+			
+			linhasVerticalaaa.y = contadorc + 342.5;
+			linhasVerticalaaa.x = 572.5;
+			linhasVerticalaaa.altura = 5;
+			
+			linhasVerticalbbb.y = contadorc + 342.5;
+			linhasVerticalbbb.x = 572.5;
+			linhasVerticalbbb.altura = 5;
+						
+			contadorc = 0;			
+		};
+		};
+		
+		if(contadord > 0){
+		
+	ctx.fillRect(linhasHorizontalaaaa.x,linhasHorizontalaaaa.y,linhasHorizontalaaaa.largura,linhasHorizontalaaaa.altura);
+	ctx.fillRect(linhasHorizontalbbbb.x,linhasHorizontalbbbb.y,linhasHorizontalbbbb.largura,linhasHorizontalbbbb.altura);
+	
+	ctx.fillRect(linhasVerticalaaaa.x,linhasVerticalaaaa.y,linhasVerticalaaaa.largura,linhasVerticalaaaa.altura);
+	ctx.fillRect(linhasVerticalbbbb.x,linhasVerticalbbbb.y,linhasVerticalbbbb.largura,linhasVerticalbbbb.altura);
+
+	
+		linhasHorizontalaaaa.y += contadord;
+		linhasHorizontalaaaa.x -= contadord / 0.580;
+		linhasHorizontalaaaa.largura += contadord * 3.45;
+		
+		linhasHorizontalbbbb.y -= contadord;
+		linhasHorizontalbbbb.x -= contadord / 0.580;
+		linhasHorizontalbbbb.largura += contadord * 3.45;
+
+		linhasVerticalaaaa.x += contadord * 1.725;
+		linhasVerticalaaaa.y -= contadord;
+		linhasVerticalaaaa.altura += contadord * 2;
+		
+		linhasVerticalbbbb.x -= contadord * 1.725;
+		linhasVerticalbbbb.y -= contadord;
+		linhasVerticalbbbb.altura += contadord * 2;
+		
+		if(linhasHorizontalaaaa.y > canvas.height){
+			linhasHorizontalaaaa.y = contadord + 342.5;
+			linhasHorizontalaaaa.x = 572.5;
+			linhasHorizontalaaaa.largura = 0;
+			
+			linhasHorizontalbbbb.y = contadord + 342.5;
+			linhasHorizontalbbbb.x = 572.5;
+			linhasHorizontalbbbb.largura = 0;
+			
+			linhasVerticalaaaa.y = contadord + 342.5;
+			linhasVerticalaaaa.x = 572.5;
+			linhasVerticalaaaa.altura = 5;
+			
+			linhasVerticalbbbb.y = contadord + 342.5;
+			linhasVerticalbbbb.x = 572.5;
+			linhasVerticalbbbb.altura = 5;
+						
+			contadord = 0;			
+		};
+		};
+		
+		if(contadore > 0){
+		
+	ctx.fillRect(linhasHorizontalaaaaa.x,linhasHorizontalaaaaa.y,linhasHorizontalaaaaa.largura,linhasHorizontalaaaa.altura);
+	ctx.fillRect(linhasHorizontalbbbbb.x,linhasHorizontalbbbbb.y,linhasHorizontalbbbbb.largura,linhasHorizontalbbbbb.altura);
+	
+	ctx.fillRect(linhasVerticalaaaaa.x,linhasVerticalaaaaa.y,linhasVerticalaaaaa.largura,linhasVerticalaaaaa.altura);
+	ctx.fillRect(linhasVerticalbbbbb.x,linhasVerticalbbbbb.y,linhasVerticalbbbbb.largura,linhasVerticalbbbbb.altura);
+
+	
+		linhasHorizontalaaaaa.y += contadore;
+		linhasHorizontalaaaaa.x -= contadore / 0.580;
+		linhasHorizontalaaaaa.largura += contadore * 3.45;
+		
+		linhasHorizontalbbbbb.y -= contadore;
+		linhasHorizontalbbbbb.x -= contadore / 0.580;
+		linhasHorizontalbbbbb.largura += contadore * 3.45;
+
+		linhasVerticalaaaaa.x += contadore * 1.725;
+		linhasVerticalaaaaa.y -= contadore;
+		linhasVerticalaaaaa.altura += contadore * 2;
+		
+		linhasVerticalbbbbb.x -= contadore * 1.725;
+		linhasVerticalbbbbb.y -= contadore;
+		linhasVerticalbbbbb.altura += contadore * 2;
+		
+		if(linhasHorizontalaaaaa.y > canvas.height){
+			linhasHorizontalaaaaa.y = contadore + 342.5;
+			linhasHorizontalaaaaa.x = 572.5;
+			linhasHorizontalaaaaa.largura = 0;
+			
+			linhasHorizontalbbbbb.y = contadore + 342.5;
+			linhasHorizontalbbbbb.x = 572.5;
+			linhasHorizontalbbbbb.largura = 0;
+			
+			linhasVerticalaaaaa.y = contadore + 342.5;
+			linhasVerticalaaaaa.x = 572.5;
+			linhasVerticalaaaaa.altura = 5;
+			
+			linhasVerticalbbbbb.y = contadore + 342.5;
+			linhasVerticalbbbbb.x = 572.5;
+			linhasVerticalbbbbb.altura = 5;
+						
+			contadore = 0;			
+		};
+		};
+		
+		if(contadorf > 0){
+		
+	ctx.fillRect(linhasHorizontalaaaaaa.x,linhasHorizontalaaaaaa.y,linhasHorizontalaaaaaa.largura,linhasHorizontalaaaaa.altura);
+	ctx.fillRect(linhasHorizontalbbbbbb.x,linhasHorizontalbbbbbb.y,linhasHorizontalbbbbbb.largura,linhasHorizontalbbbbbb.altura);
+	
+	ctx.fillRect(linhasVerticalaaaaaa.x,linhasVerticalaaaaaa.y,linhasVerticalaaaaaa.largura,linhasVerticalaaaaaa.altura);
+	ctx.fillRect(linhasVerticalbbbbbb.x,linhasVerticalbbbbbb.y,linhasVerticalbbbbbb.largura,linhasVerticalbbbbbb.altura);
+
+	
+		linhasHorizontalaaaaaa.y += contadorf;
+		linhasHorizontalaaaaaa.x -= contadorf / 0.580;
+		linhasHorizontalaaaaaa.largura += contadorf * 3.45;
+		
+		linhasHorizontalbbbbbb.y -= contadorf;
+		linhasHorizontalbbbbbb.x -= contadorf / 0.580;
+		linhasHorizontalbbbbbb.largura += contadorf * 3.45;
+
+		linhasVerticalaaaaaa.x += contadorf * 1.725;
+		linhasVerticalaaaaaa.y -= contadorf;
+		linhasVerticalaaaaaa.altura += contadorf * 2;
+		
+		linhasVerticalbbbbbb.x -= contadorf * 1.725;
+		linhasVerticalbbbbbb.y -= contadorf;
+		linhasVerticalbbbbbb.altura += contadorf * 2;
+		
+		if(linhasHorizontalaaaaaa.y > canvas.height){
+			linhasHorizontalaaaaaa.y = contadorf + 342.5;
+			linhasHorizontalaaaaaa.x = 572.5;
+			linhasHorizontalaaaaaa.largura = 0;
+			
+			linhasHorizontalbbbbbb.y = contadorf + 342.5;
+			linhasHorizontalbbbbbb.x = 572.5;
+			linhasHorizontalbbbbbb.largura = 0;
+			
+			linhasVerticalaaaaaa.y = contadorf + 342.5;
+			linhasVerticalaaaaaa.x = 572.5;
+			linhasVerticalaaaaaa.altura = 5;
+			
+			linhasVerticalbbbbbb.y = contadorf + 342.5;
+			linhasVerticalbbbbbb.x = 572.5;
+			linhasVerticalbbbbbb.altura = 5;
+						
+			contadorf = 0;			
+		};
+		};
+		
+		if(contadorg > 0){
+		
+	ctx.fillRect(linhasHorizontalaaaaaaa.x,linhasHorizontalaaaaaaa.y,linhasHorizontalaaaaaaa.largura,linhasHorizontalaaaaaa.altura);
+	ctx.fillRect(linhasHorizontalbbbbbbb.x,linhasHorizontalbbbbbbb.y,linhasHorizontalbbbbbbb.largura,linhasHorizontalbbbbbbb.altura);
+	
+	ctx.fillRect(linhasVerticalaaaaaaa.x,linhasVerticalaaaaaaa.y,linhasVerticalaaaaaaa.largura,linhasVerticalaaaaaaa.altura);
+	ctx.fillRect(linhasVerticalbbbbbbb.x,linhasVerticalbbbbbbb.y,linhasVerticalbbbbbbb.largura,linhasVerticalbbbbbbb.altura);
+
+	
+		linhasHorizontalaaaaaaa.y += contadorg;
+		linhasHorizontalaaaaaaa.x -= contadorg / 0.580;
+		linhasHorizontalaaaaaaa.largura += contadorg * 3.45;
+		
+		linhasHorizontalbbbbbbb.y -= contadorg;
+		linhasHorizontalbbbbbbb.x -= contadorg / 0.580;
+		linhasHorizontalbbbbbbb.largura += contadorg * 3.45;
+
+		linhasVerticalaaaaaaa.x += contadorg * 1.725;
+		linhasVerticalaaaaaaa.y -= contadorg;
+		linhasVerticalaaaaaaa.altura += contadorg * 2;
+		
+		linhasVerticalbbbbbbb.x -= contadorg * 1.725;
+		linhasVerticalbbbbbbb.y -= contadorg;
+		linhasVerticalbbbbbbb.altura += contadorg * 2;
+		
+		if(linhasHorizontalaaaaaaa.y > canvas.height){
+			linhasHorizontalaaaaaaa.y = contadorg + 342.5;
+			linhasHorizontalaaaaaaa.x = 572.5;
+			linhasHorizontalaaaaaaa.largura = 0;
+			
+			linhasHorizontalbbbbbbb.y = contadorg + 342.5;
+			linhasHorizontalbbbbbbb.x = 572.5;
+			linhasHorizontalbbbbbbb.largura = 0;
+			
+			linhasVerticalaaaaaaa.y = contadorg + 342.5;
+			linhasVerticalaaaaaaa.x = 572.5;
+			linhasVerticalaaaaaaa.altura = 5;
+			
+			linhasVerticalbbbbbbb.y = contadorg + 342.5;
+			linhasVerticalbbbbbbb.x = 572.5;
+			linhasVerticalbbbbbbb.altura = 5;
+						
+			contadorg = 0;			
+		};
+		};
+		
+		if(contadorh > 0){
+		
+	ctx.fillRect(linhasHorizontalaaaaaaaa.x,linhasHorizontalaaaaaaaa.y,linhasHorizontalaaaaaaaa.largura,linhasHorizontalaaaaaaa.altura);
+	ctx.fillRect(linhasHorizontalbbbbbbbb.x,linhasHorizontalbbbbbbbb.y,linhasHorizontalbbbbbbbb.largura,linhasHorizontalbbbbbbbb.altura);
+	
+	ctx.fillRect(linhasVerticalaaaaaaaa.x,linhasVerticalaaaaaaaa.y,linhasVerticalaaaaaaaa.largura,linhasVerticalaaaaaaaa.altura);
+	ctx.fillRect(linhasVerticalbbbbbbbb.x,linhasVerticalbbbbbbbb.y,linhasVerticalbbbbbbbb.largura,linhasVerticalbbbbbbbb.altura);
+
+	
+		linhasHorizontalaaaaaaaa.y += contadorh;
+		linhasHorizontalaaaaaaaa.x -= contadorh / 0.580;
+		linhasHorizontalaaaaaaaa.largura += contadorh * 3.45;
+		
+		linhasHorizontalbbbbbbbb.y -= contadorh;
+		linhasHorizontalbbbbbbbb.x -= contadorh / 0.580;
+		linhasHorizontalbbbbbbbb.largura += contadorh * 3.45;
+
+		linhasVerticalaaaaaaaa.x += contadorh * 1.725;
+		linhasVerticalaaaaaaaa.y -= contadorh;
+		linhasVerticalaaaaaaaa.altura += contadorh * 2;
+		
+		linhasVerticalbbbbbbbb.x -= contadorh * 1.725;
+		linhasVerticalbbbbbbbb.y -= contadorh;
+		linhasVerticalbbbbbbbb.altura += contadorh * 2;
+		
+		if(linhasHorizontalaaaaaaaa.y > canvas.height){
+			linhasHorizontalaaaaaaaa.y = contadorh + 342.5;
+			linhasHorizontalaaaaaaaa.x = 572.5;
+			linhasHorizontalaaaaaaaa.largura = 0;
+			
+			linhasHorizontalbbbbbbbb.y = contadorh + 342.5;
+			linhasHorizontalbbbbbbbb.x = 572.5;
+			linhasHorizontalbbbbbbbb.largura = 0;
+			
+			linhasVerticalaaaaaaaa.y = contadorh + 342.5;
+			linhasVerticalaaaaaaaa.x = 572.5;
+			linhasVerticalaaaaaaaa.altura = 5;
+			
+			linhasVerticalbbbbbbbb.y = contadorh + 342.5;
+			linhasVerticalbbbbbbbb.x = 572.5;
+			linhasVerticalbbbbbbbb.altura = 5;
+						
+			contadorh = 0;			
+		};
+		};
+		
+		
+				
+		if(contadori > 0){
+		
+	ctx.fillRect(linhasHorizontalaaaaaaaaa.x,linhasHorizontalaaaaaaaaa.y,linhasHorizontalaaaaaaaaa.largura,linhasHorizontalaaaaaaaaa.altura);
+	ctx.fillRect(linhasHorizontalbbbbbbbbb.x,linhasHorizontalbbbbbbbbb.y,linhasHorizontalbbbbbbbbb.largura,linhasHorizontalbbbbbbbbb.altura);
+	
+	ctx.fillRect(linhasVerticalaaaaaaaaa.x,linhasVerticalaaaaaaaaa.y,linhasVerticalaaaaaaaaa.largura,linhasVerticalaaaaaaaaa.altura);
+	ctx.fillRect(linhasVerticalbbbbbbbbb.x,linhasVerticalbbbbbbbbb.y,linhasVerticalbbbbbbbbb.largura,linhasVerticalbbbbbbbbb.altura);
+
+	
+		linhasHorizontalaaaaaaaaa.y += contadori;
+		linhasHorizontalaaaaaaaaa.x -= contadori / 0.580;
+		linhasHorizontalaaaaaaaaa.largura += contadori * 3.45;
+		
+		linhasHorizontalbbbbbbbbb.y -= contadori;
+		linhasHorizontalbbbbbbbbb.x -= contadori / 0.580;
+		linhasHorizontalbbbbbbbbb.largura += contadori * 3.45;
+
+		linhasVerticalaaaaaaaaa.x += contadori * 1.725;
+		linhasVerticalaaaaaaaaa.y -= contadori;
+		linhasVerticalaaaaaaaaa.altura += contadori * 2;
+		
+		linhasVerticalbbbbbbbbb.x -= contadori * 1.725;
+		linhasVerticalbbbbbbbbb.y -= contadori;
+		linhasVerticalbbbbbbbbb.altura += contadori * 2;
+		
+		if(linhasHorizontalaaaaaaaaa.y > canvas.height){
+			linhasHorizontalaaaaaaaaa.y = contadori + 342.5;
+			linhasHorizontalaaaaaaaaa.x = 572.5;
+			linhasHorizontalaaaaaaaaa.largura = 0;
+			
+			linhasHorizontalbbbbbbbbb.y = contadori + 342.5;
+			linhasHorizontalbbbbbbbbb.x = 572.5;
+			linhasHorizontalbbbbbbbbb.largura = 0;
+			
+			linhasVerticalaaaaaaaaa.y = contadori + 342.5;
+			linhasVerticalaaaaaaaaa.x = 572.5;
+			linhasVerticalaaaaaaaaa.altura = 5;
+			
+			linhasVerticalbbbbbbbbb.y = contadori + 342.5;
+			linhasVerticalbbbbbbbbb.x = 572.5;
+			linhasVerticalbbbbbbbbb.altura = 5;
+						
+			contadori = 0;			
+		};
+		};
+		////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		//ctx.rotate(59.4 * Math.PI / 180);
+		//ctx.fillRect(diagonala.x,diagonala.y,diagonala.largura,diagonala.altura);
+		//ctx.rotate(300.6* Math.PI / 180);
+		
+	};
+	
+	
+	
+	
+	
+	var teclas = {};
+	
+				document.addEventListener("keydown", function(e) {
+				teclas[e.keyCode] = true;
+				//alert(e.keyCode);
+				movebloco();
+			}, false);
+
+			document.addEventListener("keyup", function(e) {
+				delete teclas[e.keyCode];
+			}, false);
+			
+
+			function movebloco() {
+				if(37 in teclas ){
+				linhasHorizontala.x -= 10;
+				linhasHorizontalb.x -= 10;
+				linhasVerticala.x -= 10;
+				linhasVerticalb.x -= 10;
+				
+				linhasHorizontalaa.x -= 10;
+				linhasHorizontalbb.x -= 10;
+				linhasVerticalaa.x -= 10;
+				linhasVerticalbb.x -= 10;
+								
+				linhasHorizontalaaa.x -= 10;
+				linhasHorizontalbbb.x -= 10;
+				linhasVerticalaaa.x -= 10;
+				linhasVerticalbbb.x -= 10;
+				
+				linhasHorizontalaaaa.x -= 10;
+				linhasHorizontalbbbb.x -= 10;
+				linhasVerticalaaaa.x -= 10;
+				linhasVerticalbbbb.x -= 10;
+				
+				linhasHorizontalaaaaa.x -= 10;
+				linhasHorizontalbbbbb.x -= 10;
+				linhasVerticalaaaaa.x -= 10;
+				linhasVerticalbbbbb.x -= 10;
+				
+				linhasHorizontalaaaaaa.x -= 10;
+				linhasHorizontalbbbbbb.x -= 10;
+				linhasVerticalaaaaaa.x -= 10;
+				linhasVerticalbbbbbb.x -= 10;
+				
+				linhasHorizontalaaaaaaa.x -= 10;
+				linhasHorizontalbbbbbbb.x -= 10;
+				linhasVerticalaaaaaaa.x -= 10;
+				linhasVerticalbbbbbbb.x -= 10;
+				
+				linhasHorizontalaaaaaaaa.x -= 10;
+				linhasHorizontalbbbbbbbb.x -= 10;
+				linhasVerticalaaaaaaaa.x -= 10;
+				linhasVerticalbbbbbbbb.x -= 10;
+				
+				linhasHorizontalaaaaaaaaa.x -= 10;
+				linhasHorizontalbbbbbbbbb.x -= 10;
+				linhasVerticalaaaaaaaaa.x -= 10;
+				linhasVerticalbbbbbbbbb.x -= 10;
+		
+				};
+				if(38 in teclas ){
+				linhasHorizontala.y -= 5;
+				linhasHorizontalb.y -= 5;
+				linhasVerticala.y -= 5;
+				linhasVerticalb.y -= 5;
+				
+				linhasHorizontalaa.y -= 5;
+				linhasHorizontalbb.y -= 5;
+				linhasVerticalaa.y -= 5;
+				linhasVerticalbb.y -= 5;
+				
+				linhasHorizontalaaa.y -= 5;
+				linhasHorizontalbbb.y -= 5;
+				linhasVerticalaaa.y -= 5;
+				linhasVerticalbbb.y -= 5;
+				
+				linhasHorizontalaaaa.y -= 5;
+				linhasHorizontalbbbb.y -= 5;
+				linhasVerticalaaaa.y -= 5;
+				linhasVerticalbbbb.y -= 5;
+				
+				linhasHorizontalaaaaa.y -= 5;
+				linhasHorizontalbbbbb.y -= 5;
+				linhasVerticalaaaaa.y -= 5;
+				linhasVerticalbbbbb.y -= 5;
+				
+				linhasHorizontalaaaaaa.y -= 5;
+				linhasHorizontalbbbbbb.y -= 5;
+				linhasVerticalaaaaaa.y -= 5;
+				linhasVerticalbbbbbb.y -= 5;
+				
+				linhasHorizontalaaaaaaa.y -= 5;
+				linhasHorizontalbbbbbbb.y -= 5;
+				linhasVerticalaaaaaaa.y -= 5;
+				linhasVerticalbbbbbbb.y -= 5;
+				
+				linhasHorizontalaaaaaaaa.y -= 5;
+				linhasHorizontalbbbbbbbb.y -= 5;
+				linhasVerticalaaaaaaaa.y -= 5;
+				linhasVerticalbbbbbbbb.y -= 5;
+				
+				linhasHorizontalaaaaaaaaa.y -= 5;
+				linhasHorizontalbbbbbbbbb.y -= 5;
+				linhasVerticalaaaaaaaaa.y -= 5;
+				linhasVerticalbbbbbbbbb.y -= 5;
+				};
+				if(39 in teclas ){
+				linhasHorizontala.x += 10;
+				linhasHorizontalb.x += 10;
+				linhasVerticala.x += 10;
+				linhasVerticalb.x += 10;
+				
+				linhasHorizontalaa.x += 10;
+				linhasHorizontalbb.x += 10;
+				linhasVerticalaa.x += 10;
+				linhasVerticalbb.x += 10;
+								
+				linhasHorizontalaaa.x += 10;
+				linhasHorizontalbbb.x += 10;
+				linhasVerticalaaa.x += 10;
+				linhasVerticalbbb.x += 10;
+				
+				linhasHorizontalaaaa.x += 10;
+				linhasHorizontalbbbb.x += 10;
+				linhasVerticalaaaa.x += 10;
+				linhasVerticalbbbb.x += 10;
+				
+				linhasHorizontalaaaaa.x += 10;
+				linhasHorizontalbbbbb.x += 10;
+				linhasVerticalaaaaa.x += 10;
+				linhasVerticalbbbbb.x += 10;
+				
+				linhasHorizontalaaaaaa.x += 10;
+				linhasHorizontalbbbbbb.x += 10;
+				linhasVerticalaaaaaa.x += 10;
+				linhasVerticalbbbbbb.x += 10;
+				
+				linhasHorizontalaaaaaaa.x += 10;
+				linhasHorizontalbbbbbbb.x += 10;
+				linhasVerticalaaaaaaa.x += 10;
+				linhasVerticalbbbbbbb.x += 10;
+				
+				linhasHorizontalaaaaaaaa.x += 10;
+				linhasHorizontalbbbbbbbb.x += 10;
+				linhasVerticalaaaaaaaa.x += 10;
+				linhasVerticalbbbbbbbb.x += 10;
+				
+				linhasHorizontalaaaaaaaaa.x += 10;
+				linhasHorizontalbbbbbbbbb.x += 10;
+				linhasVerticalaaaaaaaaa.x += 10;
+				linhasVerticalbbbbbbbbb.x += 10;
+				};
+				if(40 in teclas ){
+				linhasHorizontala.y += 5;
+				linhasHorizontalb.y += 5;
+				linhasVerticala.y += 5;
+				linhasVerticalb.y += 5;
+				
+				linhasHorizontalaa.y += 5;
+				linhasHorizontalbb.y += 5;
+				linhasVerticalaa.y += 5;
+				linhasVerticalbb.y += 5;
+				
+				linhasHorizontalaaa.y += 5;
+				linhasHorizontalbbb.y += 5;
+				linhasVerticalaaa.y += 5;
+				linhasVerticalbbb.y += 5;
+				
+				linhasHorizontalaaaa.y += 5;
+				linhasHorizontalbbbb.y += 5;
+				linhasVerticalaaaa.y += 5;
+				linhasVerticalbbbb.y += 5;
+				
+				linhasHorizontalaaaaa.y += 5;
+				linhasHorizontalbbbbb.y += 5;
+				linhasVerticalaaaaa.y += 5;
+				linhasVerticalbbbbb.y += 5;
+				
+				linhasHorizontalaaaaaa.y += 5;
+				linhasHorizontalbbbbbb.y += 5;
+				linhasVerticalaaaaaa.y += 5;
+				linhasVerticalbbbbbb.y += 5;
+				
+				linhasHorizontalaaaaaaa.y += 5;
+				linhasHorizontalbbbbbbb.y += 5;
+				linhasVerticalaaaaaaa.y += 5;
+				linhasVerticalbbbbbbb.y += 5;
+				
+				linhasHorizontalaaaaaaaa.y += 5;
+				linhasHorizontalbbbbbbbb.y += 5;
+				linhasVerticalaaaaaaaa.y += 5;
+				linhasVerticalbbbbbbbb.y += 5;
+				
+				linhasHorizontalaaaaaaaaa.y += 5;
+				linhasHorizontalbbbbbbbbb.y += 5;
+				linhasVerticalaaaaaaaaa.y += 5;
+				linhasVerticalbbbbbbbbb.y += 5;
+				};
+			
+			};
+			
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	var diagonala = {
+		x:588,
+		y:-320,
+		largura:5,
+		altura:700,
+	};	
+	function contera(){
+		contadora += 0.1;
+	};
+	
+	function conterb(){
+		contadorb += 0.1;
+	};
+	function conterc(){
+		contadorc += 0.1;
+	};
+	
+	function conterd(){
+		contadord += 0.1;
+	};
+	function contere(){
+		contadore += 0.1;
+	};
+	
+	function conterf(){
+		contadorf += 0.1;
+	};
+	function conterg(){
+		contadorg += 0.1;
+	};
+	
+	function conterh(){
+		contadorh += 0.1;
+	};	
+	function conteri(){
+		contadori += 0.1;
+	};	
+	setInterval(desenha,5);
+	setInterval(contera,250);
+	setInterval(conterb,250);
+	setInterval(conterc,250);
+	setInterval(conterd,250);
+	setInterval(contere,250);
+	setInterval(conterf,250);
+	setInterval(conterg,250);
+	setInterval(conterh,250);
+	setInterval(conteri,250);
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

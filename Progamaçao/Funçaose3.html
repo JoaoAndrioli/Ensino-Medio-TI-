@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html> 
+	<head> 
+		<meta charset="utf-8" /> 
+		<title>Funcao se 1</title> 
+		<link rel="stylesheet" type="text/css" href="joao-lixo.css">
+    <script>
+      function Funcaose_1(){
+        var valor_1 = parseFloat( document.getElementById("valor_1").value );
+        var valor_2 = parseFloat( document.getElementById("valor_2").value );
+        if(valor_1 > valor_2 ){
+        	//document.write("Reprovados");
+        	document.getElementById("resultado").innerHTML = " Piloto 1 ganhou com a pontuaçao de : " + valor_1 ;
+        }else{
+        	//document.write("Aprovados");
+        	document.getElementById("resultado").innerHTML = " Piloto 2 ganhou com a pontuaçao de : " + valor_2 ;
+        }
+
+      }
+    </script>
+	</head> 
+	<body> 
+		<form name="meuForm" method="post" id="Funcaose_1" action=""> 
+			<div class="box">
+				<h1>Funcao se 3:</h1> 
+				<label> 
+					<span>Nota do Piloto 1</span> 
+					<input type="text" class="input_text" name="primeiro_valor" id="valor_1"/> 
+				</label> 
+				<label> 
+					<span>Nota do Piloto 2</span> 
+					<input type="text" class="input_text" name="segundo_valor" id="valor_2"/> 
+				</label>
+				<label> 
+					<input type="button" class="button" onclick="Funcaose_1()" value="Calcular" /> 
+					<a href="menu.html"><input type="button" class="button2"  value="Menu" /></a>
+					<a href="menufuncaose.html"><input type="button" class="button3"  value="Funcao se" /></a>
+				</label>
+				<p id="resultado"></p>
+			</div> 
+		</form>
+	</body> 
+</html>

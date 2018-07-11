@@ -1,0 +1,3299 @@
+<html>
+<head>
+		<meta charset="utf-8" />
+<title>Test8</title>
+		<style>
+body {
+    background-color: black;
+}
+			#mycanvas {
+				background-color: black;
+				margin-top: -300px;
+				margin-left: -500px;
+				position: absolute;
+				left: 50%;
+				top: 50%;
+			}
+		</style>
+</head>
+<body>
+		<canvas id="mycanvas" tabindex="1" height="600" width="1000">O seu browser não suporta este elemento</canvas>
+<script>
+var canvas = document.getElementById("mycanvas");
+var stgr;
+var agh;
+var palavrasInp = ["/","*","-","+",".","_",")","(","&","¨","%","$","#","@","!","'","¬",",",";","~","]","´","[","<",">",":","?","°","^","}","º","`","{","ª"];
+var palavrasMai = ["Q","W","E","R","T","Y","U","I","O","P","A","S","D","F","G","H","J","K","L","Ç","Z","X","C","V","B","N","M"];
+var palavrasMin = ["q","w","e","r","t","y","u","i","o","p","a","s","d","f","g","h","j","k","l","ç","z","x","c","v","b","n","m"];
+   canvas.onkeypress = function(evt){
+		if(travaEscrita == 0){
+        var charCode = evt.which;
+        var charStr = String.fromCharCode(charCode);
+		stgr = charStr;
+		teclou.letraDigitada.push(charStr);
+		if(charStr == "="){
+			teclou.letraDigitada.pop();
+			ctx.fillStyle = "black";
+			ctx.fillRect(blocoPreto.x,blocoPreto.y,blocoPreto.largura,blocoPreto.altura);
+			ctx.fillStyle = "green";
+			if(teclou.letraDigitada.length > 1){
+				teclou.letraDigitada.pop();
+				ctx.fillStyle = "black";
+				ctx.fillRect(blocoPreto.x,blocoPreto.y,blocoPreto.largura,blocoPreto.altura);
+				ctx.fillStyle = "green";
+			};
+		};
+		if(charStr == " "){
+			if(teclou.letraDigitada.length < 3){
+				teclou.letraDigitada.pop();
+				ctx.fillStyle = "black";
+				ctx.fillRect(blocoPreto.x,blocoPreto.y,blocoPreto.largura,blocoPreto.altura);
+				ctx.fillStyle = "green";
+			};
+		};
+		
+		for(agh = -1;agh < 34;agh++){
+			if(charStr == palavrasInp[agh]){
+				teclou.letraDigitada.pop();
+				ctx.fillStyle = "black";
+				ctx.fillRect(blocoPreto.x,blocoPreto.y,blocoPreto.largura,blocoPreto.altura);
+				ctx.fillStyle = "green";
+			};
+		};
+		
+		for(agh = -1;agh < 34;agh++){
+			if(charStr == palavrasMai[agh]){
+				teclou.letraDigitada.pop();
+				ctx.fillStyle = "black";
+				ctx.fillRect(blocoPreto.x,blocoPreto.y,blocoPreto.largura,blocoPreto.altura);
+				ctx.fillStyle = "green";
+				teclou.letraDigitada.push(palavrasMin[agh]);
+			};
+		};
+		teclou.desenha();
+		teclou.tec.push("");
+		};
+   };
+var ctx = canvas.getContext("2d");
+var armaAnterior = 0;
+var escudoAnterior = 0;
+var armaduraAnterior = 0;
+var tipoArma = 0;
+var igs;
+var temItem = 0;
+var teclas = {};
+var vida = 30;
+var vidaMaxima = 30;
+var dinheiro = 2000;
+var level = 1;
+var dano = 5;
+var dica;
+var dica2;
+var dica3;
+var inventario = ["> Espada de uma mão (Aumenta em 7 o seu dano)","> Escudo de Madeira (Aumenta em 5 a sua vida maxima)"];
+var quantidadeInventario = 2;
+var lugarPlayer;
+var lugarPlayer2;
+var lugarPlayer3;
+var travaEscrita = 0;
+var qualArma;
+var armasNpc = [b1 = "'comprar espada de uma mao'",b2 = "'comprar machado de duas maos'",b3 = "'comprar adaga'",b4 = "'comprar armadura de couro completa'",b5 = "'comprar facao'"];
+var armas = [a1 = "um machado de duas mãos",a2 = "uma espada de duas mãos",a3 = "uma espada de uma mão",a4 = "um facão",a5 = "uma faca de atirar"];
+var qualComida;
+var vidaRecuperada = 0;
+var comidas =[b1 = "'comprar vinho'",b2 = "'comprar pao'",b3 = "'comprar cordeiro assado'",b4 = "'comprar porco assado'"];
+var direcao;
+var maoDireita = "Vazio";
+var maoEsquerda = "Vazio";
+var armadura = "Sem armadura";
+const direcoes = {
+	leste:1,
+	oeste:2,
+	norte:3,
+	sul:4,
+};
+var propriedadeMapa;
+const numeroMapa = {
+	comecar:0,
+	cidade:13,
+	florestaGhoe:14,
+};
+var localMapa;
+const locaisMapa = {
+	nulo:0,
+	taberna:1,
+	igreja:2,
+	vilarejo:3,
+	ferreiro:4,
+	fonte:5,
+	centro:6,
+	rio:7,
+	portao:8,
+};
+var falando;
+const falarNpc = { 
+	nulo:0,
+	velho:1,
+	padre:2,
+	estalajadeiro:3,
+	ferreiro:4,
+	mendigos:5,
+	mesas:6,
+	estalajadeiro:7,
+	bebados:8,
+	guarda:9,
+};
+var classe;
+const classes = {
+	mago:1,
+	guerreiro:2,
+	arqueiro:3
+};
+
+	var caregamento = {
+		x:810,
+		y:215,
+		largura:0,
+		altura:25,
+	};
+	var mapa = {
+		x:880,
+		y:85,
+		altura:35,
+		largura:35,
+	};
+	var tampa = {
+		x:880,
+		y:85,
+		altura:35,
+		largura:35,	
+	};
+	const blocoPreto = {
+		x:5,
+		y:505,
+		altura:30,
+		largura:790,
+	};
+	const blocoPretoDois = {
+		x:5,
+		y:5,
+		altura:495,
+		largura:790,
+	};
+	const divisaoVerticalUm = {
+		x:canvas.width - 200 - 5,
+		y:0,
+		largura:5,
+		altura:canvas.height
+	}; 
+	const divisaoVerticalDois = {
+		x:canvas.width - 5,
+		y:0,
+		largura:5,
+		altura:canvas.height
+	}; 
+	const divisaoVerticalTres = {
+		x:0,
+		y:0,
+		largura:5,
+		altura:canvas.height
+	}; 
+		const divisaoHorizontalUm = {
+		x:canvas.width - 200 - 5,
+		y:200,
+		largura:200,
+		altura:5
+	}; 
+		const divisaoHorizontalDois = {
+		x:0,
+		y:500,
+		largura:canvas.width,
+		altura:5
+	};
+		const divisaoHorizontalTres = {
+		x:0,
+		y:595,
+		largura:canvas.width,
+		altura:5
+	};
+
+///////////////////////////////////////////
+
+	const linhaUmHorizontal = {
+	x:canvas.width - 200 - 5,
+	y:40,
+	largura:200,
+	altura:5
+	};
+	const linhaDoisHorizontal = {
+	x:canvas.width - 200 - 5,
+	y:80,
+	largura:200,
+	altura:5
+	};
+	const linhaTresHorizontal = {
+	x:canvas.width - 200 - 5,
+	y:120,
+	largura:200,
+	altura:5
+	};
+	const linhaQuatroHorizontal = {
+	x:canvas.width - 200 - 5,
+	y:160,
+	largura:200,
+	altura:5
+	};
+	const linhaCincoHorizontal = {
+	x:0,
+	y:0,
+	largura:canvas.width,
+	altura:5
+	};
+
+//////////////////////////////
+	const linhaUmVertical = {
+	x:canvas.width - 160 - 5,
+	y:0,
+	largura:5,
+	altura:200
+	};
+	const linhaDoisVertical = {
+	x:canvas.width - 120 - 5,
+	y:0,
+	largura:5,
+	altura:200	
+	};
+	const linhaTresVertical = {
+	x:canvas.width - 80 - 5,
+	y:0,
+	largura:5,
+	altura:200
+	};
+	const linhaQuatroVertical = {
+	x:canvas.width - 40 - 5,
+	y:0,
+	largura:5,
+	altura:200
+	};
+	const linhaCincoVertical = {
+	x:canvas.width  - 5,
+	y:0,
+	largura:5,
+	altura:205
+	};
+
+////////////////////////////
+			document.addEventListener("keydown", function(e) {
+				teclas[e.keyCode] = true;
+				if(travaEscrita == 0){
+				digitou();
+				};
+				//alert(e.keyCode);
+			}, false);
+
+			document.addEventListener("keyup", function(e) {
+				delete teclas[e.keyCode];
+			}, false);
+
+			function digitou(){
+				if(8 in teclas){
+					if(teclou.letraDigitada.length > 1){
+						teclou.letraDigitada.pop();
+						ctx.fillStyle = "black";
+						ctx.fillRect(blocoPreto.x,blocoPreto.y,blocoPreto.largura,blocoPreto.altura);
+						ctx.fillStyle = "green";
+						stgr = "";
+						teclou.desenha();
+					};
+				};	
+				if(13 in teclas){
+					if(stgr == " "){
+						teclou.letraDigitada.pop();
+					};
+					enter();
+				}};
+	function enter(){
+					teclou.letraDigitada.shift();
+					contFrase += 1;
+					quantidadeFrases.push("");
+					frases.push(teclou.letraDigitada.join(""));
+					for (var ez = -1, tame = this.frases.length; ez < tame; ez++){
+					quantidadeFrase = tame;
+						for(quantidade = 0; quantidade < quantidadeFrase; quantidade++){
+						ctx.fillText(frases[quantidade],10,comecoFrase.y - (quantidadeFrase - quantidade)* 25);	
+						ultimaFrase = frases[quantidade];
+						};
+					};
+				while(teclou.letraDigitada.length > 0){
+					teclou.letraDigitada.pop();
+				};
+				if(contFrase > 35){
+					frases.splice(index, 1);
+					contFrase -= 2;
+				};
+				leitor();
+	};
+	function enterNpc(){
+					contFrase += 1;
+					quantidadeFrases.push("");
+					for (var ez = -1, tame = this.frases.length; ez < tame; ez++){
+					quantidadeFrase = tame;
+						for(quantidade = 0; quantidade < quantidadeFrase; quantidade++){
+						ctx.fillText(frases[quantidade],10,comecoFrase.y - (quantidadeFrase - quantidade)* 25);	
+						};
+					};
+				if(contFrase > 35){
+					frases.splice(index, 1);
+					contFrase -= 2;
+				};
+	};	
+var ultimaFrase;
+var index;
+var contFrase = 0;
+var quantidade = 0;
+var	quantidadeFrases = [];
+var	frases = [];
+var comecoFrase = {
+	y:521,
+};
+var quantidadeFrase = 0;
+var tame = 0;
+
+///////////////////////////
+			ctx.font = "20px arial";
+///////////////////////////
+	var comecoTecla = {
+		x:10,
+		y:521,
+	};
+	var quantidadeLetras = 0;
+	var teclou = {
+		tec:[],
+		letraDigitada:[],
+		desenha:function(){
+		for (var iz = -1, tam = this.tec.length; iz < tam; iz++){
+			quantidadeLetras = tam;
+			ctx.fillText(teclou.letraDigitada.join(""),5,comecoTecla.y);
+////////////////////////////
+			ctx.font = "20px Arial";
+
+			ctx.fillRect(divisaoVerticalUm.x,divisaoVerticalUm.y,divisaoVerticalUm.largura,divisaoVerticalUm.altura);
+			ctx.fillRect(divisaoVerticalDois.x,divisaoVerticalDois.y,divisaoVerticalDois.largura,divisaoVerticalDois.altura);
+			ctx.fillRect(divisaoVerticalTres.x,divisaoVerticalTres.y,divisaoVerticalTres.largura,divisaoVerticalTres.altura);
+			ctx.fillRect(divisaoHorizontalUm.x,divisaoHorizontalUm.y,divisaoHorizontalUm.largura,divisaoHorizontalUm.altura);
+			ctx.fillRect(divisaoHorizontalDois.x,divisaoHorizontalDois.y,divisaoHorizontalDois.largura,divisaoHorizontalDois.altura);
+			ctx.fillRect(divisaoHorizontalTres.x,divisaoHorizontalTres.y,divisaoHorizontalTres.largura,divisaoHorizontalTres.altura);
+
+			ctx.fillRect(linhaUmHorizontal.x,linhaUmHorizontal.y,linhaUmHorizontal.largura,linhaUmHorizontal.altura);
+			ctx.fillRect(linhaDoisHorizontal.x,linhaDoisHorizontal.y,linhaDoisHorizontal.largura,linhaDoisHorizontal.altura);
+			ctx.fillRect(linhaTresHorizontal.x,linhaTresHorizontal.y,linhaTresHorizontal.largura,linhaTresHorizontal.altura);
+			ctx.fillRect(linhaQuatroHorizontal.x,linhaQuatroHorizontal.y,linhaQuatroHorizontal.largura,linhaQuatroHorizontal.altura);
+			ctx.fillRect(linhaCincoHorizontal.x,linhaCincoHorizontal.y,linhaCincoHorizontal.largura,linhaCincoHorizontal.altura);
+
+			ctx.fillRect(linhaUmVertical.x,linhaUmVertical.y,linhaUmVertical.largura,linhaUmVertical.altura);
+			ctx.fillRect(linhaDoisVertical.x,linhaDoisVertical.y,linhaDoisVertical.largura,linhaDoisVertical.altura);
+			ctx.fillRect(linhaTresVertical.x,linhaTresVertical.y,linhaTresVertical.largura,linhaTresVertical.altura);
+			ctx.fillRect(linhaQuatroVertical.x,linhaQuatroVertical.y,linhaQuatroVertical.largura,linhaQuatroVertical.altura);
+			ctx.fillRect(linhaCincoVertical.x,linhaCincoVertical.y,linhaCincoVertical.largura,linhaCincoVertical.altura);
+/////////////////////
+		};
+	},
+	};
+	//frases.push("Você é um "+classe+" que foi treinado pelo pai, quando sua mãe morreu seu pai iniciou");
+	frases.push("Jogo criado por: João Andrioli, João Lopes, Gabriel Daltro, Luis Fernando, Lucas Martins");
+	frases.push("");
+	frases.push("Você é um guerreiro que foi treinado pelo pai, quando sua mãe morreu seu pai iniciou");
+	frases.push("o treino com você, agora que você ja completou 18 anos, seu pai está o enviando para");
+	frases.push("ajudar uma pequena vila, aparentemente há monstros que estão aterrorizando o vilarejo");
+	frases.push("o seu papel é tentar acalmar a vila.");
+	frases.push("Tome muito cuidado, pois se morrer irá perder todo o seu progresso dentro do jogo.");
+    frases.push("BOM JOGO");
+	frases.push(" ");
+	frases.push(" ");
+	frases.push("Para começar o jogo digite: jogar");
+	frases.push(" ");
+	frases.push(" ");
+	propriedadeMapa = numeroMapa.comecar;
+/////////////////////////////////////////////////////////////////////////////////////
+
+	function desenha(){
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+			ctx.fillStyle = "green";
+			ctx.font = "20px Arial";
+
+			ctx.fillRect(divisaoVerticalUm.x,divisaoVerticalUm.y,divisaoVerticalUm.largura,divisaoVerticalUm.altura);
+			ctx.fillRect(divisaoVerticalDois.x,divisaoVerticalDois.y,divisaoVerticalDois.largura,divisaoVerticalDois.altura);
+			ctx.fillRect(divisaoVerticalTres.x,divisaoVerticalTres.y,divisaoVerticalTres.largura,divisaoVerticalTres.altura);
+			ctx.fillRect(divisaoHorizontalUm.x,divisaoHorizontalUm.y,divisaoHorizontalUm.largura,divisaoHorizontalUm.altura);
+			ctx.fillRect(divisaoHorizontalDois.x,divisaoHorizontalDois.y,divisaoHorizontalDois.largura,divisaoHorizontalDois.altura);
+			ctx.fillRect(divisaoHorizontalTres.x,divisaoHorizontalTres.y,divisaoHorizontalTres.largura,divisaoHorizontalTres.altura);
+
+			ctx.fillRect(linhaUmHorizontal.x,linhaUmHorizontal.y,linhaUmHorizontal.largura,linhaUmHorizontal.altura);
+			ctx.fillRect(linhaDoisHorizontal.x,linhaDoisHorizontal.y,linhaDoisHorizontal.largura,linhaDoisHorizontal.altura);
+			ctx.fillRect(linhaTresHorizontal.x,linhaTresHorizontal.y,linhaTresHorizontal.largura,linhaTresHorizontal.altura);
+			ctx.fillRect(linhaQuatroHorizontal.x,linhaQuatroHorizontal.y,linhaQuatroHorizontal.largura,linhaQuatroHorizontal.altura);
+			ctx.fillRect(linhaCincoHorizontal.x,linhaCincoHorizontal.y,linhaCincoHorizontal.largura,linhaCincoHorizontal.altura);
+
+			ctx.fillRect(linhaUmVertical.x,linhaUmVertical.y,linhaUmVertical.largura,linhaUmVertical.altura);
+			ctx.fillRect(linhaDoisVertical.x,linhaDoisVertical.y,linhaDoisVertical.largura,linhaDoisVertical.altura);
+			ctx.fillRect(linhaTresVertical.x,linhaTresVertical.y,linhaTresVertical.largura,linhaTresVertical.altura);
+			ctx.fillRect(linhaQuatroVertical.x,linhaQuatroVertical.y,linhaQuatroVertical.largura,linhaQuatroVertical.altura);
+			ctx.fillRect(linhaCincoVertical.x,linhaCincoVertical.y,linhaCincoVertical.largura,linhaCincoVertical.altura);
+			
+			if(propriedadeMapa != numeroMapa.comecar){
+			ctx.fillRect(mapa.x,mapa.y,mapa.largura,mapa.altura);
+			ctx.fillText("Vida: " + vida + "/" + vidaMaxima,804,355);
+			ctx.fillText("Level: " + level,803,335);
+			ctx.fillText("Dano: " + dano,803,375);
+			ctx.fillText("Dinheiro: " + dinheiro,803,395);
+			
+			ctx.fillText("Mão Esquerda:",803,415);
+			ctx.fillText(maoEsquerda,804,435);
+			ctx.fillText("Mão Direita:",803,455);
+			ctx.fillText(maoDireita,804,475);
+			
+			ctx.fillText(armadura,803,495);
+
+			//ctx.fillText("Dica:"+dica,803,335);			
+			};
+					for (var ez = -1, tame = this.frases.length; ez < tame; ez++){
+					quantidadeFrase = tame;
+						for(quantidade = 0; quantidade < quantidadeFrase; quantidade++){
+						ctx.fillText(frases[quantidade],10,comecoFrase.y - (quantidadeFrase - quantidade)* 25);	
+						};
+					};
+			
+			ctx.fillRect(caregamento.x,caregamento.y,caregamento.largura,caregamento.altura);
+		};
+setTimeout(desenha,1);
+////////////////////////////////////////////
+	function carega(){
+		setTimeout(care,10);
+	};
+	function care(){
+	if(caregamento.largura < 175){
+	caregamento.largura += 1;
+	desenha();
+	setTimeout(care,10);
+	}else{
+	ctx.fillStyle = "black";
+	ctx.fillText("Pronto",870,235);
+	ctx.fillStyle = "green";;
+	setTimeout(espera,1000);
+	};
+	};
+	function espera(){		
+	caregamento.largura = 0;
+			if(direcao == direcoes.oeste){
+			mapa.x -= 40;
+			tampa.y = mapa.y;
+			ctx.fillRect(mapa.x,mapa.y,mapa.largura,mapa.altura);
+			ctx.fillStyle = "black";
+			tampa.x = mapa.x + 40;
+			ctx.fillRect(tampa.x,tampa.y,tampa.largura,tampa.altura);
+			ctx.fillStyle = "green";
+			propriedadeMapa -= 1;
+			};
+			if(direcao == direcoes.leste){
+			mapa.x += 40;
+			tampa.y = mapa.y;
+			ctx.fillRect(mapa.x,mapa.y,mapa.largura,mapa.altura);
+			ctx.fillStyle = "black";
+			tampa.x = mapa.x - 40;
+			ctx.fillRect(tampa.x,tampa.y,tampa.largura,tampa.altura);
+			ctx.fillStyle = "green";
+			propriedadeMapa += 1;
+			};
+			if(direcao == direcoes.sul){
+			mapa.y += 40;
+			tampa.x = mapa.x;
+			ctx.fillRect(mapa.x,mapa.y,mapa.largura,mapa.altura);
+			ctx.fillStyle = "black";
+			tampa.y = mapa.y - 40;
+			ctx.fillRect(tampa.x,tampa.y,tampa.largura,tampa.altura);
+			ctx.fillStyle = "green";
+			propriedadeMapa += 5;
+			};
+			if(direcao == direcoes.norte){
+			mapa.y -= 40;
+			tampa.x = mapa.x;
+			ctx.fillRect(mapa.x,mapa.y,mapa.largura,mapa.altura);
+			ctx.fillStyle = "black";
+			tampa.y = mapa.y + 40;
+			ctx.fillRect(tampa.x,tampa.y,tampa.largura,tampa.altura);
+			ctx.fillStyle = "green";
+			propriedadeMapa -= 5;
+			};
+			if(propriedadeMapa == numeroMapa.cidade){
+			localMapa = locaisMapa.centro;
+				lugarPlayer = "Voce esta no centro da vila, voce consegue ver a Taberna, algumas casas do Vilarejo,";
+				lugarPlayer2 = "o Ferreiro, a Fonte e a Igreja";
+				lugarPlayer3 = falarNpc.nulo;
+				frases.push("Voce chega no centro da vila, voce consegue ver a Taberna, algumas casas do Vilarejo");
+				frases.push("o Ferreiro, a Fonte e a Igreja");		
+			};
+			if(propriedadeMapa == numeroMapa.florestaGhoe){
+			localMapa = locaisMapa.centro;
+				lugarPlayer = "Voce esta numa estrada na floresta Ghoe, voce pode seguir a estrada na direção do 'rio'";
+				lugarPlayer2 = "ou seguir para o 'portao' da Cidade";
+				lugarPlayer3 = falarNpc.nulo;
+				frases.push("Voce esta numa estrada na floresta Ghoe, voce pode seguir a estrada na direção do 'rio'");
+				frases.push("ou seguir para o 'portao' da Cidade");		
+			};
+			travaEscrita = 0;
+			falando = falarNpc.nulo;
+	desenha();
+	};
+////////////////////////////////////////////
+	function leitor(){
+		if(propriedadeMapa == numeroMapa.comecar){
+			if(ultimaFrase == "jogar"){					
+				frases.push("Seu spawn foi no centro da vila, voce consegue ver uma Taberna, o Ferreiro, uma Fonte");
+				frases.push("uma Igreja e algumas casas do Vilarejo");
+				frases.push("Uma dica é ir no ferreiro comprar Itens");
+				frases.push("Digite 'comandos' para ver alguns comandos uteis");
+				propriedadeMapa = numeroMapa.cidade;
+				localMapa = locaisMapa.centro;
+				falando = falarNpc.nulo;
+				lugarPlayer = "Voce esta no centro da vila, voce consegue ver a Taberna, algumas casas do Vilarejo,";
+				lugarPlayer2 = "o Ferreiro, a Fonte e a Igreja";
+				lugarPlayer3 = falarNpc.nulo;
+			}else{
+				frases.push("Digite jogar para começar o jogo!");
+			};
+		}else{
+		if(ultimaFrase == ""){
+		frases.push("Escreva algo antes de pressionar a tecla Enter");
+		}else{
+		if(ultimaFrase == "mystic forest"){
+		frases.push("Um jogo Foda, criado por pessoas Fodas");
+		}else{
+		if(ultimaFrase == "comandos"){
+		frases.push("Aqui estão alguns comandos uteis:");
+		frases.push("> escreva o nome do local que voce quer ir, exemplo: 'igreja'");
+		frases.push("> falar com 'npc', exemplo: 'falar com ferreiro'");
+		frases.push("> usar/equipar/comer 'item em seu inventario', exemplo: 'usar espada de uma mao'");
+		frases.push("> digite 'inventario/mochila' para ver os itens em sua mochila");
+		frases.push("> abrir 'objeto', exemplo: 'abrir portao'");
+		frases.push("> olhar 'objeto/npc', exemplo:'olhar velho'");
+		frases.push("> Digite 'olhar em volta' para saber onde voce esta");
+		frases.push("> digite 'norte/sul/leste/oeste' para mudar de localização");
+		//frases.push("> quando um npc faz uma pergunta, voce pode responder 'sim' ou 'nao'");
+		}else{
+		if(ultimaFrase == "jogar"){
+			frases.push("Voce ja esta jogando");
+		}else{
+		//fazer sistema que ve se tem espada no inventario e dai dizer se nao tiver <nao entendi>
+		if(ultimaFrase == "usar espada de uma mao"){
+			for(igs = 0; igs < quantidadeInventario;igs++){
+				if(inventario[igs] == "> Espada de uma mão (Aumenta em 7 o seu dano)"){
+					if(tipoArma == 0){
+						maoEsquerda = "Espada uma mão";
+					}else{
+						maoEsquerda = "Espada uma mão";
+						maoDireita = "Vazio";
+					};
+					tipoArma = 0;
+					dano -= armaAnterior;
+					armaAnterior = 7;
+					dano += armaAnterior;
+					frases.push("Voce esta usando a Espada de uma mão");
+					igs = quantidadeInventario + 1; 
+				}else{
+					temItem += 1; 
+				};
+				if(temItem == quantidadeInventario){
+					frases.push("Voce não tem este item em seu inventario");
+					temItem = 0;
+				};
+			};		
+		}else{
+		if(ultimaFrase == "usar espada de duas maos"){
+			for(igs = 0; igs < quantidadeInventario;igs++){
+				if(inventario[igs] == "> Espada de duas mãos (Aumenta em 14 o seu dano)"){
+					maoEsquerda = "Espada duas mãos";
+					maoDireita = "Espada duas mãos";
+					vida -= escudoAnterior;
+					vidaMaxima -= escudoAnterior;
+					escudoAnterior = 0;
+					tipoArma = 1;
+					dano -= armaAnterior;
+					armaAnterior = 14;
+					dano += armaAnterior;
+					frases.push("Voce esta usando a Espada de duas mãos");
+					igs = quantidadeInventario + 1; 
+				}else{
+					temItem += 1; 
+				};
+				if(temItem == quantidadeInventario){
+					frases.push("Voce não tem este item em seu inventario");
+					temItem = 0;
+				};
+			};
+		}else{
+		if(ultimaFrase == "usar machado de uma mao"){
+			for(igs = 0; igs < quantidadeInventario;igs++){
+				if(inventario[igs] == "> Machado de uma mão (Aumenta em 9 o seu dano)"){
+					if(tipoArma == 0){
+						maoEsquerda = "Machado uma mão";
+					}else{
+						maoEsquerda = "Machado uma mão";
+						maoDireita = "Vazio";
+					};
+					tipoArma = 0;
+					dano -= armaAnterior;
+					armaAnterior = 9;
+					dano += armaAnterior;
+					frases.push("Voce esta usando o Machado de uma mão");
+					igs = quantidadeInventario + 1; 
+				}else{
+					temItem += 1; 
+				};
+				if(temItem == quantidadeInventario){
+					frases.push("Voce não tem este item em seu inventario");
+					temItem = 0;
+				};
+			};
+		}else{
+		if(ultimaFrase == "usar machado de duas maos"){
+			for(igs = 0; igs < quantidadeInventario;igs++){
+				if(inventario[igs] == "> Machado de duas mãos (Aumenta em 18 o seu dano)"){
+					maoEsquerda = "Machado duas mãos";
+					maoDireita = "Machado duas mãos";
+					vida -= escudoAnterior;
+					vidaMaxima -= escudoAnterior;
+					escudoAnterior = 0;
+					tipoArma = 1;
+					dano -= armaAnterior;
+					armaAnterior = 18;
+					dano += armaAnterior;
+					frases.push("Voce esta usando o Machado de duas mãos");
+					igs = quantidadeInventario + 1; 
+				}else{
+					temItem += 1; 
+				};
+				if(temItem == quantidadeInventario){
+					frases.push("Voce não tem este item em seu inventario");
+					temItem = 0;
+				};
+			};
+		}else{
+		if(ultimaFrase == "usar facao"){
+			for(igs = 0; igs < quantidadeInventario;igs++){
+				if(inventario[igs] == "> Facão (Permite passar por lugares de dificil acesso)"){
+					if(tipoArma == 0){
+						maoEsquerda = "Facão";
+					}else{
+						maoEsquerda = "Facão";
+						maoDireita = "Vazio";
+					};
+					tipoArma = 0;
+					dano -= armaAnterior;
+					armaAnterior = 5;
+					dano += armaAnterior;
+					frases.push("Voce esta usando o Facão");
+					igs = quantidadeInventario + 1; 
+				}else{
+					temItem += 1; 
+				};
+				if(temItem == quantidadeInventario){
+					frases.push("Voce não tem este item em seu inventario");
+					temItem = 0;
+				};
+			};	
+		}else{
+		if(ultimaFrase == "usar adaga"){
+			for(igs = 0; igs < quantidadeInventario;igs++){
+				if(inventario[igs] == "> Adaga (Aumenta em 6 o seu dano)"){
+					if(tipoArma == 0){
+						maoEsquerda = "Adaga";
+					}else{
+						maoEsquerda = "Adaga";
+						maoDireita = "Vazio";
+					};
+					tipoArma = 0;
+					dano -= armaAnterior;
+					armaAnterior = 6;
+					dano += armaAnterior;
+					frases.push("Voce esta usando a Adaga");
+					igs = quantidadeInventario + 1; 
+				}else{
+					temItem += 1; 
+				};
+				if(temItem == quantidadeInventario){
+					frases.push("Voce não tem este item em seu inventario");
+					temItem = 0;
+				};
+			};
+		}else{
+		if(ultimaFrase == "usar machado de mithril"){
+			for(igs = 0; igs < quantidadeInventario;igs++){
+				if(inventario[igs] == "> Machado de Mithril (Aumenta em 30 o seu dano)"){
+					maoEsquerda = "Machado de mithril";
+					maoDireita = "Machado de mithril";
+					vida -= escudoAnterior;
+					vidaMaxima -= escudoAnterior;
+					escudoAnterior = 0;
+					tipoArma = 1;
+					dano -= armaAnterior;
+					armaAnterior = 30;
+					dano += armaAnterior;
+					frases.push("Voce esta usando o Machado de mithril");
+					igs = quantidadeInventario + 1; 
+				}else{
+					temItem += 1; 
+				};
+				if(temItem == quantidadeInventario){
+					frases.push("Voce não tem este item em seu inventario");
+					temItem = 0;
+				};
+			};			
+		}else{
+		if(ultimaFrase == "usar escudo de madeira"){
+			for(igs = 0; igs < quantidadeInventario;igs++){
+				if(inventario[igs] == "> Escudo de Madeira (Aumenta em 5 a sua vida maxima)"){
+					if(tipoArma == 0){
+						maoDireita = "Escudo de Madeira";
+					}else{
+						maoEsquerda = "Vazio";
+						maoDireita = "Escudo de Madeira";
+						dano -= armaAnterior;
+						armaAnterior = 0;
+					};
+					tipoArma = 0;
+					vida -= escudoAnterior;
+					vidaMaxima -= escudoAnterior;
+					escudoAnterior = 5;
+					vida += escudoAnterior;
+					vidaMaxima += escudoAnterior;
+					frases.push("Voce esta usando o Escudo de madeira");
+					igs = quantidadeInventario + 1; 
+				}else{
+					temItem += 1; 
+				};
+				if(temItem == quantidadeInventario){
+					frases.push("Voce não tem este item em seu inventario");
+					temItem = 0;
+				};
+			};
+		}else{
+		if(ultimaFrase == "usar escudo de madeira grande"){
+			for(igs = 0; igs < quantidadeInventario;igs++){
+				if(inventario[igs] == "> Escudo de Madeira Grande (Aumenta em 9 a sua vida maxima)"){
+					if(tipoArma == 0){
+						maoDireita = "Escudo de Madeira";
+					}else{
+						maoEsquerda = "Vazio";
+						maoDireita = "Escudo de Madeira";
+						dano -= armaAnterior;
+						armaAnterior = 0;
+					};
+					tipoArma = 0;
+					vida -= escudoAnterior;
+					vidaMaxima -= escudoAnterior;
+					escudoAnterior = 9;
+					vida += escudoAnterior;
+					vidaMaxima += escudoAnterior;
+					frases.push("Voce esta usando o Escudo de madeira grande");
+					igs = quantidadeInventario + 1; 
+				}else{
+					temItem += 1; 
+				};
+				if(temItem == quantidadeInventario){
+					frases.push("Voce não tem este item em seu inventario");
+					temItem = 0;
+				};
+			};
+		}else{
+		if(ultimaFrase == "usar escudo de ferro pequeno"){
+			for(igs = 0; igs < quantidadeInventario;igs++){
+				if(inventario[igs] == "> Escudo de Ferro Pequeno (Aumenta em 12 a sua vida maxima)"){
+					if(tipoArma == 0){
+						maoDireita = "Escudo de ferro";
+					}else{
+						maoEsquerda = "Vazio";
+						maoDireita = "Escudo de ferro";
+						dano -= armaAnterior;
+						armaAnterior = 0;
+					};
+					tipoArma = 0;
+					vida -= escudoAnterior;
+					vidaMaxima -= escudoAnterior;
+					escudoAnterior = 12;
+					vida += escudoAnterior;
+					vidaMaxima += escudoAnterior;
+					frases.push("Voce esta usando o Escudo de ferro pequeno");
+					igs = quantidadeInventario + 1; 
+				}else{
+					temItem += 1; 
+				};
+				if(temItem == quantidadeInventario){
+					frases.push("Voce não tem este item em seu inventario");
+					temItem = 0;
+				};
+			};
+		}else{
+		if(ultimaFrase == "usar escudo de ferro grande"){
+			for(igs = 0; igs < quantidadeInventario;igs++){
+				if(inventario[igs] == "> Escudo de Ferro Grande (Aumenta em 15 a sua vida maxima)"){
+					if(tipoArma == 0){
+						maoDireita = "Escudo de ferro";
+					}else{
+						maoEsquerda = "Vazio";
+						maoDireita = "Escudo de ferro";
+						dano -= armaAnterior;
+						armaAnterior = 0;
+					};
+					tipoArma = 0;
+					vida -= escudoAnterior;
+					vidaMaxima -= escudoAnterior;
+					escudoAnterior = 15;
+					vida += escudoAnterior;
+					vidaMaxima += escudoAnterior;
+					frases.push("Voce esta usando o Escudo de ferro grande");
+					igs = quantidadeInventario + 1; 
+				}else{
+					temItem += 1; 
+				};
+				if(temItem == quantidadeInventario){
+					frases.push("Voce não tem este item em seu inventario");
+					temItem = 0;
+				};
+			};
+		}else{
+		if(ultimaFrase == "usar escudo de mithril"){
+			for(igs = 0; igs < quantidadeInventario;igs++){
+				if(inventario[igs] == "> Escudo de Mithril (Aumenta em 27 a sua vida maxima)"){
+					if(tipoArma == 0){
+						maoDireita = "Escudo de mithril";
+					}else{
+						maoEsquerda = "Vazio";
+						maoDireita = "Escudo de mithril";
+						dano -= armaAnterior;
+						armaAnterior = 0;
+					};
+					tipoArma = 0;
+					vida -= escudoAnterior;
+					vidaMaxima -= escudoAnterior;
+					escudoAnterior = 27;
+					vida += escudoAnterior;
+					vidaMaxima += escudoAnterior;
+					frases.push("Voce esta usando o Escudo de mithril");
+					igs = quantidadeInventario + 1; 
+				}else{
+					temItem += 1; 
+				};
+				if(temItem == quantidadeInventario){
+					frases.push("Voce não tem este item em seu inventario");
+					temItem = 0;
+				};
+			};
+		}else{
+		if(ultimaFrase == "usar armadura de couro"){
+			for(igs = 0; igs < quantidadeInventario;igs++){
+				if(inventario[igs] == "> Armadura de Couro (Aumenta em 15 a sua vida maxima)"){
+					armadura = "Armadura de couro";
+					vida -= armaduraAnterior;
+					vidaMaxima -= armaduraAnterior;
+					armaduraAnterior = 15;
+					vida += armaduraAnterior;
+					vidaMaxima += armaduraAnterior;
+					frases.push("Voce esta usando a Armadura de couro");
+					igs = quantidadeInventario + 1; 
+				}else{
+					temItem += 1; 
+				};
+				if(temItem == quantidadeInventario){
+					frases.push("Voce não tem este item em seu inventario");
+					temItem = 0;
+				};
+			};
+		}else{
+		if(ultimaFrase == "usar armadura de ferro"){
+			for(igs = 0; igs < quantidadeInventario;igs++){
+				if(inventario[igs] == "> Armadura de Ferro (Aumenta em 24 a sua vida maxima)"){
+					armadura = "Armadura de ferro";
+					vida -= armaduraAnterior;
+					vidaMaxima -= armaduraAnterior;
+					armaduraAnterior = 24;
+					vida += armaduraAnterior;
+					vidaMaxima += armaduraAnterior;
+					frases.push("Voce esta usando a Armadura de ferro");
+					igs = quantidadeInventario + 1; 
+				}else{
+					temItem += 1; 
+				};
+				if(temItem == quantidadeInventario){
+					frases.push("Voce não tem este item em seu inventario");
+					temItem = 0;
+				};
+			};
+		}else{
+		if(ultimaFrase == "usar armadura de mithril"){
+			for(igs = 0; igs < quantidadeInventario;igs++){
+				if(inventario[igs] == "> Armadura de Mithril (Aumenta em 39 a sua vida maxima)"){
+					armadura = "Armadura de mithril";
+					vida -= armaduraAnterior;
+					vidaMaxima -= armaduraAnterior;
+					armaduraAnterior = 39;
+					vida += armaduraAnterior;
+					vidaMaxima += armaduraAnterior;
+					frases.push("Voce esta usando a Armadura de mithril");
+					igs = quantidadeInventario + 1;
+				}else{
+					temItem += 1; 
+				};
+				if(temItem == quantidadeInventario){
+					frases.push("Voce não tem este item em seu inventario");
+					temItem = 0;
+				};
+			};
+		}else{
+		if(ultimaFrase == "usar pao"){
+			for(igs = 0; igs < quantidadeInventario;igs++){
+				if(inventario[igs] == "> Pão (Recupera 5 de vida quando usado)"){
+					vidaRecuperada = 5;
+					vida += 5;
+					if(vida > vidaMaxima){
+						vidaRecuperada = vidaRecuperada - (vida - vidaMaxima);
+						vida = vidaMaxima;
+					};
+					frases.push("Voce comeu um pão");
+					frases.push("'Voce recuperou "+vidaRecuperada+" pontos de vida'");
+					inventario.splice(igs,1);
+					quantidadeInventario -= 1;
+					igs = quantidadeInventario + 1; 
+				}else{
+					temItem += 1; 
+				};
+				if(temItem == quantidadeInventario){
+					frases.push("Voce não tem este item em seu inventario");
+					temItem = 0;
+				};
+			};
+		}else{
+		if(ultimaFrase == "usar vinho"){
+			for(igs = 0; igs < quantidadeInventario;igs++){
+				if(inventario[igs] == "> Vinho (Recupera 10 de vida quando usado)"){
+					vidaRecuperada = 10;
+					vida += 10;
+					if(vida > vidaMaxima){
+						vidaRecuperada = vidaRecuperada - (vida - vidaMaxima);
+						vida = vidaMaxima;
+					};
+					frases.push("Voce tomou um vinho");
+					frases.push("'Voce recuperou "+vidaRecuperada+" pontos de vida'");
+					inventario.splice(igs,1);
+					quantidadeInventario -= 1;
+					igs = quantidadeInventario + 1;
+				}else{
+					temItem += 1; 
+				};
+				if(temItem == quantidadeInventario){
+					frases.push("Voce não tem este item em seu inventario");
+					temItem = 0;
+				};
+			};
+		}else{
+		if(ultimaFrase == "usar porco assado"){
+			for(igs = 0; igs < quantidadeInventario;igs++){
+				if(inventario[igs] == "> Porco Assado (Recupera 20 de vida quando usado)"){
+					vidaRecuperada = 20;
+					vida += 20;
+					if(vida > vidaMaxima){
+						vidaRecuperada = vidaRecuperada - (vida - vidaMaxima);
+						vida = vidaMaxima;
+					};
+					frases.push("Voce comeu um porco assado");
+					frases.push("'Voce recuperou "+vidaRecuperada+" pontos de vida'");
+					inventario.splice(igs,1);
+					quantidadeInventario -= 1;
+					igs = quantidadeInventario + 1; 
+				}else{
+					temItem += 1; 
+				};
+				if(temItem == quantidadeInventario){
+					frases.push("Voce não tem este item em seu inventario");
+					temItem = 0;
+				};
+			};
+		}else{
+		if(ultimaFrase == "usar cordeiro assado"){
+			for(igs = 0; igs < quantidadeInventario;igs++){
+				if(inventario[igs] == "> Cordeiro Assado (Recupera 30 de vida quando usado)"){
+					vidaRecuperada = 30;
+					vida += 30;
+					if(vida > vidaMaxima){
+						vidaRecuperada = vidaRecuperada - (vida - vidaMaxima);
+						vida = vidaMaxima;
+					};
+					frases.push("Voce comeu um cordeiro assado");
+					frases.push("'Voce recuperou "+vidaRecuperada+" pontos de vida'");
+					inventario.splice(igs,1);
+					quantidadeInventario -= 1;
+					igs = quantidadeInventario + 1;
+				}else{
+					temItem += 1; 
+				};
+				if(temItem == quantidadeInventario){
+					frases.push("Voce não tem este item em seu inventario");
+					temItem = 0;
+				};
+			};			
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		}else{
+		if(ultimaFrase == "equipar espada de uma mao"){
+			for(igs = 0; igs < quantidadeInventario;igs++){
+				if(inventario[igs] == "> Espada de uma mão (Aumenta em 7 o seu dano)"){
+					if(tipoArma == 0){
+						maoEsquerda = "Espada uma mão";
+					}else{
+						maoEsquerda = "Espada uma mão";
+						maoDireita = "Vazio";
+					};
+					tipoArma = 0;
+					dano -= armaAnterior;
+					armaAnterior = 7;
+					dano += armaAnterior;
+					frases.push("Voce esta usando a Espada de uma mão");
+					igs = quantidadeInventario + 1; 
+				}else{
+					temItem += 1; 
+				};
+				if(temItem == quantidadeInventario){
+					frases.push("Voce não tem este item em seu inventario");
+					temItem = 0;
+				};
+			};		
+		}else{
+		if(ultimaFrase == "equipar espada de duas maos"){
+			for(igs = 0; igs < quantidadeInventario;igs++){
+				if(inventario[igs] == "> Espada de duas mãos (Aumenta em 14 o seu dano)"){
+					maoEsquerda = "Espada duas mãos";
+					maoDireita = "Espada duas mãos";
+					vida -= escudoAnterior;
+					vidaMaxima -= escudoAnterior;
+					escudoAnterior = 0;
+					tipoArma = 1;
+					dano -= armaAnterior;
+					armaAnterior = 14;
+					dano += armaAnterior;
+					frases.push("Voce esta usando a Espada de duas mãos");
+					igs = quantidadeInventario + 1; 
+				}else{
+					temItem += 1; 
+				};
+				if(temItem == quantidadeInventario){
+					frases.push("Voce não tem este item em seu inventario");
+					temItem = 0;
+				};
+			};
+		}else{
+		if(ultimaFrase == "equipar machado de uma mao"){
+			for(igs = 0; igs < quantidadeInventario;igs++){
+				if(inventario[igs] == "> Machado de uma mão (Aumenta em 9 o seu dano)"){
+					if(tipoArma == 0){
+						maoEsquerda = "Machado uma mão";
+					}else{
+						maoEsquerda = "Machado uma mão";
+						maoDireita = "Vazio";
+					};
+					tipoArma = 0;
+					dano -= armaAnterior;
+					armaAnterior = 9;
+					dano += armaAnterior;
+					frases.push("Voce esta usando o Machado de uma mão");
+					igs = quantidadeInventario + 1; 
+				}else{
+					temItem += 1; 
+				};
+				if(temItem == quantidadeInventario){
+					frases.push("Voce não tem este item em seu inventario");
+					temItem = 0;
+				};
+			};
+		}else{
+		if(ultimaFrase == "equipar machado de duas maos"){
+			for(igs = 0; igs < quantidadeInventario;igs++){
+				if(inventario[igs] == "> Machado de duas mãos (Aumenta em 18 o seu dano)"){
+					maoEsquerda = "Machado duas mãos";
+					maoDireita = "Machado duas mãos";
+					vida -= escudoAnterior;
+					vidaMaxima -= escudoAnterior;
+					escudoAnterior = 0;
+					tipoArma = 1;
+					dano -= armaAnterior;
+					armaAnterior = 18;
+					dano += armaAnterior;
+					frases.push("Voce esta usando o Machado de duas mãos");
+					igs = quantidadeInventario + 1; 
+				}else{
+					temItem += 1; 
+				};
+				if(temItem == quantidadeInventario){
+					frases.push("Voce não tem este item em seu inventario");
+					temItem = 0;
+				};
+			};
+		}else{
+		if(ultimaFrase == "equipar facao"){
+			for(igs = 0; igs < quantidadeInventario;igs++){
+				if(inventario[igs] == "> Facão (Permite passar por lugares de dificil acesso)"){
+					if(tipoArma == 0){
+						maoEsquerda = "Facão";
+					}else{
+						maoEsquerda = "Facão";
+						maoDireita = "Vazio";
+					};
+					tipoArma = 0;
+					dano -= armaAnterior;
+					armaAnterior = 5;
+					dano += armaAnterior;
+					frases.push("Voce esta usando o Facão");
+					igs = quantidadeInventario + 1; 
+				}else{
+					temItem += 1; 
+				};
+				if(temItem == quantidadeInventario){
+					frases.push("Voce não tem este item em seu inventario");
+					temItem = 0;
+				};
+			};	
+		}else{
+		if(ultimaFrase == "equipar adaga"){
+			for(igs = 0; igs < quantidadeInventario;igs++){
+				if(inventario[igs] == "> Adaga (Aumenta em 6 o seu dano)"){
+					if(tipoArma == 0){
+						maoEsquerda = "Adaga";
+					}else{
+						maoEsquerda = "Adaga";
+						maoDireita = "Vazio";
+					};
+					tipoArma = 0;
+					dano -= armaAnterior;
+					armaAnterior = 6;
+					dano += armaAnterior;
+					frases.push("Voce esta usando a Adaga");
+					igs = quantidadeInventario + 1; 
+				}else{
+					temItem += 1; 
+				};
+				if(temItem == quantidadeInventario){
+					frases.push("Voce não tem este item em seu inventario");
+					temItem = 0;
+				};
+			};
+		}else{
+		if(ultimaFrase == "equipar machado de mithril"){
+			for(igs = 0; igs < quantidadeInventario;igs++){
+				if(inventario[igs] == "> Machado de Mithril (Aumenta em 30 o seu dano)"){
+					maoEsquerda = "Machado de mithril";
+					maoDireita = "Machado de mithril";
+					vida -= escudoAnterior;
+					vidaMaxima -= escudoAnterior;
+					escudoAnterior = 0;
+					tipoArma = 1;
+					dano -= armaAnterior;
+					armaAnterior = 30;
+					dano += armaAnterior;
+					frases.push("Voce esta usando o Machado de mithril");
+					igs = quantidadeInventario + 1; 
+				}else{
+					temItem += 1; 
+				};
+				if(temItem == quantidadeInventario){
+					frases.push("Voce não tem este item em seu inventario");
+					temItem = 0;
+				};
+			};			
+		}else{
+		if(ultimaFrase == "equipar escudo de madeira"){
+			for(igs = 0; igs < quantidadeInventario;igs++){
+				if(inventario[igs] == "> Escudo de Madeira (Aumenta em 5 a sua vida maxima)"){
+					if(tipoArma == 0){
+						maoDireita = "Escudo de Madeira";
+					}else{
+						maoEsquerda = "Vazio";
+						maoDireita = "Escudo de Madeira";
+						dano -= armaAnterior;
+						armaAnterior = 0;
+					};
+					tipoArma = 0;
+					vida -= escudoAnterior;
+					vidaMaxima -= escudoAnterior;
+					escudoAnterior = 5;
+					vida += escudoAnterior;
+					vidaMaxima += escudoAnterior;
+					frases.push("Voce esta usando o Escudo de madeira");
+					igs = quantidadeInventario + 1; 
+				}else{
+					temItem += 1; 
+				};
+				if(temItem == quantidadeInventario){
+					frases.push("Voce não tem este item em seu inventario");
+					temItem = 0;
+				};
+			};
+		}else{
+		if(ultimaFrase == "equipar escudo de madeira grande"){
+			for(igs = 0; igs < quantidadeInventario;igs++){
+				if(inventario[igs] == "> Escudo de Madeira Grande (Aumenta em 9 a sua vida maxima)"){
+					if(tipoArma == 0){
+						maoDireita = "Escudo de Madeira";
+					}else{
+						maoEsquerda = "Vazio";
+						maoDireita = "Escudo de Madeira";
+						dano -= armaAnterior;
+						armaAnterior = 0;
+					};
+					tipoArma = 0;
+					vida -= escudoAnterior;
+					vidaMaxima -= escudoAnterior;
+					escudoAnterior = 9;
+					vida += escudoAnterior;
+					vidaMaxima += escudoAnterior;
+					frases.push("Voce esta usando o Escudo de madeira grande");
+					igs = quantidadeInventario + 1; 
+				}else{
+					temItem += 1; 
+				};
+				if(temItem == quantidadeInventario){
+					frases.push("Voce não tem este item em seu inventario");
+					temItem = 0;
+				};
+			};
+		}else{
+		if(ultimaFrase == "equipar escudo de ferro pequeno"){
+			for(igs = 0; igs < quantidadeInventario;igs++){
+				if(inventario[igs] == "> Escudo de Ferro Pequeno (Aumenta em 12 a sua vida maxima)"){
+					if(tipoArma == 0){
+						maoDireita = "Escudo de ferro";
+					}else{
+						maoEsquerda = "Vazio";
+						maoDireita = "Escudo de ferro";
+						dano -= armaAnterior;
+						armaAnterior = 0;
+					};
+					tipoArma = 0;
+					vida -= escudoAnterior;
+					vidaMaxima -= escudoAnterior;
+					escudoAnterior = 12;
+					vida += escudoAnterior;
+					vidaMaxima += escudoAnterior;
+					frases.push("Voce esta usando o Escudo de ferro pequeno");
+					igs = quantidadeInventario + 1; 
+				}else{
+					temItem += 1; 
+				};
+				if(temItem == quantidadeInventario){
+					frases.push("Voce não tem este item em seu inventario");
+					temItem = 0;
+				};
+			};
+		}else{
+		if(ultimaFrase == "equipar escudo de ferro grande"){
+			for(igs = 0; igs < quantidadeInventario;igs++){
+				if(inventario[igs] == "> Escudo de Ferro Grande (Aumenta em 15 a sua vida maxima)"){
+					if(tipoArma == 0){
+						maoDireita = "Escudo de ferro";
+					}else{
+						maoEsquerda = "Vazio";
+						maoDireita = "Escudo de ferro";
+						dano -= armaAnterior;
+						armaAnterior = 0;
+					};
+					tipoArma = 0;
+					vida -= escudoAnterior;
+					vidaMaxima -= escudoAnterior;
+					escudoAnterior = 15;
+					vida += escudoAnterior;
+					vidaMaxima += escudoAnterior;
+					frases.push("Voce esta usando o Escudo de ferro grande");
+					igs = quantidadeInventario + 1; 
+				}else{
+					temItem += 1; 
+				};
+				if(temItem == quantidadeInventario){
+					frases.push("Voce não tem este item em seu inventario");
+					temItem = 0;
+				};
+			};
+		}else{
+		if(ultimaFrase == "equipar escudo de mithril"){
+			for(igs = 0; igs < quantidadeInventario;igs++){
+				if(inventario[igs] == "> Escudo de Mithril (Aumenta em 27 a sua vida maxima)"){
+					if(tipoArma == 0){
+						maoDireita = "Escudo de mithril";
+					}else{
+						maoEsquerda = "Vazio";
+						maoDireita = "Escudo de mithril";
+						dano -= armaAnterior;
+						armaAnterior = 0;
+					};
+					tipoArma = 0;
+					vida -= escudoAnterior;
+					vidaMaxima -= escudoAnterior;
+					escudoAnterior = 27;
+					vida += escudoAnterior;
+					vidaMaxima += escudoAnterior;
+					frases.push("Voce esta usando o Escudo de mithril");
+					igs = quantidadeInventario + 1; 
+				}else{
+					temItem += 1; 
+				};
+				if(temItem == quantidadeInventario){
+					frases.push("Voce não tem este item em seu inventario");
+					temItem = 0;
+				};
+			};
+		}else{
+		if(ultimaFrase == "equipar armadura de couro"){
+			for(igs = 0; igs < quantidadeInventario;igs++){
+				if(inventario[igs] == "> Armadura de Couro (Aumenta em 15 a sua vida maxima)"){
+					armadura = "Armadura de couro";
+					vida -= armaduraAnterior;
+					vidaMaxima -= armaduraAnterior;
+					armaduraAnterior = 15;
+					vida += armaduraAnterior;
+					vidaMaxima += armaduraAnterior;
+					frases.push("Voce esta usando a Armadura de couro");
+					igs = quantidadeInventario + 1; 
+				}else{
+					temItem += 1; 
+				};
+				if(temItem == quantidadeInventario){
+					frases.push("Voce não tem este item em seu inventario");
+					temItem = 0;
+				};
+			};
+		}else{
+		if(ultimaFrase == "equipar armadura de ferro"){
+			for(igs = 0; igs < quantidadeInventario;igs++){
+				if(inventario[igs] == "> Armadura de Ferro (Aumenta em 24 a sua vida maxima)"){
+					armadura = "Armadura de ferro";
+					vida -= armaduraAnterior;
+					vidaMaxima -= armaduraAnterior;
+					armaduraAnterior = 24;
+					vida += armaduraAnterior;
+					vidaMaxima += armaduraAnterior;
+					frases.push("Voce esta usando a Armadura de ferro");
+					igs = quantidadeInventario + 1; 
+				}else{
+					temItem += 1; 
+				};
+				if(temItem == quantidadeInventario){
+					frases.push("Voce não tem este item em seu inventario");
+					temItem = 0;
+				};
+			};
+		}else{
+		if(ultimaFrase == "equipar armadura de mithril"){
+			for(igs = 0; igs < quantidadeInventario;igs++){
+				if(inventario[igs] == "> Armadura de Mithril (Aumenta em 39 a sua vida maxima)"){
+					armadura = "Armadura de mithril";
+					vida -= armaduraAnterior;
+					vidaMaxima -= armaduraAnterior;
+					armaduraAnterior = 39;
+					vida += armaduraAnterior;
+					vidaMaxima += armaduraAnterior;
+					frases.push("Voce esta usando a Armadura de mithril");
+					igs = quantidadeInventario + 1;
+				}else{
+					temItem += 1; 
+				};
+				if(temItem == quantidadeInventario){
+					frases.push("Voce não tem este item em seu inventario");
+					temItem = 0;
+				};
+			};
+		}else{
+		if(ultimaFrase == "comer pao"){
+			for(igs = 0; igs < quantidadeInventario;igs++){
+				if(inventario[igs] == "> Pão (Recupera 5 de vida quando usado)"){
+					vidaRecuperada = 5;
+					vida += 5;
+					if(vida > vidaMaxima){
+						vidaRecuperada = vidaRecuperada - (vida - vidaMaxima);
+						vida = vidaMaxima;
+					};
+					frases.push("Voce comeu um pão");
+					frases.push("'Voce recuperou "+vidaRecuperada+" pontos de vida'");
+					inventario.splice(igs,1);
+					quantidadeInventario -= 1;
+					igs = quantidadeInventario + 1; 
+				}else{
+					temItem += 1; 
+				};
+				if(temItem == quantidadeInventario){
+					frases.push("Voce não tem este item em seu inventario");
+					temItem = 0;
+				};
+			};
+		}else{
+		if(ultimaFrase == "tomar vinho"){
+			for(igs = 0; igs < quantidadeInventario;igs++){
+				if(inventario[igs] == "> Vinho (Recupera 10 de vida quando usado)"){
+					vidaRecuperada = 10;
+					vida += 10;
+					if(vida > vidaMaxima){
+						vidaRecuperada = vidaRecuperada - (vida - vidaMaxima);
+						vida = vidaMaxima;
+					};
+					frases.push("Voce tomou um vinho");
+					frases.push("'Voce recuperou "+vidaRecuperada+" pontos de vida'");
+					inventario.splice(igs,1);
+					quantidadeInventario -= 1;
+					igs = quantidadeInventario + 1;
+				}else{
+					temItem += 1; 
+				};
+				if(temItem == quantidadeInventario){
+					frases.push("Voce não tem este item em seu inventario");
+					temItem = 0;
+				};
+			};
+		}else{
+		if(ultimaFrase == "comer porco assado"){
+			for(igs = 0; igs < quantidadeInventario;igs++){
+				if(inventario[igs] == "> Porco Assado (Recupera 20 de vida quando usado)"){
+					vidaRecuperada = 20;
+					vida += 20;
+					if(vida > vidaMaxima){
+						vidaRecuperada = vidaRecuperada - (vida - vidaMaxima);
+						vida = vidaMaxima;
+					};
+					frases.push("Voce comeu um porco assado");
+					frases.push("'Voce recuperou "+vidaRecuperada+" pontos de vida'");
+					inventario.splice(igs,1);
+					quantidadeInventario -= 1;
+					igs = quantidadeInventario + 1; 
+				}else{
+					temItem += 1; 
+				};
+				if(temItem == quantidadeInventario){
+					frases.push("Voce não tem este item em seu inventario");
+					temItem = 0;
+				};
+			};
+		}else{
+		if(ultimaFrase == "comer cordeiro assado"){
+			for(igs = 0; igs < quantidadeInventario;igs++){
+				if(inventario[igs] == "> Cordeiro Assado (Recupera 30 de vida quando usado)"){
+					vidaRecuperada = 30;
+					vida += 30;
+					if(vida > vidaMaxima){
+						vidaRecuperada = vidaRecuperada - (vida - vidaMaxima);
+						vida = vidaMaxima;
+					};
+					frases.push("Voce comeu um cordeiro assado");
+					frases.push("'Voce recuperou "+vidaRecuperada+" pontos de vida'");
+					inventario.splice(igs,1);
+					quantidadeInventario -= 1;
+					igs = quantidadeInventario + 1;
+				}else{
+					temItem += 1; 
+				};
+				if(temItem == quantidadeInventario){
+					frases.push("Voce não tem este item em seu inventario");
+					temItem = 0;
+				};
+			};
+		}else{
+		if(ultimaFrase == "norte" & mapa.y > 40){
+			frases.push("Indo para Norte");
+			direcao = direcoes.norte;
+			travaEscrita = 1;
+			teclou.letraDigitada.push(" ");
+			carega();
+			//frases.push("");
+		}else{
+		if(ultimaFrase == "norte"){
+			frases.push("Voce não consegue passar, a floresta é muito Fechada");
+		}else{
+
+		if(ultimaFrase == "sul" & mapa.y < 160){
+			frases.push("Indo para Sul");
+			direcao = direcoes.sul;
+			travaEscrita = 1;
+			teclou.letraDigitada.push(" ");
+			carega();
+			//frases.push("");
+		}else{
+		if(ultimaFrase == "sul"){
+			frases.push("Voce não consegue passar, a floresta é muito Fechada");
+		}else{
+
+		if(ultimaFrase == "leste" & mapa.x < 960){
+			frases.push("Indo para Leste");
+			direcao = direcoes.leste;
+			travaEscrita = 1;
+			teclou.letraDigitada.push(" ");
+			carega();
+			//leste direita
+		}else{
+		if(ultimaFrase == "leste"){
+			frases.push("Voce não consegue passar, a floresta é muito Fechada");
+		}else{
+
+		if(ultimaFrase == "oeste" & mapa.x > 800){
+			frases.push("Indo para Oeste");
+			direcao = direcoes.oeste;
+			travaEscrita = 1;
+			teclou.letraDigitada.push(" ");
+			carega();
+			//oeste esquerda
+		}else{
+		if(ultimaFrase == "oeste"){
+			frases.push("Voce não consegue passar, a floresta é muito Fechada");
+		}else{
+
+		if(ultimaFrase == "atualiza"){
+			frases.push("Atualizado");
+			desenha();
+		}else{
+		if(ultimaFrase == "nao entendi"){
+			frases.push("Eu que falo isso, pare de me Imitar");
+		}else{
+		if(ultimaFrase == "level"){
+			level += 1;
+			frases.push("Level Aumentado");
+		}else{
+		if(ultimaFrase == "atacar"){
+			frases.push("Atacar 'Oque'?");
+		}else{
+		if(ultimaFrase == "olhar"){
+			frases.push("Olhar 'Oque'?");
+		}else{
+		if(ultimaFrase == "pegar"){
+			frases.push("Pegar 'Oque'?");
+		}else{
+		if(ultimaFrase == "falar"){
+			frases.push("Falar com 'Quem'?");
+		}else{
+		if(ultimaFrase == "falar com"){
+			frases.push("Falar com 'Quem'?");
+		}else{
+		if(ultimaFrase == "olhar em volta"){
+			if(lugarPlayer != falarNpc.nulo){
+			frases.push(lugarPlayer);
+			};
+			if(lugarPlayer2 != falarNpc.nulo){
+			frases.push(lugarPlayer2);
+			};
+			if(lugarPlayer3 != falarNpc.nulo){
+			frases.push(lugarPlayer3);
+			};
+		}else{
+		if(ultimaFrase == "inventario"){
+			if(quantidadeInventario > 0){
+			frases.push("Itens em sua Mochila:");
+			for(igs = 0; igs < quantidadeInventario;igs++){
+			frases.push(inventario[igs]);
+			};
+			}else{
+			frases.push("Voce não tem itens na sua Mochila");
+			};
+		}else{
+		if(ultimaFrase == "mochila"){
+			if(quantidadeInventario > 0){
+			frases.push("Itens em sua Mochila:");
+			for(igs = 0; igs < quantidadeInventario;igs++){
+			frases.push(inventario[igs]);
+			};
+			}else{
+			frases.push("Voce não tem itens na sua Mochila");
+			};
+		}else{
+		if(ultimaFrase == "olhar inventario"){
+			if(quantidadeInventario > 0){
+			frases.push("Itens em sua Mochila:");
+			for(igs = 0; igs < quantidadeInventario;igs++){
+			frases.push(inventario[igs]);
+			};
+			}else{
+			frases.push("Voce não tem itens na sua Mochila");
+			};
+		}else{
+		if(ultimaFrase == "olhar mochila"){
+			if(quantidadeInventario > 0){
+			frases.push("Itens em sua Mochila:");
+			for(igs = 0; igs < quantidadeInventario;igs++){
+			frases.push(inventario[igs]);
+			};
+			}else{
+			frases.push("Voce não tem itens na sua Mochila");
+			};
+		}else{
+		if(ultimaFrase == "abrir mochila"){
+			if(quantidadeInventario > 0){
+			frases.push("Itens em sua Mochila:");
+			for(igs = 0; igs < quantidadeInventario;igs++){
+			frases.push(inventario[igs]);
+			};
+			}else{
+			frases.push("Voce não tem itens na sua Mochila");
+			};
+		}else{
+		if(ultimaFrase == "abrir inventario"){
+			if(quantidadeInventario > 0){
+			frases.push("Itens em sua Mochila:");
+			for(igs = 0; igs < quantidadeInventario;igs++){
+			frases.push(inventario[igs]);
+			};
+			}else{
+			frases.push("Voce não tem itens na sua Mochila");
+			};
+		}else{
+		if(propriedadeMapa == numeroMapa.cidade){
+			if(ultimaFrase == "taberna"){
+				if(localMapa != locaisMapa.taberna){
+				falando = falarNpc.nulo;
+				localMapa = locaisMapa.taberna;
+				lugarPlayer = "Voce esta na Taberna, voce vê o Estalajadeiro no balcão, mesas a sua direita e alguns";
+				lugarPlayer2 = "bebados bagunçando";
+				lugarPlayer3 = falarNpc.nulo;
+				frases.push("Voce entra na Taberna, voce vê o Estalajadeiro no balcão, mesas a sua direita e alguns");
+				frases.push("bebados bagunçando");
+				frases.push("Voce pode voltar para o centro da vila se quiser.");
+				}else{
+				if(localMapa == locaisMapa.taberna){
+				frases.push("Voce ja esta na Taberna");
+				}};
+			}else{
+			if(ultimaFrase == "estalagem"){
+				if(localMapa != locaisMapa.taberna){
+				falando = falarNpc.nulo;
+				localMapa = locaisMapa.taberna;
+				lugarPlayer = "Voce esta na Taberna, voce vê o Estalajadeiro no balcão, mesas a sua direita e alguns";
+				lugarPlayer2 = "bebados bagunçando";
+				lugarPlayer3 = falarNpc.nulo;
+				frases.push("Voce entra na Taberna, voce vê o Estalajadeiro no balcão, mesas a sua direita e alguns");
+				frases.push("bebados bagunçando");
+				frases.push("Voce pode voltar para o centro da vila se quiser.");
+				}else{
+				if(localMapa == locaisMapa.taberna){
+				frases.push("Voce ja esta na Estalagem");
+				}};
+			}else{
+			if(ultimaFrase == "taverna"){
+				if(localMapa != locaisMapa.taberna){
+				falando = falarNpc.nulo;
+				localMapa = locaisMapa.taberna;
+				lugarPlayer = "Voce esta na Taberna, voce vê o Estalajadeiro no balcão, mesas a sua direita e alguns";
+				lugarPlayer2 = "bebados bagunçando";
+				lugarPlayer3 = falarNpc.nulo;
+				frases.push("Voce entra na Taberna, voce vê o Estalajadeiro no balcão, mesas a sua direita e alguns");
+				frases.push("bebados bagunçando");
+				frases.push("Voce pode voltar para o centro da vila se quiser.");
+				}else{
+				if(localMapa == locaisMapa.taberna){
+				frases.push("Voce ja esta na Taberna");
+				}};
+			}else{
+			if(ultimaFrase == "igreja"){
+				if(localMapa != locaisMapa.igreja){
+				falando = falarNpc.nulo;
+				localMapa = locaisMapa.igreja;
+				lugarPlayer = "Voce esta na Igreja, voce vê o padre da vila rezando, uma caixa de doações no lado, a";
+				lugarPlayer2 = "igreja parece um pouco mais cheia que o normal";
+				lugarPlayer3 = falarNpc.nulo;
+				frases.push("Voce entra na Igreja, voce vê o padre da vila rezando, uma caixa de doações no lado,");
+				frases.push("a igreja parece um pouco mais cheia que o normal");
+				frases.push("Voce pode voltar para o centro da vila se quiser.");
+				//frases.push("OBS: Falar com o padre quando se esta ferido, recupera sua vida");
+				}else{
+				if(localMapa == locaisMapa.igreja){
+				frases.push("Voce ja esta na Igreja");
+				}};
+			}else{
+			if(ultimaFrase == "vilarejo"){
+				if(localMapa != locaisMapa.vilarejo){
+				falando = falarNpc.nulo;
+				localMapa = locaisMapa.vilarejo;
+				lugarPlayer = "Voce esta no Vilarejo e vê varios moradores conversando, voce vê um velho sentado";
+				lugarPlayer2 = "numa cadeira a sua esquerda, a sua direita crianças brincando";
+				lugarPlayer3 = falarNpc.nulo;
+				frases.push("Voce chega no Vilarejo e vê varios moradores conversando, voce vê um velho sentado");
+				frases.push("numa cadeira a sua esquerda, a sua direita crianças brincando");
+				frases.push("Voce pode voltar para o centro da vila se quiser.");
+				}else{
+				if(localMapa == locaisMapa.vilarejo){
+				frases.push("Voce ja esta no Vilarejo");
+				}};
+			}else{
+			if(ultimaFrase == "casas"){
+				if(localMapa != locaisMapa.vilarejo){
+				falando = falarNpc.nulo;
+				localMapa = locaisMapa.vilarejo;
+				lugarPlayer = "Voce esta no Vilarejo e vê varios moradores conversando, voce vê um velho sentado";
+				lugarPlayer2 = "numa cadeira a sua esquerda, a sua direita crianças brincando";
+				lugarPlayer3 = falarNpc.nulo;
+				frases.push("Voce chega no Vilarejo e vê varios moradores conversando, voce vê um velho sentado");
+				frases.push("numa cadeira a sua esquerda, a sua direita crianças brincando");
+				frases.push("Voce pode voltar para o centro da vila se quiser.");
+				}else{
+				if(localMapa == locaisMapa.vilarejo){
+				frases.push("Voce ja esta no Vilarejo");
+				}};
+			}else{
+			if(ultimaFrase == "casas do vilarejo"){
+				if(localMapa != locaisMapa.vilarejo){
+				falando = falarNpc.nulo;
+				localMapa = locaisMapa.vilarejo;
+				lugarPlayer = "Voce esta no Vilarejo e vê varios moradores conversando, voce vê um velho sentado";
+				lugarPlayer2 = "numa cadeira a sua esquerda, a sua direita crianças brincando";
+				lugarPlayer3 = falarNpc.nulo;
+				frases.push("Voce chega no Vilarejo e vê varios moradores conversando, voce vê um velho sentado");
+				frases.push("numa cadeira a sua esquerda, a sua direita crianças brincando");
+				frases.push("Voce pode voltar para o centro da vila se quiser.");
+				}else{
+				if(localMapa == locaisMapa.vilarejo){
+				frases.push("Voce ja esta no Vilarejo");
+				}};
+			}else{
+			if(ultimaFrase == "fonte"){
+				if(localMapa != locaisMapa.fonte){
+				falando = falarNpc.nulo;
+				localMapa = locaisMapa.fonte;
+				lugarPlayer = "Voce esta na Fonte e vê varios mendigos sentandos ao seu redor, dentro dela voce não";
+				lugarPlayer2 = "consegue ver agua";
+				lugarPlayer3 = falarNpc.nulo;
+				frases.push("Voce chega na Fonte e vê varios mendigos sentandos ao seu redor, dentro dela voce");
+				frases.push("não consegue ver agua, pelo jeito os moradores estão sem agua,voce precisa ajuda-los");
+				frases.push("Voce pode voltar para o centro da vila se quiser.");
+				}else{
+				if(localMapa == locaisMapa.fonte){
+				frases.push("Voce ja esta na Fonte");
+				}};
+			}else{
+			if(ultimaFrase == "ferreiro"){
+				if(localMapa != locaisMapa.ferreiro){
+				falando = falarNpc.nulo;
+				localMapa = locaisMapa.ferreiro;
+				qualArma = armas[Math.floor(Math.random() * 5)];
+				lugarPlayer = "Voce esta na loja do Ferreiro, voce consegue ver varias armas e armaduras, o ferreiro";
+				lugarPlayer2 = "esta no balcão afiando " + qualArma;
+				lugarPlayer3 = falarNpc.nulo;
+				frases.push("Voce entra na loja do Ferreiro, voce consegue ver varias armas e armaduras, o ferreiro");
+				frases.push("esta no balcão afiando " + qualArma);
+				frases.push("Voce pode voltar para o centro da vila se quiser.");
+				}else{
+				if(localMapa == locaisMapa.ferreiro){
+				frases.push("Voce ja esta no Ferreiro");
+				}};
+			}else{
+			if(ultimaFrase == "ferraria"){
+				if(localMapa != locaisMapa.ferreiro){
+				falando = falarNpc.nulo;
+				localMapa = locaisMapa.ferreiro;
+				qualArma = armas[Math.floor(Math.random() * 5)];
+				lugarPlayer = "Voce esta na loja do Ferreiro, voce consegue ver varias armas e armaduras, o ferreiro";
+				lugarPlayer2 = "esta no balcão afiando " + qualArma;
+				lugarPlayer3 = falarNpc.nulo;
+				frases.push("Voce entra na loja do Ferreiro, voce consegue ver varias armas e armaduras, o ferreiro");
+				frases.push("esta no balcão afiando " + qualArma);
+				frases.push("Voce pode voltar para o centro da vila se quiser.");
+				}else{
+				if(localMapa == locaisMapa.ferreiro){
+				frases.push("Voce ja esta no Ferreiro");
+				}};
+			}else{
+			if(ultimaFrase == "centro"){
+				falando = falarNpc.nulo;
+				if(localMapa != locaisMapa.centro){
+				localMapa = locaisMapa.centro;
+				lugarPlayer = "Voce esta no centro da vila, voce consegue ver a Taberna, algumas casas do Vilarejo";
+				lugarPlayer2 = "o Ferreiro, a Fonte e a Igreja";
+				lugarPlayer3 = falarNpc.nulo;
+				frases.push("Voce chega no centro da vila, voce consegue ver a Taberna, algumas casas do Vilarejo");
+				frases.push("o Ferreiro, a Fonte e a Igreja");						
+				}else{
+				if(localMapa == locaisMapa.centro){
+				frases.push("Voce ja esta no Centro");
+				}};
+			}else{
+			if(ultimaFrase == "centro da vila"){
+				falando = falarNpc.nulo;
+				if(localMapa != locaisMapa.centro){
+				localMapa = locaisMapa.centro;
+				lugarPlayer = "Voce esta no centro da vila, voce consegue ver a Taberna, algumas casas do Vilarejo";
+				lugarPlayer2 = "o Ferreiro, a Fonte e a Igreja";
+				lugarPlayer3 = falarNpc.nulo;
+				frases.push("Voce chega no centro da vila, voce consegue ver a Taberna, algumas casas do Vilarejo");
+				frases.push("o Ferreiro, a Fonte e a Igreja");							
+				}else{
+				if(localMapa == locaisMapa.centro){
+				frases.push("Voce ja esta no Centro");
+				}};
+			}else{
+			if(ultimaFrase == "vila"){
+				localMapa = locaisMapa.centro;
+				frases.push("Voce ja esta na Vila, se quiser ir ao centro da vila digite: centro ou centro da vila.");
+			}else{
+			if(ultimaFrase == "brincar com criancas"){
+				if(localMapa == locaisMapa.vilarejo){
+				frases.push("Voce nao pode fazer isso");
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "olhar cadeira"){
+				if(localMapa == locaisMapa.vilarejo){
+				frases.push("Uma cadeira de madeira");
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "olhar caixa"){
+				if(localMapa == locaisMapa.igreja){
+				frases.push("Na superficie superior da caixa voce ve um um pequeno buraco, voce nao consegue ver");
+				frases.push("dentro da caixa, se quiser voce pode 'doar moeda'");
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "pegar fonte"){
+				if(localMapa == locaisMapa.fonte){
+				frases.push("Voce não consegue pegar isso");
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "olhar fonte"){
+				if(localMapa == locaisMapa.fonte){
+				frases.push("A fonte esta em pessimas condições, antigamente ela devia ser bonita");
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "olhar mesas"){
+				if(localMapa == locaisMapa.taberna){
+				frases.push("Voce ve algumas mesas de madeira");
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "olhar mesa"){
+				if(localMapa == locaisMapa.taberna){
+				frases.push("Voce ve algumas mesas de madeira");
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "olhar bebados"){
+				if(localMapa == locaisMapa.taberna){
+				frases.push("Os bebados estão fazendo bagunça e falando alto, o estalajadeiro não esta gostando");
+				frases.push("muito, porem não reclama");
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "armas"){
+				if(localMapa == locaisMapa.ferreiro){
+				frases.push("Voce esta na frente de varias armas e armaduras bem feitas");
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "armaduras"){
+				if(localMapa == locaisMapa.ferreiro){
+				frases.push("Voce esta na frente de varias armas e armaduras bem feitas");
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "olhar estalajadeiro"){
+				if(localMapa == locaisMapa.taberna){
+				if(falando == falarNpc.estalajadeiro){
+				frases.push("O estalajadeiro esta olhando voce")
+				}else{
+				frases.push("O estalajadeiro esta observando os bebados enquanto passa um pano no balcão");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "olhar balcao"){
+				if(localMapa == locaisMapa.taberna){
+				frases.push("O balcão é de madeira e esta bem limpo, o estalajadeiro deve limpa-lo frequentemente");
+				}else{
+				if(localMapa == locaisMapa.ferreiro){
+				frases.push("Em cima do balcão de madeira, voce consegue ver duas espadas bem afiadas");
+				}else{
+				frases.push("Nao Entendi");
+				};
+				};
+			}else{
+			if(ultimaFrase == "balcao"){
+				if(localMapa == locaisMapa.taberna){
+				if(falando != falarNpc.estalajadeiro){
+				lugarPlayer = "Voce esta na frente do balcão da taberna/estalagem, conversando com o estalajadeiro";
+				lugarPlayer2 = falarNpc.nulo;
+				lugarPlayer3 = falarNpc.nulo;
+				frases.push("Voce esta na frente do balcão, o estalajadeiro olha para voce e fala:");
+				frases.push("Seja bem vindo a Taberna/Estalagem Cavalo Manso, quer 'comprar' algum 'produto'?");
+				}else{
+				frases.push("Voce ja esta no balcão");
+				};
+				falando = falarNpc.estalajadeiro;
+				}else{
+				if(localMapa == locaisMapa.ferreiro){
+				if(falando != falarNpc.ferreiro){
+				lugarPlayer = "Voce esta na frente do balcão da ferraria, conversando com o ferreiro";
+				lugarPlayer2 = falarNpc.nulo;
+				lugarPlayer3 = falarNpc.nulo;
+				frases.push("Voce esta na frente do balcão, o ferreiro olha para voce e fala:");
+				frases.push("Seja bem vindo a ferraria Bigorna & Martelo, quer 'comprar' algum 'produto'?");
+				falando = falarNpc.ferreiro;
+				}else{
+				frases.push("Voce ja esta no balcão");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				}};
+			}else{
+			if(ultimaFrase == "falar com ferreiro"){
+				if(localMapa == locaisMapa.ferreiro){
+				if(falando != falarNpc.ferreiro){
+				lugarPlayer = "Voce esta na frente do balcão da ferraria, conversando com o ferreiro";
+				lugarPlayer2 = falarNpc.nulo;
+				lugarPlayer3 = falarNpc.nulo;
+				frases.push("Voce esta na frente do balcão, o ferreiro olha para voce e fala:");
+				frases.push("Seja bem vindo a ferraria Bigorna & Martelo, quer 'comprar' algum 'produto'?");
+				}else{
+				frases.push("Voce ja esta falando com ele");
+				};
+				falando = falarNpc.ferreiro;
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "falar com estalajadeiro"){
+				if(localMapa == locaisMapa.taberna){
+				if(falando != falarNpc.estalajadeiro){
+				lugarPlayer = "Voce esta na frente do balcão da taberna/estalagem, conversando com o estalajadeiro";
+				lugarPlayer2 = falarNpc.nulo;
+				lugarPlayer3 = falarNpc.nulo;
+				frases.push("Voce esta na frente do balcão, o estalajadeiro olha para voce e fala:");
+				frases.push("Seja bem vindo a Taberna/Estalagem Cavalo Manso, quer 'comprar' algum 'produto'?");
+				}else{
+				frases.push("Voce ja esta falando com ele");
+				};
+				falando = falarNpc.estalajadeiro;
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "falar com bebados"){
+				if(localMapa == locaisMapa.taberna){
+				if(falando != falarNpc.bebados){
+				frases.push("ahmm HICKS! ei voce ai, tem rum pra noiís.");
+				}else{
+				frases.push("Voce ja esta falando com ele");
+				};
+				falando = falarNpc.bebados;
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "falar com bebado"){
+				if(localMapa == locaisMapa.taberna){
+				if(falando != falarNpc.bebados){
+				frases.push("ahmm HICKS! ei voce ai, tem rum pra noiís.");
+				}else{
+				frases.push("Voce ja esta falando com ele");
+				};
+				falando = falarNpc.bebados;
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "comprar"){
+				if(localMapa == locaisMapa.taberna){
+				if(falando == falarNpc.estalajadeiro){
+				qualComida = comidas[Math.floor(Math.random() * 4)];
+				frases.push("Aqui estão alguns produtos:");
+				frases.push("> Pão (Recupera 5 de vida quando usado) custa 5 moedas");
+				frases.push("> Vinho (Recupera 10 de vida quando usado) custa 10 moedas");
+				frases.push("> Porco Assado (Recupera 20 de vida quando usado) custa 20 moedas");
+				frases.push("> Cordeiro Assado (Recupera 30 de vida quando usado) custa 30 moedas");
+				frases.push("Para comprar digite, exemplo: " + qualComida);
+				}else{
+				frases.push("Nao Entendi");
+				};
+				}else{
+				if(localMapa == locaisMapa.ferreiro){
+				if(falando == falarNpc.ferreiro){
+				qualArma = armasNpc[Math.floor(Math.random() * 4)];
+				frases.push("Aqui estão alguns produtos:");
+				frases.push("> Espada de uma mão (Aumenta em 7 o seu dano) custa 25 moedas");
+				frases.push("> Espada de duas mãos (Aumenta em 14 o seu dano) custa 45 moedas");
+				frases.push("> Machado de uma mão (Aumenta em 9 o seu dano) custa 30 moedas");
+				frases.push("> Machado de duas mãos (Aumenta em 18 o seu dano) custa 60 moedas");
+				frases.push("> Facão (Permite passar por lugares de dificil acesso) custa 15 moedas");
+				frases.push("> Adaga (Aumenta em 6 o seu dano) custa 20 moedas");
+				frases.push("> Machado de mithril (Aumenta em 30 o seu dano) custa 100 moedas");
+				frases.push("> Escudo de madeira grande (Aumenta em 9 a sua vida maxima) custa 30 moedas");
+				frases.push("> Escudo de ferro pequeno (Aumenta em 12 a sua vida maxima) custa 40 moedas");
+				frases.push("> Escudo de ferro grande (Aumenta em 15 a sua vida maxima) custa 50 moedas");
+				frases.push("> Escudo de mithril (Aumenta em 27 a sua vida maxima) custa 90 moedas");
+				frases.push("> Armadura de couro (Aumenta em 15 a sua vida maxima) custa 50 moedas");
+				frases.push("> Armadura de ferro (Aumenta em 24 a sua vida maxima) custa 80 moedas");
+				frases.push("> Armadura de mithril (Aumenta em 39 a sua vida maxima) custa 130 moedas");
+				frases.push("Para comprar digite, exemplo: " + qualArma);
+				}else{
+				frases.push("Nao Entendi");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				}};
+			}else{
+			if(ultimaFrase == "produto"){
+				if(localMapa == locaisMapa.taberna){
+				if(falando == falarNpc.estalajadeiro){
+				qualComida = comidas[Math.floor(Math.random() * 4)];
+				frases.push("Aqui estão alguns produtos:");
+				frases.push("> Pão (Recupera 5 de vida quando usado) custa 5 moedas");
+				frases.push("> Vinho (Recupera 10 de vida quando usado) custa 10 moedas");
+				frases.push("> Porco Assado (Recupera 20 de vida quando usado) custa 20 moedas");
+				frases.push("> Cordeiro Assado (Recupera 30 de vida quando usado) custa 30 moedas");
+				frases.push("Para comprar digite, exemplo: " + qualComida);
+				}else{
+				frases.push("Nao Entendi");
+				};
+				}else{
+				if(localMapa == locaisMapa.ferreiro){
+				if(falando == falarNpc.ferreiro){
+				qualArma = armasNpc[Math.floor(Math.random() * 4)];
+				frases.push("Aqui estão alguns produtos:");
+				frases.push("> Espada de uma mão (Aumenta em 7 o seu dano) custa 25 moedas");
+				frases.push("> Espada de duas mãos (Aumenta em 14 o seu dano) custa 45 moedas");
+				frases.push("> Machado de uma mão (Aumenta em 9 o seu dano) custa 30 moedas");
+				frases.push("> Machado de duas mãos (Aumenta em 18 o seu dano) custa 60 moedas");
+				frases.push("> Facão (Permite passar por lugares de dificil acesso) custa 15 moedas");
+				frases.push("> Adaga (Aumenta em 6 o seu dano) custa 20 moedas");
+				frases.push("> Machado de mithril (Aumenta em 30 o seu dano) custa 100 moedas");
+				frases.push("> Escudo de madeira grande (Aumenta em 9 a sua vida maxima) custa 30 moedas");
+				frases.push("> Escudo de ferro pequeno (Aumenta em 12 a sua vida maxima) custa 40 moedas");
+				frases.push("> Escudo de ferro grande (Aumenta em 15 a sua vida maxima) custa 50 moedas");
+				frases.push("> Escudo de mithril (Aumenta em 27 a sua vida maxima) custa 90 moedas");
+				frases.push("> Armadura de couro (Aumenta em 15 a sua vida maxima) custa 50 moedas");
+				frases.push("> Armadura de ferro (Aumenta em 24 a sua vida maxima) custa 80 moedas");
+				frases.push("> Armadura de mithril (Aumenta em 39 a sua vida maxima) custa 130 moedas");
+				frases.push("Para comprar digite, exemplo: " + qualArma);
+				}else{
+				frases.push("Nao Entendi");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				}};
+			}else{
+			if(ultimaFrase == "produtos"){
+				if(localMapa == locaisMapa.taberna){
+				if(falando == falarNpc.estalajadeiro){
+				qualComida = comidas[Math.floor(Math.random() * 4)];
+				frases.push("Aqui estão alguns produtos:");
+				frases.push("> Pão (Recupera 5 de vida quando usado) custa 5 moedas");
+				frases.push("> Vinho (Recupera 10 de vida quando usado) custa 10 moedas");
+				frases.push("> Porco Assado (Recupera 20 de vida quando usado) custa 20 moedas");
+				frases.push("> Cordeiro Assado (Recupera 30 de vida quando usado) custa 30 moedas");
+				frases.push("Para comprar digite, exemplo: " + qualComida);
+				}else{
+				frases.push("Nao Entendi");
+				};
+				}else{
+				if(localMapa == locaisMapa.ferreiro){
+				if(falando == falarNpc.ferreiro){
+				qualArma = armasNpc[Math.floor(Math.random() * 4)];
+				frases.push("Aqui estão alguns produtos:");
+				frases.push("> Espada de uma mão (Aumenta em 7 o seu dano) custa 25 moedas");
+				frases.push("> Espada de duas mãos (Aumenta em 14 o seu dano) custa 45 moedas");
+				frases.push("> Machado de uma mão (Aumenta em 9 o seu dano) custa 30 moedas");
+				frases.push("> Machado de duas mãos (Aumenta em 18 o seu dano) custa 60 moedas");
+				frases.push("> Facão (Permite passar por lugares de dificil acesso) custa 15 moedas");
+				frases.push("> Adaga (Aumenta em 6 o seu dano) custa 20 moedas");
+				frases.push("> Machado de mithril (Aumenta em 30 o seu dano) custa 100 moedas");
+				frases.push("> Escudo de madeira grande (Aumenta em 9 a sua vida maxima) custa 30 moedas");
+				frases.push("> Escudo de ferro pequeno (Aumenta em 12 a sua vida maxima) custa 40 moedas");
+				frases.push("> Escudo de ferro grande (Aumenta em 15 a sua vida maxima) custa 50 moedas");
+				frases.push("> Escudo de mithril (Aumenta em 27 a sua vida maxima) custa 90 moedas");
+				frases.push("> Armadura de couro (Aumenta em 15 a sua vida maxima) custa 50 moedas");
+				frases.push("> Armadura de ferro (Aumenta em 24 a sua vida maxima) custa 80 moedas");
+				frases.push("> Armadura de mithril (Aumenta em 39 a sua vida maxima) custa 130 moedas");
+				frases.push("Para comprar digite, exemplo: " + qualArma);
+				}else{
+				frases.push("Nao Entendi");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				}};
+			}else{
+			if(ultimaFrase == "comprar espada de uma mao"){
+				if(localMapa == locaisMapa.ferreiro){
+				if(falando == falarNpc.ferreiro){
+				if(quantidadeInventario < 18){
+				if(dinheiro >= 25){
+				dinheiro -= 25;
+				quantidadeInventario += 1;
+				inventario.push("> Espada de uma mão (Aumenta em 7 o seu dano)");
+				frases.push("Arma de otima qualidade");
+				frases.push("'Voce comprou uma Espada de uma mão por 25 moedas'");
+				}else{
+				frases.push("Voce nao tem dinheiro suficiente");
+				};
+				}else{
+				frases.push("Voce atingiu o limite de itens em seu inventario");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "comprar espada de duas maos"){
+				if(localMapa == locaisMapa.ferreiro){
+				if(falando == falarNpc.ferreiro){
+				if(quantidadeInventario < 18){
+				if(dinheiro >= 45){
+				dinheiro -= 45;
+				quantidadeInventario += 1;
+				inventario.push("> Espada de duas mãos (Aumenta em 14 o seu dano)");
+				frases.push("Arma de otima qualidade");
+				frases.push("'Voce comprou uma Espada de duas mãos por 45 moedas'");
+				}else{
+				frases.push("Voce nao tem dinheiro suficiente");
+				};
+				}else{
+				frases.push("Voce atingiu o limmite de itens em seu inventario");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "comprar machado de uma mao"){
+				if(localMapa == locaisMapa.ferreiro){
+				if(falando == falarNpc.ferreiro){
+				if(quantidadeInventario < 18){
+				if(dinheiro >= 30){
+				dinheiro -= 30;
+				quantidadeInventario += 1;
+				inventario.push("> Machado de uma mão (Aumenta em 9 o seu dano)");
+				frases.push("Arma de otima qualidade");
+				frases.push("'Voce comprou um Machado de uma mão por 30 moedas'");
+				}else{
+				frases.push("Voce nao tem dinheiro suficiente");
+				};
+				}else{
+				frases.push("Voce atingiu o limmite de itens em seu inventario");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "comprar machado de duas maos"){
+				if(localMapa == locaisMapa.ferreiro){
+				if(falando == falarNpc.ferreiro){
+				if(quantidadeInventario < 18){
+				if(dinheiro >= 60){
+				dinheiro -= 60;
+				quantidadeInventario += 1;
+				inventario.push("> Machado de duas mãos (Aumenta em 18 o seu dano)");
+				frases.push("Arma de otima qualidade");
+				frases.push("'Voce comprou um Machado de duas mãos por 60 moedas'");
+				}else{
+				frases.push("Voce nao tem dinheiro suficiente");
+				};
+				}else{
+				frases.push("Voce atingiu o limmite de itens em seu inventario");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "comprar facao"){
+				if(localMapa == locaisMapa.ferreiro){
+				if(falando == falarNpc.ferreiro){
+				if(quantidadeInventario < 18){
+				if(dinheiro >= 15){
+				dinheiro -= 15;
+				quantidadeInventario += 1;
+				inventario.push("> Facão (Permite passar por lugares de dificil acesso)");
+				frases.push("Facão de otima qualidade");
+				frases.push("'Voce comprou um Facão por 15 moedas'");
+				}else{
+				frases.push("Voce nao tem dinheiro suficiente");
+				};
+				}else{
+				frases.push("Voce atingiu o limmite de itens em seu inventario");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "comprar adaga"){
+				if(localMapa == locaisMapa.ferreiro){
+				if(falando == falarNpc.ferreiro){
+				if(quantidadeInventario < 18){
+				if(dinheiro >= 20){
+				dinheiro -= 20;
+				quantidadeInventario += 1;
+				inventario.push("> Adaga (Aumenta em 6 o seu dano)");
+				frases.push("Arma de otima qualidade");
+				frases.push("'Voce comprou uma Adaga por 15 moedas'");
+				}else{
+				frases.push("Voce nao tem dinheiro suficiente");
+				};
+				}else{
+				frases.push("Voce atingiu o limmite de itens em seu inventario");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "comprar machado de mithril"){
+				if(localMapa == locaisMapa.ferreiro){
+				if(falando == falarNpc.ferreiro){
+				if(quantidadeInventario < 18){
+				if(dinheiro >= 100){
+				dinheiro -= 100;
+				quantidadeInventario += 1;
+				inventario.push("> Machado de Mithril (Aumenta em 30 o seu dano)");
+				frases.push("Arma de otima qualidade");
+				frases.push("'Voce comprou um Machado de Mithril por 100 moedas'");
+				}else{
+				frases.push("Voce nao tem dinheiro suficiente");
+				};
+				}else{
+				frases.push("Voce atingiu o limmite de itens em seu inventario");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "comprar escudo de madeira grande"){
+				if(localMapa == locaisMapa.ferreiro){
+				if(falando == falarNpc.ferreiro){
+				if(quantidadeInventario < 18){
+				if(dinheiro >= 30){
+				dinheiro -= 30;
+				quantidadeInventario += 1;
+				inventario.push("> Escudo de Madeira Grande (Aumenta em 9 a sua vida maxima)");
+				frases.push("Arma de otima qualidade");
+				frases.push("'Voce comprou um Escudo de Madeira Grande por 30 moedas'");
+				}else{
+				frases.push("Voce nao tem dinheiro suficiente");
+				};
+				}else{
+				frases.push("Voce atingiu o limmite de itens em seu inventario");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "comprar escudo de ferro pequeno"){
+				if(localMapa == locaisMapa.ferreiro){
+				if(falando == falarNpc.ferreiro){
+				if(quantidadeInventario < 18){
+				if(dinheiro >= 40){
+				dinheiro -= 40;
+				quantidadeInventario += 1;
+				inventario.push("> Escudo de Ferro Pequeno (Aumenta em 12 a sua vida maxima)");
+				frases.push("Arma de otima qualidade");
+				frases.push("'Voce comprou um Escudo de Ferro Pequeno por 40 moedas'");
+				}else{
+				frases.push("Voce nao tem dinheiro suficiente");
+				};
+				}else{
+				frases.push("Voce atingiu o limmite de itens em seu inventario");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "comprar escudo de ferro grande"){
+				if(localMapa == locaisMapa.ferreiro){
+				if(falando == falarNpc.ferreiro){
+				if(quantidadeInventario < 18){
+				if(dinheiro >= 50){
+				dinheiro -= 50;
+				quantidadeInventario += 1;
+				inventario.push("> Escudo de Ferro Grande (Aumenta em 15 a sua vida maxima)");
+				frases.push("Arma de otima qualidade");
+				frases.push("'Voce comprou um Escudo de Ferro Grande por 50 moedas'");
+				}else{
+				frases.push("Voce nao tem dinheiro suficiente");
+				};
+				}else{
+				frases.push("Voce atingiu o limmite de itens em seu inventario");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "comprar escudo de mithril"){
+				if(localMapa == locaisMapa.ferreiro){
+				if(falando == falarNpc.ferreiro){
+				if(quantidadeInventario < 18){
+				if(dinheiro >= 90){
+				dinheiro -= 90;
+				quantidadeInventario += 1;
+				inventario.push("> Escudo de Mithril (Aumenta em 27 a sua vida maxima)");
+				frases.push("Arma de otima qualidade");
+				frases.push("'Voce comprou um Escudo de Mithril por 90 moedas'");
+				}else{
+				frases.push("Voce nao tem dinheiro suficiente");
+				};
+				}else{
+				frases.push("Voce atingiu o limmite de itens em seu inventario");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "comprar armadura de couro"){
+				if(localMapa == locaisMapa.ferreiro){
+				if(falando == falarNpc.ferreiro){
+				if(quantidadeInventario < 18){
+				if(dinheiro >= 50){
+				dinheiro -= 50;
+				quantidadeInventario += 1;
+				inventario.push("> Armadura de Couro (Aumenta em 15 a sua vida maxima)");
+				frases.push("Armadura de otima qualidade");
+				frases.push("'Voce comprou uma Armadura de Couro por 50 moedas'");
+				}else{
+				frases.push("Voce nao tem dinheiro suficiente");
+				};
+				}else{
+				frases.push("Voce atingiu o limmite de itens em seu inventario");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "comprar armadura de ferro"){
+				if(localMapa == locaisMapa.ferreiro){
+				if(falando == falarNpc.ferreiro){
+				if(quantidadeInventario < 18){
+				if(dinheiro >= 80){
+				dinheiro -= 80;
+				quantidadeInventario += 1;
+				inventario.push("> Armadura de Ferro (Aumenta em 24 a sua vida maxima)");
+				frases.push("Armadura de otima qualidade");
+				frases.push("'Voce comprou uma Armadura de Ferro por 80 moedas'");
+				}else{
+				frases.push("Voce nao tem dinheiro suficiente");
+				};
+				}else{
+				frases.push("Voce atingiu o limmite de itens em seu inventario");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "comprar armadura de mithril"){
+				if(localMapa == locaisMapa.ferreiro){
+				if(falando == falarNpc.ferreiro){
+				if(quantidadeInventario < 18){
+				if(dinheiro >= 130){
+				dinheiro -= 130;
+				quantidadeInventario += 1;
+				inventario.push("> Armadura de Mithril (Aumenta em 39 a sua vida maxima)");
+				frases.push("Armadura de otima qualidade");
+				frases.push("'Voce comprou uma Armadura de Mithril por 130 moedas'");
+				}else{
+				frases.push("Voce nao tem dinheiro suficiente");
+				};
+				}else{
+				frases.push("Voce atingiu o limmite de itens em seu inventario");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "comprar cordeiro assado"){
+				if(localMapa == locaisMapa.taberna){
+				if(falando == falarNpc.estalajadeiro){
+				if(quantidadeInventario < 18){
+				if(dinheiro >= 30){
+				dinheiro -= 30;
+				quantidadeInventario += 1;
+				inventario.push("> Cordeiro Assado (Recupera 30 de vida quando usado)");
+				frases.push("Este cordeiro acabou de sair do fogueira, faça bom proveito!");
+				frases.push("'Voce comprou um Cordeiro Assado por 30 moedas'");
+				}else{
+				frases.push("Voce nao tem dinheiro suficiente");
+				};
+				}else{
+				frases.push("Voce atingiu o limmite de itens em seu inventario");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "comprar porco assado"){
+				if(localMapa == locaisMapa.taberna){
+				if(falando == falarNpc.estalajadeiro){
+				if(quantidadeInventario < 18){
+				if(dinheiro >= 20){
+				dinheiro -= 20;
+				quantidadeInventario += 1;
+				inventario.push("> Porco Assado (Recupera 20 de vida quando usado)");
+				frases.push("Este porco acabou de sair do fogueira, faça bom proveito!");
+				frases.push("'Voce comprou um Porco Assado por 20 moedas'");
+				}else{
+				frases.push("Voce nao tem dinheiro suficiente");
+				};
+				}else{
+				frases.push("Voce atingiu o limmite de itens em seu inventario");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "comprar porco"){
+				if(localMapa == locaisMapa.taberna){
+				if(falando == falarNpc.estalajadeiro){
+				if(quantidadeInventario < 18){
+				if(dinheiro >= 20){
+				dinheiro -= 20;
+				quantidadeInventario += 1;
+				inventario.push("> Porco Assado (Recupera 20 de vida quando usado)");
+				frases.push("Este porco acabou de sair do fogueira, faça bom proveito!");
+				frases.push("'Voce comprou um Porco Assado por 20 moedas'");
+				}else{
+				frases.push("Voce nao tem dinheiro suficiente");
+				};
+				}else{
+				frases.push("Voce atingiu o limmite de itens em seu inventario");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "comprar vinho"){
+				if(localMapa == locaisMapa.taberna){
+				if(falando == falarNpc.estalajadeiro){
+				if(quantidadeInventario < 18){
+				if(dinheiro >= 10){
+				dinheiro -= 10;
+				quantidadeInventario += 1;
+				inventario.push("> Vinho (Recupera 10 de vida quando usado)");
+				frases.push("Este vinho é de otima qualidade, faça bom proveito!");
+				frases.push("'Voce comprou uma garrafa de vinho por 10 moedas'");
+				}else{
+				frases.push("Voce nao tem dinheiro suficiente");
+				};
+				}else{
+				frases.push("Voce atingiu o limmite de itens em seu inventario");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "comprar pao"){
+				if(localMapa == locaisMapa.taberna){
+				if(falando == falarNpc.estalajadeiro){
+				if(quantidadeInventario < 18){
+				if(dinheiro >= 5){
+				dinheiro -= 5;
+				quantidadeInventario += 1;
+				inventario.push("> Pão (Recupera 5 de vida quando usado)");
+				frases.push("O pão acabou de sair do forno, faça bom proveito!");
+				frases.push("'Voce comprou um pão por 5 moedas'");
+				}else{
+				frases.push("Voce nao tem dinheiro suficiente");
+				};
+				}else{
+				frases.push("Voce atingiu o limmite de itens em seu inventario");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "comprar cordeiro"){
+				if(localMapa == locaisMapa.taberna){
+				if(falando == falarNpc.estalajadeiro){
+				if(quantidadeInventario < 18){
+				if(dinheiro >= 30){
+				dinheiro -= 30;
+				quantidadeInventario += 1;
+				inventario.push("> Cordeiro Assado (Recupera 30 de vida quando usado)");
+				frases.push("Este cordeiro acabou de sair da fogueira, faça bom proveito!");
+				frases.push("'Voce comprou um Cordeiro Assado por 30 moedas'");
+				}else{
+				frases.push("Voce nao tem dinheiro suficiente");
+				};
+				}else{
+				frases.push("Voce atingiu o limmite de itens em seu inventario");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "cordeiro assado"){
+				if(localMapa == locaisMapa.taberna){
+				if(falando == falarNpc.estalajadeiro){
+				if(quantidadeInventario < 18){
+				if(dinheiro >= 30){
+				dinheiro -= 30;
+				quantidadeInventario += 1;
+				inventario.push("> Cordeiro Assado (Recupera 30 de vida quando usado)");
+				frases.push("Este cordeiro acabou de sair do fogueira, faça bom proveito!");
+				frases.push("'Voce comprou um Cordeiro Assado por 30 moedas'");
+				}else{
+				frases.push("Voce nao tem dinheiro suficiente");
+				};
+				}else{
+				frases.push("Voce atingiu o limmite de itens em seu inventario");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "porco assado"){
+				if(localMapa == locaisMapa.taberna){
+				if(falando == falarNpc.estalajadeiro){
+				if(quantidadeInventario < 18){
+				if(dinheiro >= 20){
+				dinheiro -= 20;
+				quantidadeInventario += 1;
+				inventario.push("> Porco Assado (Recupera 20 de vida quando usado)");
+				frases.push("Este porco acabou de sair do fogueira, faça bom proveito!");
+				frases.push("'Voce comprou um Porco Assado por 20 moedas'");
+				}else{
+				frases.push("Voce nao tem dinheiro suficiente");
+				};
+				}else{
+				frases.push("Voce atingiu o limmite de itens em seu inventario");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "porco"){
+				if(localMapa == locaisMapa.taberna){
+				if(falando == falarNpc.estalajadeiro){
+				if(quantidadeInventario < 18){
+				if(dinheiro >= 20){
+				dinheiro -= 20;
+				quantidadeInventario += 1;
+				inventario.push("> Porco Assado (Recupera 20 de vida quando usado)");
+				frases.push("Este porco acabou de sair do fogueira, faça bom proveito!");
+				frases.push("'Voce comprou um Porco Assado por 20 moedas'");
+				}else{
+				frases.push("Voce nao tem dinheiro suficiente");
+				};
+				}else{
+				frases.push("Voce atingiu o limmite de itens em seu inventario");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "vinho"){
+				if(localMapa == locaisMapa.taberna){
+				if(falando == falarNpc.estalajadeiro){
+				if(quantidadeInventario < 18){
+				if(dinheiro >= 10){
+				dinheiro -= 10;
+				quantidadeInventario += 1;
+				inventario.push("> Vinho (Recupera 10 de vida quando usado)");
+				frases.push("Este vinho é de otima qualidade, faça bom proveito!");
+				frases.push("'Voce comprou uma garrafa de vinho por 10 moedas'");
+				}else{
+				frases.push("Voce nao tem dinheiro suficiente");
+				};
+				}else{
+				frases.push("Voce atingiu o limmite de itens em seu inventario");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "pao"){
+				if(localMapa == locaisMapa.taberna){
+				if(falando == falarNpc.estalajadeiro){
+				if(quantidadeInventario < 18){
+				if(dinheiro >= 5){
+				dinheiro -= 5;
+				quantidadeInventario += 1;
+				inventario.push("> Pão (Recupera 5 de vida quando usado)");
+				frases.push("O pão acabou de sair do forno, faça bom proveito!");
+				frases.push("'Voce comprou um pão por 5 moedas'");
+				}else{
+				frases.push("Voce nao tem dinheiro suficiente");
+				};
+				}else{
+				frases.push("Voce atingiu o limmite de itens em seu inventario");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "cordeiro"){
+				if(localMapa == locaisMapa.taberna){
+					if(falando == falarNpc.estalajadeiro){
+						if(quantidadeInventario < 18){
+							if(dinheiro >= 30){
+								dinheiro -= 30;
+								quantidadeInventario += 1;
+								inventario.push("> Cordeiro Assado (Recupera 10 de vida quando usado)");				
+								frases.push("Este cordeiro acabou de sair da fogueira, faça bom proveito!");
+								frases.push("'Voce comprou um Cordeiro Assado por 30 moedas'");
+							}else{
+							frases.push("Voce nao tem dinheiro suficiente");
+							};
+						}else{
+							frases.push("Voce atingiu o limmite de itens em seu inventario");
+						};
+					}else{
+						frases.push("Nao Entendi");
+					};
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "mesas"){
+				if(localMapa == locaisMapa.taberna){
+				if(falando != falarNpc.mesas){
+				lugarPlayer = "Voce esta sentado numa mesa da taberna/estalagem";
+				lugarPlayer2 = falarNpc.nulo;
+				lugarPlayer3 = falarNpc.nulo;
+				frases.push("Voce se senta em uma mesa");
+				}else{
+				frases.push("Voce ja esta sentado numa mesa");
+				};
+				falando = falarNpc.mesas;
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "sentar nas mesas"){
+				if(localMapa == locaisMapa.taberna){
+				if(falando != falarNpc.mesas){
+				lugarPlayer = "Voce esta sentado numa mesa da taberna/estalagem";
+				lugarPlayer2 = falarNpc.nulo;
+				lugarPlayer3 = falarNpc.nulo;
+				frases.push("Voce se senta em uma mesa");
+				}else{
+				frases.push("Voce ja esta sentado numa mesa");
+				};
+				falando = falarNpc.mesas;
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "sentar na mesa"){
+				if(localMapa == locaisMapa.taberna){
+				if(falando != falarNpc.mesas){
+				lugarPlayer = "Voce esta sentado numa mesa da taberna/estalagem";
+				lugarPlayer2 = falarNpc.nulo;
+				lugarPlayer3 = falarNpc.nulo;
+				frases.push("Voce se senta em uma mesa");
+				}else{
+				frases.push("Voce ja esta sentado numa mesa");
+				};
+				falando = falarNpc.mesas;
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "sentar mesas"){
+				if(localMapa == locaisMapa.taberna){
+				if(falando != falarNpc.mesas){
+				lugarPlayer = "Voce esta sentado numa mesa da taberna/estalagem";
+				lugarPlayer2 = falarNpc.nulo;
+				lugarPlayer3 = falarNpc.nulo;
+				frases.push("Voce se senta em uma mesa");
+				}else{
+				frases.push("Voce ja esta sentado numa mesa");
+				};
+				falando = falarNpc.mesas;
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "olhar mendigos"){
+				if(localMapa == locaisMapa.fonte){
+				frases.push("Os mendigos estão sujos e sentados no chão, usam roupas rasgadas.");
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "olhar padre"){
+				if(localMapa == locaisMapa.igreja){
+				frases.push("O padre esta usando uma roupa marrom simples, parece ser bem velho e sabio");
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "olhar armas"){
+				if(localMapa == locaisMapa.ferreiro){
+				frases.push("Voce ve varias armas de varios tamanhos e tipos");
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "olhar ferreiro"){
+				if(localMapa == locaisMapa.ferreiro){
+				if(falando == falarNpc.ferreiro){
+				frases.push("O ferreiro esta conversando com voce");
+				}else{
+				frases.push("O ferreiro esta usando uma armadura de couro e segurando um martelo de ferro");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "olhar armaduras"){
+				if(localMapa == locaisMapa.ferreiro){
+				frases.push("Voce ve varias armaduras de varios tamanhos e tipos");
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "olhar moradores"){
+				if(localMapa == locaisMapa.vilarejo){
+				frases.push("Os moradores estão conversando tranquilamente.");
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "olhar velho"){
+				if(localMapa == locaisMapa.vilarejo){
+				if(falando == falarNpc.velho){
+				frases.push("O velho esta conversando com voce");
+				}else{
+				frases.push("O velho esta sentado numa cadeira de balanço sozinho, observando as crianças");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "olhar espadas"){
+				if(localMapa == locaisMapa.ferreiro){
+				frases.push("Voce nao pode olhar isso");
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "olhar crianças"){
+				if(localMapa == locaisMapa.vilarejo){
+				frases.push("Voce ve 5 crianças brincando");
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "doar moeda"){
+				if(localMapa == locaisMapa.igreja){
+				if(dinheiro > 0){
+				dinheiro -= 1;
+				frases.push("O padre esta muito grato por sua doação");
+				frases.push("'Voce colocou 1 moeda na caixa de doações'");
+				}else{
+				frases.push("Voce nao tem dinheiro suficiente");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "doar"){
+				if(localMapa == locaisMapa.igreja){
+				if(dinheiro > 0){
+				dinheiro -= 1;
+				frases.push("O padre esta muito grato por sua doação");
+				frases.push("'Voce colocou 1 moeda na caixa de doações'");
+				}else{
+				frases.push("Voce nao tem dinheiro suficiente");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "pegar caixa"){
+				if(localMapa == locaisMapa.igreja){
+				frases.push("Voce nao pode pegar isso");
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "pegar armas"){
+				if(localMapa == locaisMapa.ferreiro){
+				frases.push("Voce nao pode pegar isso");
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "pegar armaduras"){
+				if(localMapa == locaisMapa.ferreiro){
+				frases.push("Voce nao pode pegar isso");
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "pegar espadas"){
+				if(localMapa == locaisMapa.ferreiro){
+				frases.push("Voce nao pode pegar isso");
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "pegar espada"){
+				if(localMapa == locaisMapa.ferreiro){
+				frases.push("Voce nao pode pegar isso");
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "rezar"){
+				if(localMapa == locaisMapa.igreja){
+				frases.push("Voce não precisa rezar, não vai ajudar");
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "abrir caixa"){
+				if(localMapa == locaisMapa.igreja){
+				frases.push("Voce nao pode abrir isso");
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "forcar caixa"){
+				if(localMapa == locaisMapa.igreja){
+				frases.push("Voce nao pode forcar isso");
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "falar com velho"){
+				if(localMapa == locaisMapa.vilarejo){
+				if(falando == falarNpc.velho){
+				frases.push("Voce ja esta falando com ele");
+				}else{
+				frases.push("Hmm olá viajante, ficou sabendo das novidades da vila?");			
+				};
+				falando = falarNpc.velho;
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "falar com padre"){
+				if(localMapa == locaisMapa.igreja){
+				if(falando == falarNpc.padre){
+				frases.push("Voce ja esta falando com ele");
+				}else{
+				frases.push("Ola viajante, soube que  esta querendo nos ajudar, sempre que precisar de uma ajuda");	
+				frases.push("espiritual ou estiver ferido, fale comigo");
+				frases.push("OBS: Falar 'cura' para o padre quando se esta ferido, recupera toda a sua vida");	
+				};
+				falando = falarNpc.padre;
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "falar com mendigos"){
+				if(localMapa == locaisMapa.fonte){
+				if(falando == falarNpc.mendigos){
+				frases.push("Voce ja esta falando com eles");
+				}else{
+				frases.push("Ei moço tem uma moedinha pra gente?");	
+				};
+				falando = falarNpc.mendigos;
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "falar com mendigo"){
+				if(localMapa == locaisMapa.fonte){
+				if(falando == falarNpc.mendigos){
+				frases.push("Voce ja esta falando com eles");
+				}else{
+				frases.push("Ei moço tem uma moedinha pra gente?");	
+				};
+				falando = falarNpc.mendigos;
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "falar com moradores"){
+				if(localMapa == locaisMapa.vilarejo){
+				frases.push("Eles não querem falar com voce agora");
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "falar com crianças"){
+				if(localMapa == locaisMapa.vilarejo){
+				frases.push("Elas estão brincando, deixe elas em paz");
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "cura"){
+				if(localMapa == locaisMapa.igreja){
+				if(falando == falarNpc.padre){
+				vida = vidaMaxima;
+				frases.push("Que os deuses te abençoe!");
+				}else{
+				frases.push("Fale com o padre primeiro");
+				}
+				}else{
+				frases.push("Nao Entendi");
+				};				
+			}else{
+				if(ultimaFrase == "atacar velho"){
+				if(localMapa == locaisMapa.vilarejo){
+				frases.push("Voce não pode atacar isso");
+				}else{
+				frases.push("Nao Entendi");
+				};				
+			}else{
+				if(ultimaFrase == "atacar moradores"){
+				if(localMapa == locaisMapa.vilarejo){
+				frases.push("Voce não pode atacar isso");
+				}else{
+				frases.push("Nao Entendi");
+				};				
+			}else{
+				if(ultimaFrase == "atacar crianças"){
+				if(localMapa == locaisMapa.vilarejo){
+				frases.push("Voce não pode atacar isso");
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+				if(ultimaFrase == "atacar padre"){
+				if(localMapa == locaisMapa.igreja){
+				frases.push("Voce não pode atacar isso");
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+				if(ultimaFrase == "atacar ferreiro"){
+				if(localMapa == locaisMapa.ferreiro){
+				frases.push("Voce não pode atacar isso");
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+				if(ultimaFrase == "atacar mendigos"){
+				if(localMapa == locaisMapa.fonte){
+				frases.push("Voce não pode atacar isso");
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+				if(ultimaFrase == "atacar estalajadeiro"){
+				if(localMapa == locaisMapa.taberna){
+				frases.push("Voce não pode atacar isso");
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+				if(ultimaFrase == "atacar taberneiro"){
+				if(localMapa == locaisMapa.taberna){
+				frases.push("Voce não pode atacar isso");
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+				if(ultimaFrase == "atacar bebados"){
+				if(localMapa == locaisMapa.taberna){
+				frases.push("Voce não pode atacar isso");
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			if(ultimaFrase == "sim"){
+				if(falando == falarNpc.velho){
+				frases.push("Então... esta esperando oque? vai correndo nos ajudar!");
+				}else{
+					if(falando == falarNpc.mendigos){
+						if(dinheiro > 0){
+						dinheiro -= 1;
+						frases.push("Obrigado viajante, tem mais?");
+						frases.push("'Voce deu 1 moeda para o mendigo'");
+						}else{
+						frases.push("Voce nao tem dinheiro suficiente");
+						};
+        			}else{
+					if(falando == falarNpc.estalajadeiro){
+					qualComida = comidas[Math.floor(Math.random() * 4)];
+					frases.push("Aqui estão alguns produtos:");
+					frases.push("> Pão (Recupera 5 de vida quando usado) custa 5 moedas");
+					frases.push("> Vinho (Recupera 10 de vida quando usado) custa 10 moedas");
+					frases.push("> Porco Assado (Recupera 20 de vida quando usado) custa 20 moedas");
+					frases.push("> Cordeiro Assado (Recupera 30 de vida quando usado) custa 30 moedas");
+					frases.push("Para comprar digite, exemplo: " + qualComida);
+					}else{
+					if(falando == falarNpc.ferreiro){
+				qualArma = armasNpc[Math.floor(Math.random() * 4)];
+				frases.push("Aqui estão alguns produtos:");
+				frases.push("> Espada de uma mão (Aumenta em 7 o seu dano) custa 25 moedas");
+				frases.push("> Espada de duas mãos (Aumenta em 14 o seu dano) custa 45 moedas");
+				frases.push("> Machado de uma mão (Aumenta em 9 o seu dano) custa 30 moedas");
+				frases.push("> Machado de duas mãos (Aumenta em 18 o seu dano) custa 60 moedas");
+				frases.push("> Facão (Permite passar por lugares de dificil acesso) custa 15 moedas");
+				frases.push("> Adaga (Aumenta em 6 o seu dano) custa 20 moedas");
+				frases.push("> Machado de mithril (Aumenta em 30 o seu dano) custa 100 moedas");
+				frases.push("> Escudo de madeira grande (Aumenta em 9 a sua vida maxima) custa 30 moedas");
+				frases.push("> Escudo de ferro pequeno (Aumenta em 12 a sua vida maxima) custa 40 moedas");
+				frases.push("> Escudo de ferro grande (Aumenta em 15 a sua vida maxima) custa 50 moedas");
+				frases.push("> Escudo de mithril (Aumenta em 27 a sua vida maxima) custa 90 moedas");
+				frases.push("> Armadura de couro (Aumenta em 15 a sua vida maxima) custa 50 moedas");
+				frases.push("> Armadura de ferro (Aumenta em 24 a sua vida maxima) custa 80 moedas");
+				frases.push("> Armadura de mithril (Aumenta em 39 a sua vida maxima) custa 130 moedas");
+				frases.push("Para comprar digite, exemplo: " + qualArma);
+					}else{
+					frases.push("Nao Entendi");					
+				}}}};
+			}else{
+			if(ultimaFrase == "nao"){
+			if(falando == falarNpc.velho){
+			frases.push("A vila esta ficando sem agua, voce precisa ir ao Rio Ghoe que fica a LESTE e ver oque");
+			frases.push("esta acontecendo, por favor nos ajude!");
+			}else{
+			if(falando == falarNpc.mendigos){
+			frases.push("Consegue trazer agua pra gente pelo menos?");
+			}else{
+			if(falando == falarNpc.estalajadeiro){
+			frases.push("Volte sempre!");
+			}else{
+			if(falando == falarNpc.ferreiro){
+			frases.push("Volte sempre!");
+			}else{
+			frases.push("Nao Entendi");
+			}}}};
+			}else{
+			frases.push("Nao Entendi");
+			}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}};
+		}else{
+		if(propriedadeMapa == numeroMapa.florestaGhoe){
+			if(ultimaFrase == "rio"){
+				if(localMapa != locaisMapa.rio){
+				localMapa = locaisMapa.rio;
+				lugarPlayer = "Voce chega numa ponte relativamente velha, a humidade da floresta deixou algumas";
+				lugarPlayer2 = "partes da ponte podre, em baixo da ponte o Rio Ghoe Corre para o norte e depois para";
+				lugarPlayer3 = "oeste, a agua parece estar normal";
+				frases.push("Voce chega numa ponte relativamente velha, a humidade da floresta deixou algumas");
+				frases.push("partes da ponte podre, em baixo da ponte o Rio Ghoe Corre para o norte e depois para");
+				frases.push("oeste, a agua parece estar normal");
+				}else{
+				frases.push("Voce ja esta no rio");
+				};
+			}else{
+			if(ultimaFrase == "ponte"){
+				if(localMapa != locaisMapa.rio){
+				localMapa = locaisMapa.rio;
+				lugarPlayer = "Voce chega numa ponte relativamente velha, a humidade da floresta deixou algumas";
+				lugarPlayer2 = "partes da ponte podre, em baixo da ponte o Rio Ghoe Corre para o norte e depois para";
+				lugarPlayer3 = "oeste, a agua parece estar normal";
+				frases.push("Voce chega numa ponte relativamente velha, a humidade da floresta deixou algumas");
+				frases.push("partes da ponte podre, em baixo da ponte o Rio Ghoe Corre para o norte e depois para");
+				frases.push("oeste, a agua parece estar normal");
+				}else{
+				frases.push("Voce ja esta na ponte");
+				};
+			}else{
+				if(ultimaFrase == "portao"){
+				if(localMapa != locaisMapa.portao){
+				localMapa = locaisMapa.portao;
+				lugarPlayer = "Voce esta no portão da vila, um guarda esta vigiando a entrada";
+				lugarPlayer2 = falarNpc.nulo;
+				lugarPlayer3 = falarNpc.nulo;
+				frases.push("Voce chega no portão da vila, o portão esta fechado e um guarda vigia a entrada");
+				}else{
+				frases.push("Voce ja esta no portão da cidade");
+				};
+			}else{
+				if(ultimaFrase == "olhar guarda"){
+				if(localMapa == locaisMapa.portao){
+				frases.push("O guarda esta usando uma armadura de couro, uma espada de uma mão e um escudo");
+				frases.push("de madeira grande");
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+				if(ultimaFrase == "olhar portao"){
+				if(localMapa == locaisMapa.portao){
+				frases.push("O portão é feito com madeira de carvalho, tem aproximadamente 3 metros");
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+				if(ultimaFrase == "abrir portao"){
+				if(localMapa == locaisMapa.portao){
+				frases.push("O portão esta fechado pelo outro lado");
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+				if(ultimaFrase == "passar pelo portao"){
+				if(localMapa == locaisMapa.portao){
+				frases.push("O portão esta fechado");
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+				if(ultimaFrase == "quebrar portao"){
+				if(localMapa == locaisMapa.portao){
+				frases.push("Voce não pode quebrar isso");
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+				if(ultimaFrase == "falar com guarda"){
+				if(localMapa == locaisMapa.portao){
+				lugarPlayer = "Voce esta no portão da vila, conversando com o guarda da cidade";
+				lugarPlayer2 = falarNpc.nulo;
+				lugarPlayer3 = falarNpc.nulo;
+				if(falando == falarNpc.guarda){
+				frases.push("Voce ja esta falando com ele");
+				}else{			
+				frases.push("Ola viajante, depois que voce saiu o portão foi fechado por ordem do padre, quer entrar?");
+				};
+				falando = falarNpc.guarda;
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+				if(ultimaFrase == "sim"){
+				if(localMapa == locaisMapa.portao){			
+				if(falando == falarNpc.guarda){
+				frases.push("'O guarda faz um sinal para um guarda que esta escondido numa pequena torre ao lado");
+				frases.push("do portão, o portão começa a abrir lentamente'");
+				frases.push("Pode entrar viajante, a taberna serve um cordeiro assado delicioso, seja bem vindo");
+				direcao = direcoes.oeste;
+				travaEscrita = 1;
+				teclou.letraDigitada.push(" ");
+				carega();
+				}else{
+				frases.push("Nao Entendi");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+				if(ultimaFrase == "nao"){
+				if(localMapa == locaisMapa.portao){			
+				if(falando == falarNpc.guarda){
+				frases.push("Tudo bem, mas não me atrapalhe!");
+				}else{
+				frases.push("Nao Entendi");
+				};
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+				if(ultimaFrase == "atacar guarda"){
+				if(localMapa == locaisMapa.portao){
+				frases.push("Voce não pode atacar o guarda");
+				}else{
+				frases.push("Nao Entendi");
+				};
+			}else{
+			frases.push("Nao Entendi");
+			}}}}}}}}}}}};
+		}else{
+			frases.push("Nao Entendi");
+		}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}};
+		enterNpc();
+		desenha();
+	};
+		this.teclou.letraDigitada.push(" ");
+
+		
+//Math.floor((Math.random() * 10) + 1
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
